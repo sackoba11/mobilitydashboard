@@ -41,6 +41,9 @@ dependencies:
   equatable: ^2.0.7
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
+  animations: ^2.0.11
+  get_it: ^8.0.3
+  injectable: ^2.5.0
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +58,7 @@ dev_dependencies:
   build_runner: ^2.4.13
   freezed: ^2.5.7
   json_serializable: ^6.9.0
+  injectable_generator: ^2.6.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -95,5 +99,6 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package
+scripts:
+  gen-watch: .fvm/flutter_sdk/bin/flutter pub run build_runner watch  
+  gen-build: .fvm/flutter_sdk/bin/flutter pub run build_runner build
