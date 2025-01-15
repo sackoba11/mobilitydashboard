@@ -1,4 +1,5 @@
 enum AppRoutes {
+initialScreen(path: '/', name: null),
   homeScreen(path: '/home', name: 'Overview'),
   busScreen(path: '/bus', name: 'Bus'),
   driverScreen(path: '/drivers', name: 'Drivers Bus'),
