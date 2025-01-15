@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
+import 'package:mobilitydashboard/core/theme/color/i_app_color.dart';
 import 'package:mobilitydashboard/cubits/side_menu_cubit/side_menu_state.dart';
 
 import '../../core/routes/routes.dart';
@@ -36,17 +38,17 @@ class SideMenuItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: width ?? mediaQueryWidth / 7.6,
+                width: mediaQueryWidth / 4.8,
                 decoration: BoxDecoration(
                     color: locator.get<SideMenuCubit>().isActive(itemName)
-                        ? Colors.red
+                        ? locator.get<IAppColor>().sideBarItemBackground
                         : null,
                     borderRadius: BorderRadius.circular(8)),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 child: Text(itemName.name!,
                     style: TextStyle(
-                        // color: context.colors.black,
+                        color: context.colors.textColor,
                         fontSize: fontSize ?? 20,
                         fontWeight: bold ? FontWeight.bold : null)),
               )

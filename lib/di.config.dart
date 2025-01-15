@@ -11,6 +11,8 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import 'core/theme/color/default_app_color.dart' as _i763;
+import 'core/theme/color/i_app_color.dart' as _i260;
 import 'cubits/side_menu_cubit/side_menu_cubit.dart' as _i180;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -25,6 +27,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.singleton<_i180.SideMenuCubit>(() => _i180.SideMenuCubit());
+    gh.singleton<_i260.IAppColor>(() => _i763.DefaultAppColor());
     return this;
   }
 }
