@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import 'core/animations/fade_animation.dart';
 import 'core/routes/routes.dart';
-import 'dashboard.dart';
+import 'views/screens/dashboard.dart';
 import 'views/screens/bus/bus_screen.dart';
 import 'views/screens/driver/driver_screen.dart';
 import 'views/screens/home/home_screen.dart';

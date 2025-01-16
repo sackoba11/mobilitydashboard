@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 
-import 'responsive.dart';
-import 'views/widgets/side_menu.dart';
+import '../../responsive.dart';
+import '../widgets/side_menu.dart';
 
 class Dashboard extends StatelessWidget {
   final StatefulNavigationShell statefulNavigationShell;
@@ -13,12 +14,16 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: context.colors.background,
-        appBar: !Responsive.isDesktop(context) ? AppBar() : null,
+        appBar: !Responsive.isDesktop(context)
+            ? AppBar(
+                backgroundColor: context.colors.background,
+              )
+            : null,
         key: _scaffoldKey,
         drawer: !Responsive.isDesktop(context)
-            ? SizedBox(
-                width: 250,
-                height: MediaQuery.of(context).size.height,
+            ? Drawer(
+                backgroundColor: context.colors.background,
+                width: 400.sp,
                 child: SideMenu(scaffoldKey: _scaffoldKey))
             : null,
         body: SafeArea(

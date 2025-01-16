@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:mobilitydashboard/cubits/side_menu_cubit/side_menu_cubit.dart';
 import 'package:mobilitydashboard/di.dart';
 
@@ -19,13 +18,12 @@ class SideMenu extends StatelessWidget {
     return Container(
       width: mediaQueryWidth,
       decoration: BoxDecoration(
-          color: context.colors.background,
           border: Border(
-            right: BorderSide(
-              color: Colors.grey[800]!,
-              width: 1,
-            ),
-          )),
+        right: BorderSide(
+          color: Colors.grey[800]!,
+          width: 1,
+        ),
+      )),
       child: Padding(
         padding: EdgeInsets.all(15.sp),
         child: SingleChildScrollView(
@@ -43,7 +41,6 @@ class SideMenu extends StatelessWidget {
                           locator.get<SideMenuCubit>().changeActiveItemTo(item);
                           context.go(item.path);
                         }
-                        scaffoldKey.currentState!.closeDrawer();
                       },
                     )
           ]),
