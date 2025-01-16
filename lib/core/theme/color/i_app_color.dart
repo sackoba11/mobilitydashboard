@@ -10,6 +10,5 @@ abstract class IAppColor {
   Color get red;
   Color get background;
   Color get textColor;
-  Color get sideBarItemBackground;
   static Color transparent = Colors.transparent;
 }

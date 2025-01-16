@@ -8,6 +8,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: IAppColor.transparent,
+     
       body: Center(
         child: Text('HomeScreen'),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
-import 'package:mobilitydashboard/core/theme/color/i_app_color.dart';
 import 'package:mobilitydashboard/cubits/side_menu_cubit/side_menu_state.dart';
 
 import '../../core/routes/routes.dart';
@@ -10,49 +10,55 @@ import '../../di.dart';
 
 class SideMenuItem extends StatelessWidget {
   final AppRoutes itemName;
-  final double? fontSize;
-  final double? width;
-  final bool bold;
   final GestureTapCallback onTap;
-  const SideMenuItem(
-      {super.key,
-      required this.itemName,
-      required this.onTap,
-      this.fontSize,
-      this.width,
-      this.bold = false});
+  const SideMenuItem({
+    super.key,
+    required this.itemName,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final double mediaQueryWidth = MediaQuery.sizeOf(context).width;
-
     return BlocBuilder<SideMenuCubit, SideMenuCubitState>(
       buildWhen: (context, state) {
         return state is SideMenuChangedToState;
       },
       builder: (context, state) {
-        return InkWell(
-          onTap: onTap,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: mediaQueryWidth / 4.8,
-                decoration: BoxDecoration(
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(vertical: 5.sp),
+          decoration: BoxDecoration(
+              color: locator.get<SideMenuCubit>().isActive(itemName)
+                  ? context.colors.primary
+                  : null,
+              borderRadius: BorderRadius.circular(6.sp)),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(6.sp),
+            onTap: onTap,
+            child: Row(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
+                  child: Icon(
+                    Icons.settings,
                     color: locator.get<SideMenuCubit>().isActive(itemName)
-                        ? locator.get<IAppColor>().sideBarItemBackground
-                        : null,
-                    borderRadius: BorderRadius.circular(8)),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: Text(itemName.name!,
+                        ? context.colors.black
+                        : context.colors.textColor,
+                  ),
+                ),
+                Text(itemName.name!,
                     style: TextStyle(
-                        color: context.colors.textColor,
-                        fontSize: fontSize ?? 20,
-                        fontWeight: bold ? FontWeight.bold : null)),
-              )
-            ],
+                        color: locator.get<SideMenuCubit>().isActive(itemName)
+                            ? context.colors.black
+                            : context.colors.textColor,
+                        fontSize: 16,
+                        fontWeight:
+                            locator.get<SideMenuCubit>().isActive(itemName)
+                                ? FontWeight.w600
+                                : FontWeight.normal))
+              ],
+            ),
           ),
         );
       },
