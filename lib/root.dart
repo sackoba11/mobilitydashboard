@@ -20,6 +20,7 @@ class Root extends StatelessWidget {
           routerConfig: AppRouter.router,
           themeMode: ThemeMode.dark,
           theme: ThemeData(
+            useMaterial3: true,
             primaryColor: context.colors.primary,
             fontFamily: 'IBMPlexSans',
             brightness: Brightness.dark,

@@ -533,6 +533,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.1"
+  material_table_view:
+    dependency: "direct main"
+    description:
+      name: material_table_view
+      sha256: "4e2b0f031b4ac4e6351daa25c6f8d9d2a0d8979818b633ccb493601c7118e9d1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.1"
   meta:
     dependency: transitive
     description:

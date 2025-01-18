@@ -11,15 +11,25 @@ import '../../di.dart';
 
 class SideMenuItem extends StatelessWidget {
   final AppRoutes itemName;
+  // final List<Icons> iconsList;
   final GestureTapCallback onTap;
   const SideMenuItem({
     super.key,
     required this.itemName,
     required this.onTap,
+    //  required this.IconsList,
   });
 
   @override
   Widget build(BuildContext context) {
+    // List<Icon> iconsList = [
+    //   Icons.dashboard_outlined,
+    //   Icons.bus_alert_outlined,
+    //   Icons.drive_eta_rounded,
+    //   Icons.supervised_user_circle_outlined,
+    //   Icons.ev_station_outlined
+    // ];
+
     return BlocBuilder<SideMenuCubit, SideMenuCubitState>(
       buildWhen: (context, state) {
         return state is SideMenuChangedToState;
@@ -41,11 +51,7 @@ class SideMenuItem extends StatelessWidget {
                 Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
-                    child: Assets.svg.home.svg(
-                      color: locator.get<SideMenuCubit>().isActive(itemName)
-                          ? context.colors.black
-                          : context.colors.textColor,
-                    )),
+                    child: Assets.png.dashboard.image(width: 20, height: 20)),
                 Text(itemName.name!,
                     style: TextStyle(
                         color: locator.get<SideMenuCubit>().isActive(itemName)

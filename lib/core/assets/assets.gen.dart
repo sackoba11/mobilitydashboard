@@ -52,6 +52,78 @@ class $AssetsFontsGen {
       ];
 }
 
+class $AssetsPngGen {
+  const $AssetsPngGen();
+
+  /// File path: assets/png/BusDriver.png
+  AssetGenImage get busDriver =>
+      const AssetGenImage('assets/png/BusDriver.png');
+
+  /// File path: assets/png/Driver.png
+  AssetGenImage get driver => const AssetGenImage('assets/png/Driver.png');
+
+  /// File path: assets/png/blocks.png
+  AssetGenImage get blocks => const AssetGenImage('assets/png/blocks.png');
+
+  /// File path: assets/png/bus.png
+  AssetGenImage get bus => const AssetGenImage('assets/png/bus.png');
+
+  /// File path: assets/png/bus1.png
+  AssetGenImage get bus1 => const AssetGenImage('assets/png/bus1.png');
+
+  /// File path: assets/png/busstation.png
+  AssetGenImage get busstation =>
+      const AssetGenImage('assets/png/busstation.png');
+
+  /// File path: assets/png/dashboard.png
+  AssetGenImage get dashboard =>
+      const AssetGenImage('assets/png/dashboard.png');
+
+  /// File path: assets/png/dashboard7.png
+  AssetGenImage get dashboard7 =>
+      const AssetGenImage('assets/png/dashboard7.png');
+
+  /// File path: assets/png/driver1.png
+  AssetGenImage get driver1 => const AssetGenImage('assets/png/driver1.png');
+
+  /// File path: assets/png/group.png
+  AssetGenImage get group => const AssetGenImage('assets/png/group.png');
+
+  /// File path: assets/png/group2.png
+  AssetGenImage get group2 => const AssetGenImage('assets/png/group2.png');
+
+  /// File path: assets/png/station.png
+  AssetGenImage get station => const AssetGenImage('assets/png/station.png');
+
+  /// File path: assets/png/station2.png
+  AssetGenImage get station2 => const AssetGenImage('assets/png/station2.png');
+
+  /// File path: assets/png/team.png
+  AssetGenImage get team => const AssetGenImage('assets/png/team.png');
+
+  /// File path: assets/png/template.png
+  AssetGenImage get template => const AssetGenImage('assets/png/template.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        busDriver,
+        driver,
+        blocks,
+        bus,
+        bus1,
+        busstation,
+        dashboard,
+        dashboard7,
+        driver1,
+        group,
+        group2,
+        station,
+        station2,
+        team,
+        template
+      ];
+}
+
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
@@ -183,7 +255,89 @@ class Assets {
   Assets._();
 
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
+  static const $AssetsPngGen png = $AssetsPngGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
+}
+
+class AssetGenImage {
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
+
+  final String _assetName;
+
+  final Size? size;
+  final Set<String> flavors;
+
+  Image image({
+    Key? key,
+    AssetBundle? bundle,
+    ImageFrameBuilder? frameBuilder,
+    ImageErrorWidgetBuilder? errorBuilder,
+    String? semanticLabel,
+    bool excludeFromSemantics = false,
+    double? scale,
+    double? width,
+    double? height,
+    Color? color,
+    Animation<double>? opacity,
+    BlendMode? colorBlendMode,
+    BoxFit? fit,
+    AlignmentGeometry alignment = Alignment.center,
+    ImageRepeat repeat = ImageRepeat.noRepeat,
+    Rect? centerSlice,
+    bool matchTextDirection = false,
+    bool gaplessPlayback = true,
+    bool isAntiAlias = false,
+    String? package,
+    FilterQuality filterQuality = FilterQuality.low,
+    int? cacheWidth,
+    int? cacheHeight,
+  }) {
+    return Image.asset(
+      _assetName,
+      key: key,
+      bundle: bundle,
+      frameBuilder: frameBuilder,
+      errorBuilder: errorBuilder,
+      semanticLabel: semanticLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      scale: scale,
+      width: width,
+      height: height,
+      color: color,
+      opacity: opacity,
+      colorBlendMode: colorBlendMode,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
+      centerSlice: centerSlice,
+      matchTextDirection: matchTextDirection,
+      gaplessPlayback: gaplessPlayback,
+      isAntiAlias: isAntiAlias,
+      package: package,
+      filterQuality: filterQuality,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+    );
+  }
+
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
 }
 
 class SvgGenImage {
