@@ -48,7 +48,12 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.17
   flutter_gen: ^5.8.0
-  material_table_view: ^5.0.1
+  paged_datatable: ^2.1.1
+  darq: ^2.0.0
+  faker: ^2.2.0
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
