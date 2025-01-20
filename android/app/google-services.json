@@ -1,0 +1,151 @@
+{
+  "project_info": {
+    "project_number": "714842411456",
+    "firebase_url": "https://mobilityplus-74105-default-rtdb.firebaseio.com",
+    "project_id": "mobilityplus-74105",
+    "storage_bucket": "mobilityplus-74105.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714842411456:android:ad14abc9158581b845f825",
+        "android_client_info": {
+          "package_name": "com.example.mobility"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714842411456-j7971a8jculmpb9ujm4lmaslq37n8jpg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobility",
+            "certificate_hash": "f6f776fa67a1ad7948bb18dac0df2e582e85b134"
+          }
+        },
+        {
+          "client_id": "714842411456-uf2k5rqit800hcgtd7hj4cs75a4fhc94.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobility",
+            "certificate_hash": "c222f0b259f7dc680e91ab72e6b961463ec3e9d0"
+          }
+        },
+        {
+          "client_id": "714842411456-5e2aknnofo1d8esftj3l7t3miplk3e0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvuZ47B67_Es0vDaakG_tooRyi2cFaU38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714842411456-2lortfhkvq38f8v2fjgaeu2vnpmofs5j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "714842411456-813nel2oujo2limgnn11pqbqgnghbo23.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mobilitydashboard"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714842411456:android:00654aeadabf40be45f825",
+        "android_client_info": {
+          "package_name": "com.example.mobilitydashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714842411456-5e2aknnofo1d8esftj3l7t3miplk3e0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvuZ47B67_Es0vDaakG_tooRyi2cFaU38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714842411456-2lortfhkvq38f8v2fjgaeu2vnpmofs5j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "714842411456-813nel2oujo2limgnn11pqbqgnghbo23.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mobilitydashboard"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714842411456:android:95c9a6dfc770968345f825",
+        "android_client_info": {
+          "package_name": "com.mobility.mobility"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714842411456-0rgr81no2dhi10kml13pljsv68jisr9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobility.mobility",
+            "certificate_hash": "c222f0b259f7dc680e91ab72e6b961463ec3e9d0"
+          }
+        },
+        {
+          "client_id": "714842411456-0th32q3jqooj8rv2rb5eq46geqsfgruo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobility.mobility",
+            "certificate_hash": "f6f776fa67a1ad7948bb18dac0df2e582e85b134"
+          }
+        },
+        {
+          "client_id": "714842411456-5e2aknnofo1d8esftj3l7t3miplk3e0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvuZ47B67_Es0vDaakG_tooRyi2cFaU38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714842411456-2lortfhkvq38f8v2fjgaeu2vnpmofs5j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "714842411456-813nel2oujo2limgnn11pqbqgnghbo23.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mobilitydashboard"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

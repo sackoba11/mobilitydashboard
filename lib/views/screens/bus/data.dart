@@ -32,8 +32,11 @@ class _MainViewState extends State<MainView> {
                   headerTextStyle: TextStyle(color: context.colors.white),
                   cellTextStyle: TextStyle(color: context.colors.white),
                   backgroundColor: Colors.transparent,
-                  selectedRow: context.colors.gray,
-                  rowColor: (index) => index.isEven ? Colors.purple[50] : null,
+                  selectedRow: context.colors.lightPrimary,
+                  rowColor: (index) => context.colors.secondary,
+                  // index.isEven
+                  //     ? context.colors.lightPrimary
+                  //     :
                 ),
                 child: PagedDataTable<String, Post>(
                   controller: tableController,
