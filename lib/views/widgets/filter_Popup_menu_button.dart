@@ -1,16 +1,20 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
+import '../../core/assets/assets.gen.dart';
 import '../../models/bus/bus_from_firestore/bus.dart';
 
 PopupMenuButton<dynamic> filterPopupMenuButtom(
-    PagedDataTableController<String, Bus> tableController) {
+    {required PagedDataTableController<String, Bus> tableController,
+    required BuildContext context}) {
   return PopupMenuButton(
-    icon: const Icon(
-      Icons.more_vert_outlined,
-    ),
+    tooltip: 'Menu',
+    icon: Assets.svg.menuVertical1
+        .svg(color: context.colors.textColor, height: 30.sp, width: 30.sp),
     itemBuilder: (context) => <PopupMenuEntry>[
       PopupMenuItem(
         child: const Text(

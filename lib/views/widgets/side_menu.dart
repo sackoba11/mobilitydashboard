@@ -15,6 +15,7 @@ class SideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double mediaQueryWidth = MediaQuery.sizeOf(context).width;
+
     return Container(
       width: mediaQueryWidth,
       decoration: BoxDecoration(

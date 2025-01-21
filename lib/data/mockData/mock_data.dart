@@ -1,9 +1,11 @@
 import 'package:mobilitydashboard/models/bus/bus_from_firestore/bus.dart';
+import 'package:mobilitydashboard/models/driver/driver.dart';
 import 'package:mobilitydashboard/models/itineraire_gare/itineraire_gare.dart';
 import 'package:mobilitydashboard/models/stop/stop.dart';
 import 'package:mobilitydashboard/models/gare/gare.dart';
 
 class MockData {
+  static List<Driver> drivers = [];
   static List<ItineraireGare> itineraireGbaka = [
     //Abobo
     ItineraireGare(commune: "Abobo", type: "Gbaka", source: {

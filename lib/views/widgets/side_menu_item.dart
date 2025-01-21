@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:mobilitydashboard/cubits/side_menu_cubit/side_menu_state.dart';
 
@@ -11,25 +12,15 @@ import '../../di.dart';
 
 class SideMenuItem extends StatelessWidget {
   final AppRoutes itemName;
-  // final List<Icons> iconsList;
   final GestureTapCallback onTap;
   const SideMenuItem({
     super.key,
     required this.itemName,
     required this.onTap,
-    //  required this.IconsList,
   });
 
   @override
   Widget build(BuildContext context) {
-    // List<Icon> iconsList = [
-    //   Icons.dashboard_outlined,
-    //   Icons.bus_alert_outlined,
-    //   Icons.drive_eta_rounded,
-    //   Icons.supervised_user_circle_outlined,
-    //   Icons.ev_station_outlined
-    // ];
-
     return BlocBuilder<SideMenuCubit, SideMenuCubitState>(
       buildWhen: (context, state) {
         return state is SideMenuChangedToState;
@@ -51,13 +42,19 @@ class SideMenuItem extends StatelessWidget {
                 Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
-                    child: Assets.png.dashboard.image(width: 20, height: 20)),
+                    child: SvgGenImage(itemName.icon!).svg(
+                      height: 20.sp,
+                      width: 25.sp,
+                      color: locator.get<SideMenuCubit>().isActive(itemName)
+                          ? context.colors.black
+                          : context.colors.textColor,
+                    )),
                 Text(itemName.name!,
                     style: TextStyle(
                         color: locator.get<SideMenuCubit>().isActive(itemName)
                             ? context.colors.black
                             : context.colors.textColor,
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight:
                             locator.get<SideMenuCubit>().isActive(itemName)
                                 ? FontWeight.w600

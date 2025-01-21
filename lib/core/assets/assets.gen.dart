@@ -52,202 +52,101 @@ class $AssetsFontsGen {
       ];
 }
 
-class $AssetsPngGen {
-  const $AssetsPngGen();
-
-  /// File path: assets/png/BusDriver.png
-  AssetGenImage get busDriver =>
-      const AssetGenImage('assets/png/BusDriver.png');
-
-  /// File path: assets/png/Driver.png
-  AssetGenImage get driver => const AssetGenImage('assets/png/Driver.png');
-
-  /// File path: assets/png/blocks.png
-  AssetGenImage get blocks => const AssetGenImage('assets/png/blocks.png');
-
-  /// File path: assets/png/bus.png
-  AssetGenImage get bus => const AssetGenImage('assets/png/bus.png');
-
-  /// File path: assets/png/bus1.png
-  AssetGenImage get bus1 => const AssetGenImage('assets/png/bus1.png');
-
-  /// File path: assets/png/busstation.png
-  AssetGenImage get busstation =>
-      const AssetGenImage('assets/png/busstation.png');
-
-  /// File path: assets/png/dashboard.png
-  AssetGenImage get dashboard =>
-      const AssetGenImage('assets/png/dashboard.png');
-
-  /// File path: assets/png/dashboard7.png
-  AssetGenImage get dashboard7 =>
-      const AssetGenImage('assets/png/dashboard7.png');
-
-  /// File path: assets/png/driver1.png
-  AssetGenImage get driver1 => const AssetGenImage('assets/png/driver1.png');
-
-  /// File path: assets/png/group.png
-  AssetGenImage get group => const AssetGenImage('assets/png/group.png');
-
-  /// File path: assets/png/group2.png
-  AssetGenImage get group2 => const AssetGenImage('assets/png/group2.png');
-
-  /// File path: assets/png/station.png
-  AssetGenImage get station => const AssetGenImage('assets/png/station.png');
-
-  /// File path: assets/png/station2.png
-  AssetGenImage get station2 => const AssetGenImage('assets/png/station2.png');
-
-  /// File path: assets/png/team.png
-  AssetGenImage get team => const AssetGenImage('assets/png/team.png');
-
-  /// File path: assets/png/template.png
-  AssetGenImage get template => const AssetGenImage('assets/png/template.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [
-        busDriver,
-        driver,
-        blocks,
-        bus,
-        bus1,
-        busstation,
-        dashboard,
-        dashboard7,
-        driver1,
-        group,
-        group2,
-        station,
-        station2,
-        team,
-        template
-      ];
-}
-
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
-  /// File path: assets/svg/bell.svg
-  SvgGenImage get bell => const SvgGenImage('assets/svg/bell.svg');
+  /// File path: assets/svg/add-ellipse.svg
+  SvgGenImage get addEllipse => const SvgGenImage('assets/svg/add-ellipse.svg');
 
-  /// File path: assets/svg/burn.svg
-  SvgGenImage get burn => const SvgGenImage('assets/svg/burn.svg');
+  /// File path: assets/svg/add-row.svg
+  SvgGenImage get addRow => const SvgGenImage('assets/svg/add-row.svg');
 
-  /// File path: assets/svg/distance.svg
-  SvgGenImage get distance => const SvgGenImage('assets/svg/distance.svg');
+  /// File path: assets/svg/add-square.svg
+  SvgGenImage get addSquare => const SvgGenImage('assets/svg/add-square.svg');
 
-  /// File path: assets/svg/exercise.svg
-  SvgGenImage get exercise => const SvgGenImage('assets/svg/exercise.svg');
+  /// File path: assets/svg/bus-stop-pointer.svg
+  SvgGenImage get busStopPointer =>
+      const SvgGenImage('assets/svg/bus-stop-pointer.svg');
 
-  /// File path: assets/svg/fan_close.svg
-  SvgGenImage get fanClose => const SvgGenImage('assets/svg/fan_close.svg');
+  /// File path: assets/svg/bus-stop-station.svg
+  SvgGenImage get busStopStation =>
+      const SvgGenImage('assets/svg/bus-stop-station.svg');
 
-  /// File path: assets/svg/fan_open.svg
-  SvgGenImage get fanOpen => const SvgGenImage('assets/svg/fan_open.svg');
+  /// File path: assets/svg/bus-stop.svg
+  SvgGenImage get busStop => const SvgGenImage('assets/svg/bus-stop.svg');
 
-  /// File path: assets/svg/history.svg
-  SvgGenImage get history => const SvgGenImage('assets/svg/history.svg');
+  /// File path: assets/svg/bus-svgrepo-com.svg
+  SvgGenImage get busSvgrepoCom =>
+      const SvgGenImage('assets/svg/bus-svgrepo-com.svg');
 
-  /// File path: assets/svg/home.svg
-  SvgGenImage get home => const SvgGenImage('assets/svg/home.svg');
+  /// File path: assets/svg/bus1.svg
+  SvgGenImage get bus1 => const SvgGenImage('assets/svg/bus1.svg');
 
-  /// File path: assets/svg/humid.svg
-  SvgGenImage get humid => const SvgGenImage('assets/svg/humid.svg');
+  /// File path: assets/svg/chauffer.svg
+  SvgGenImage get chauffer => const SvgGenImage('assets/svg/chauffer.svg');
 
-  /// File path: assets/svg/humidity-svgrepo-com.svg
-  SvgGenImage get humiditySvgrepoCom =>
-      const SvgGenImage('assets/svg/humidity-svgrepo-com.svg');
+  /// File path: assets/svg/dashboard2.svg
+  SvgGenImage get dashboard2 => const SvgGenImage('assets/svg/dashboard2.svg');
 
-  /// File path: assets/svg/more.svg
-  SvgGenImage get more => const SvgGenImage('assets/svg/more.svg');
+  /// File path: assets/svg/filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/svg/filter.svg');
 
-  /// File path: assets/svg/plant.svg
-  SvgGenImage get plant => const SvgGenImage('assets/svg/plant.svg');
+  /// File path: assets/svg/filter1.svg
+  SvgGenImage get filter1 => const SvgGenImage('assets/svg/filter1.svg');
 
-  /// File path: assets/svg/profile.svg
-  SvgGenImage get profile => const SvgGenImage('assets/svg/profile.svg');
+  /// File path: assets/svg/filter2.svg
+  SvgGenImage get filter2 => const SvgGenImage('assets/svg/filter2.svg');
 
-  /// File path: assets/svg/remote.svg
-  SvgGenImage get remote => const SvgGenImage('assets/svg/remote.svg');
+  /// File path: assets/svg/logout.svg
+  SvgGenImage get logout => const SvgGenImage('assets/svg/logout.svg');
 
-  /// File path: assets/svg/search.svg
-  SvgGenImage get search => const SvgGenImage('assets/svg/search.svg');
+  /// File path: assets/svg/logout1.svg
+  SvgGenImage get logout1 => const SvgGenImage('assets/svg/logout1.svg');
 
-  /// File path: assets/svg/setting.svg
-  SvgGenImage get setting => const SvgGenImage('assets/svg/setting.svg');
+  /// File path: assets/svg/menu-vertical.svg
+  SvgGenImage get menuVertical =>
+      const SvgGenImage('assets/svg/menu-vertical.svg');
 
-  /// File path: assets/svg/share-2.svg
-  SvgGenImage get share2 => const SvgGenImage('assets/svg/share-2.svg');
+  /// File path: assets/svg/menu-vertical1.svg
+  SvgGenImage get menuVertical1 =>
+      const SvgGenImage('assets/svg/menu-vertical1.svg');
 
-  /// File path: assets/svg/signout.svg
-  SvgGenImage get signout => const SvgGenImage('assets/svg/signout.svg');
+  /// File path: assets/svg/menu.svg
+  SvgGenImage get menu => const SvgGenImage('assets/svg/menu.svg');
 
-  /// File path: assets/svg/slack.svg
-  SvgGenImage get slack => const SvgGenImage('assets/svg/slack.svg');
+  /// File path: assets/svg/table-add.svg
+  SvgGenImage get tableAdd => const SvgGenImage('assets/svg/table-add.svg');
 
-  /// File path: assets/svg/sleep.svg
-  SvgGenImage get sleep => const SvgGenImage('assets/svg/sleep.svg');
+  /// File path: assets/svg/users-people.svg
+  SvgGenImage get usersPeople =>
+      const SvgGenImage('assets/svg/users-people.svg');
 
-  /// File path: assets/svg/soil.svg
-  SvgGenImage get soil => const SvgGenImage('assets/svg/soil.svg');
-
-  /// File path: assets/svg/steps.svg
-  SvgGenImage get steps => const SvgGenImage('assets/svg/steps.svg');
-
-  /// File path: assets/svg/sun.svg
-  SvgGenImage get sun => const SvgGenImage('assets/svg/sun.svg');
-
-  /// File path: assets/svg/thermometer.svg
-  SvgGenImage get thermometer =>
-      const SvgGenImage('assets/svg/thermometer.svg');
-
-  /// File path: assets/svg/water.svg
-  SvgGenImage get water => const SvgGenImage('assets/svg/water.svg');
-
-  /// File path: assets/svg/water_not.svg
-  SvgGenImage get waterNot => const SvgGenImage('assets/svg/water_not.svg');
-
-  /// File path: assets/svg/wind.svg
-  SvgGenImage get wind => const SvgGenImage('assets/svg/wind.svg');
-
-  /// File path: assets/svg/window.svg
-  SvgGenImage get window => const SvgGenImage('assets/svg/window.svg');
-
-  /// File path: assets/svg/window_close.svg
-  SvgGenImage get windowClose =>
-      const SvgGenImage('assets/svg/window_close.svg');
+  /// File path: assets/svg/users-user.svg
+  SvgGenImage get usersUser => const SvgGenImage('assets/svg/users-user.svg');
 
   /// List of all assets
   List<SvgGenImage> get values => [
-        bell,
-        burn,
-        distance,
-        exercise,
-        fanClose,
-        fanOpen,
-        history,
-        home,
-        humid,
-        humiditySvgrepoCom,
-        more,
-        plant,
-        profile,
-        remote,
-        search,
-        setting,
-        share2,
-        signout,
-        slack,
-        sleep,
-        soil,
-        steps,
-        sun,
-        thermometer,
-        water,
-        waterNot,
-        wind,
-        window,
-        windowClose
+        addEllipse,
+        addRow,
+        addSquare,
+        busStopPointer,
+        busStopStation,
+        busStop,
+        busSvgrepoCom,
+        bus1,
+        chauffer,
+        dashboard2,
+        filter,
+        filter1,
+        filter2,
+        logout,
+        logout1,
+        menuVertical,
+        menuVertical1,
+        menu,
+        tableAdd,
+        usersPeople,
+        usersUser
       ];
 }
 
@@ -255,89 +154,7 @@ class Assets {
   Assets._();
 
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
-  static const $AssetsPngGen png = $AssetsPngGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
-}
-
-class AssetGenImage {
-  const AssetGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  });
-
-  final String _assetName;
-
-  final Size? size;
-  final Set<String> flavors;
-
-  Image image({
-    Key? key,
-    AssetBundle? bundle,
-    ImageFrameBuilder? frameBuilder,
-    ImageErrorWidgetBuilder? errorBuilder,
-    String? semanticLabel,
-    bool excludeFromSemantics = false,
-    double? scale,
-    double? width,
-    double? height,
-    Color? color,
-    Animation<double>? opacity,
-    BlendMode? colorBlendMode,
-    BoxFit? fit,
-    AlignmentGeometry alignment = Alignment.center,
-    ImageRepeat repeat = ImageRepeat.noRepeat,
-    Rect? centerSlice,
-    bool matchTextDirection = false,
-    bool gaplessPlayback = true,
-    bool isAntiAlias = false,
-    String? package,
-    FilterQuality filterQuality = FilterQuality.low,
-    int? cacheWidth,
-    int? cacheHeight,
-  }) {
-    return Image.asset(
-      _assetName,
-      key: key,
-      bundle: bundle,
-      frameBuilder: frameBuilder,
-      errorBuilder: errorBuilder,
-      semanticLabel: semanticLabel,
-      excludeFromSemantics: excludeFromSemantics,
-      scale: scale,
-      width: width,
-      height: height,
-      color: color,
-      opacity: opacity,
-      colorBlendMode: colorBlendMode,
-      fit: fit,
-      alignment: alignment,
-      repeat: repeat,
-      centerSlice: centerSlice,
-      matchTextDirection: matchTextDirection,
-      gaplessPlayback: gaplessPlayback,
-      isAntiAlias: isAntiAlias,
-      package: package,
-      filterQuality: filterQuality,
-      cacheWidth: cacheWidth,
-      cacheHeight: cacheHeight,
-    );
-  }
-
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
-  }
-
-  String get path => _assetName;
-
-  String get keyName => _assetName;
 }
 
 class SvgGenImage {

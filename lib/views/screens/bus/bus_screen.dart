@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
+import '../../../core/assets/assets.gen.dart';
 import '../../../data/mockData/mock_data.dart';
 import '../../../models/bus/bus_from_firestore/bus.dart';
 import '../../widgets/custom_large_text_table_column.dart';
@@ -35,9 +36,11 @@ class _BusScreenState extends State<BusScreen> {
             Expanded(
               child: PagedDataTableTheme(
                 data: PagedDataTableThemeData(
+                  borderRadius: BorderRadius.circular(8.sp),
+                  elevation: 2,
                   headerTextStyle: TextStyle(color: context.colors.white),
                   cellTextStyle: TextStyle(color: context.colors.white),
-                  backgroundColor: context.colors.background,
+                  backgroundColor: context.colors.secondary,
                   selectedRow: context.colors.lightPrimary,
                   rowColor: (index) => context.colors.secondary,
                 ),
@@ -88,19 +91,25 @@ class _BusScreenState extends State<BusScreen> {
                   filterBarChild: Row(
                     children: [
                       IconButton(
-                          onPressed: () {
-                            tableController.insertAt(
-                                0,
-                                Bus(
-                                    number: 28,
-                                    source: 'Riviera',
-                                    destination: 'Gare Sud',
-                                    isActive: true,
-                                    roadMap: MockData.stop));
-                            print('done');
-                          },
-                          icon: const Icon(Icons.add)),
-                      filterPopupMenuButtom(tableController),
+                        tooltip: 'Ajouter',
+                        onPressed: () {
+                          tableController.insertAt(
+                              0,
+                              Bus(
+                                  number: 28,
+                                  source: 'Riviera',
+                                  destination: 'Gare Sud',
+                                  isActive: true,
+                                  roadMap: MockData.stop));
+                          print('done');
+                        },
+                        icon: Assets.svg.addRow.svg(
+                            color: context.colors.textColor,
+                            height: 35.sp,
+                            width: 35.sp),
+                      ),
+                      filterPopupMenuButtom(
+                          tableController: tableController, context: context),
                     ],
                   ),
                   columns: [
