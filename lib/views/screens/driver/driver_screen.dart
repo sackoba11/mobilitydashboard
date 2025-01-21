@@ -24,7 +24,7 @@ class DriverScreen extends StatelessWidget {
               title: const Text("Nom"),
               getter: (item, index) => item.name,
               id: "name",
-              size: const FractionalColumnSize(.2),
+              size: const RemainingColumnSize(),
               fieldLabel: "name",
               setter: (item, newValue, index) async {
                 await Future.delayed(const Duration(seconds: 2));
@@ -37,7 +37,7 @@ class DriverScreen extends StatelessWidget {
               title: const Text("email"),
               getter: (item, index) => item.email,
               id: "email",
-              size: const FractionalColumnSize(.2),
+              size: const RemainingColumnSize(),
               fieldLabel: "email",
               setter: (item, newValue, index) async {
                 await Future.delayed(const Duration(seconds: 2));
@@ -50,7 +50,7 @@ class DriverScreen extends StatelessWidget {
               title: const Text("Numero"),
               getter: (item, index) => item.number,
               id: "number",
-              size: const FractionalColumnSize(.2),
+              size: const RemainingColumnSize(),
               fieldLabel: "number",
               setter: (item, newValue, index) async {
                 await Future.delayed(const Duration(seconds: 2));
@@ -63,7 +63,7 @@ class DriverScreen extends StatelessWidget {
               title: const Text("Mot de passe"),
               getter: (item, index) => item.password,
               id: "password",
-              size: const FractionalColumnSize(.2),
+              size: const RemainingColumnSize(),
               fieldLabel: "password",
               setter: (item, newValue, index) async {
                 await Future.delayed(const Duration(seconds: 2));

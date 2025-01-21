@@ -4,6 +4,8 @@ import 'package:mobilitydashboard/models/itineraire_gare/itineraire_gare.dart';
 import 'package:mobilitydashboard/models/stop/stop.dart';
 import 'package:mobilitydashboard/models/gare/gare.dart';
 
+import '../../models/user/my_user.dart';
+
 class MockData {
   static List<Driver> drivers = [
     Driver(
@@ -46,6 +48,32 @@ class MockData {
         number: '0203040708',
         email: 'badragmail.com',
         password: 'password'),
+  ];
+  static List<MyUser> users = [
+    MyUser(
+      name: 'sacko Moussa',
+      email: 'mousagmail.com',
+    ),
+    MyUser(
+      name: 'sacko Moussa',
+      email: 'mousagmail.com',
+    ),
+    MyUser(
+      name: 'sacko Moussa',
+      email: 'mousagmail.com',
+    ),
+    MyUser(
+      name: 'sacko Moussa',
+      email: 'mousagmail.com',
+    ),
+    MyUser(
+      name: 'sacko Moussa',
+      email: 'mousagmail.com',
+    ),
+    MyUser(
+      name: 'sacko Moussa',
+      email: 'mousagmail.com',
+    ),
   ];
   static List<ItineraireGare> itineraireGbaka = [
     //Abobo

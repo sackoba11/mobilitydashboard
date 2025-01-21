@@ -55,29 +55,12 @@ class $AssetsFontsGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
-  /// File path: assets/svg/add-ellipse.svg
-  SvgGenImage get addEllipse => const SvgGenImage('assets/svg/add-ellipse.svg');
-
   /// File path: assets/svg/add-row.svg
   SvgGenImage get addRow => const SvgGenImage('assets/svg/add-row.svg');
-
-  /// File path: assets/svg/add-square.svg
-  SvgGenImage get addSquare => const SvgGenImage('assets/svg/add-square.svg');
 
   /// File path: assets/svg/bus-stop-pointer.svg
   SvgGenImage get busStopPointer =>
       const SvgGenImage('assets/svg/bus-stop-pointer.svg');
-
-  /// File path: assets/svg/bus-stop-station.svg
-  SvgGenImage get busStopStation =>
-      const SvgGenImage('assets/svg/bus-stop-station.svg');
-
-  /// File path: assets/svg/bus-stop.svg
-  SvgGenImage get busStop => const SvgGenImage('assets/svg/bus-stop.svg');
-
-  /// File path: assets/svg/bus-svgrepo-com.svg
-  SvgGenImage get busSvgrepoCom =>
-      const SvgGenImage('assets/svg/bus-svgrepo-com.svg');
 
   /// File path: assets/svg/bus1.svg
   SvgGenImage get bus1 => const SvgGenImage('assets/svg/bus1.svg');
@@ -103,36 +86,20 @@ class $AssetsSvgGen {
   /// File path: assets/svg/logout1.svg
   SvgGenImage get logout1 => const SvgGenImage('assets/svg/logout1.svg');
 
-  /// File path: assets/svg/menu-vertical.svg
-  SvgGenImage get menuVertical =>
-      const SvgGenImage('assets/svg/menu-vertical.svg');
-
   /// File path: assets/svg/menu-vertical1.svg
   SvgGenImage get menuVertical1 =>
       const SvgGenImage('assets/svg/menu-vertical1.svg');
 
-  /// File path: assets/svg/menu.svg
-  SvgGenImage get menu => const SvgGenImage('assets/svg/menu.svg');
-
   /// File path: assets/svg/table-add.svg
   SvgGenImage get tableAdd => const SvgGenImage('assets/svg/table-add.svg');
-
-  /// File path: assets/svg/users-people.svg
-  SvgGenImage get usersPeople =>
-      const SvgGenImage('assets/svg/users-people.svg');
 
   /// File path: assets/svg/users-user.svg
   SvgGenImage get usersUser => const SvgGenImage('assets/svg/users-user.svg');
 
   /// List of all assets
   List<SvgGenImage> get values => [
-        addEllipse,
         addRow,
-        addSquare,
         busStopPointer,
-        busStopStation,
-        busStop,
-        busSvgrepoCom,
         bus1,
         chauffer,
         dashboard2,
@@ -141,11 +108,8 @@ class $AssetsSvgGen {
         filter2,
         logout,
         logout1,
-        menuVertical,
         menuVertical1,
-        menu,
         tableAdd,
-        usersPeople,
         usersUser
       ];
 }
