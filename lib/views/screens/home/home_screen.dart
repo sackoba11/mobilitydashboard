@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobilitydashboard/core/theme/color/i_app_color.dart';
+import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -7,7 +7,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: IAppColor.transparent,
+      backgroundColor: context.colors.transparent,
      
       body: Center(
         child: Text('HomeScreen'),

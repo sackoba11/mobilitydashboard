@@ -230,6 +230,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  darq:
+    dependency: "direct main"
+    description:
+      name: darq
+      sha256: eb58203f550d113df1984cf6550b94b6951e515bed98eb49d098fb35719c78b0
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   dart_style:
     dependency: transitive
     description:
@@ -686,10 +694,10 @@ packages:
     dependency: "direct main"
     description:
       name: paged_datatable
-      sha256: "2e70de29a0bd0c6ed94a73f01c2ce139568c09e20c8b7f60661b1fe3d7ee25ea"
+      sha256: dd07d3fe88edae6fa2b1d7939c6754a57fc8249976edaab11f458aef4aecb934
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "2.2.0-dev1.1"
   path:
     dependency: transitive
     description:

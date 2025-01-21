@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 
-import '../../../core/theme/color/i_app_color.dart';
 
 class DriverScreen extends StatelessWidget {
   const DriverScreen({super.key});
@@ -8,7 +8,7 @@ class DriverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: IAppColor.transparent,
+      backgroundColor: context.colors.transparent,
       body: Center(
         child: Text('DriverScreen'),
       ),

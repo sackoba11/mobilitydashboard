@@ -3,7 +3,6 @@ import 'package:mobilitydashboard/models/itineraire_gare/itineraire_gare.dart';
 import 'package:mobilitydashboard/models/stop/stop.dart';
 import 'package:mobilitydashboard/models/gare/gare.dart';
 
-
 class MockData {
   static List<ItineraireGare> itineraireGbaka = [
     //Abobo
@@ -4670,49 +4669,145 @@ class MockData {
         number: 610,
         source: "Adjamé",
         destination: "BingerVille",
-        roadMap: [],
+        roadMap: stop,
         isActive: true),
     Bus(
-        number: 610,
+        number: 21,
         source: "Ecole de Police",
         destination: "Chu TreichVille",
-        roadMap: [],
+        roadMap: stop,
         isActive: false),
     Bus(
-        number: 21,
+        number: 15,
         source: "Abobo Sogefia",
         destination: "Gare Sud",
-        roadMap: [],
+        roadMap: stop,
         isActive: true),
     Bus(
-        number: 21,
+        number: 85,
         source: "Gare Campus",
         destination: "Yopougon Kouté",
-        roadMap: [],
+        roadMap: stop,
         isActive: false),
     Bus(
-        number: 15,
+        number: 49,
         source: "Abobo Sogefia",
         destination: "Gare Campus",
-        roadMap: [],
+        roadMap: stop,
         isActive: true),
     Bus(
-        number: 15,
+        number: 49,
         source: "Abobo Sogefia",
         destination: "Gare Campus",
-        roadMap: [],
+        roadMap: stop,
         isActive: false),
     Bus(
         number: 85,
         source: "Yopougon Kouté",
         destination: "Gare Campus",
-        roadMap: [],
+        roadMap: stop,
         isActive: true),
     Bus(
         number: 85,
         source: "Gare Campus",
         destination: "Yopougon Kouté",
-        roadMap: [],
+        roadMap: stop,
+        isActive: false),
+    Bus(
+        number: 610,
+        source: "Adjamé",
+        destination: "BingerVille",
+        roadMap: stop,
+        isActive: true),
+    Bus(
+        number: 21,
+        source: "Ecole de Police",
+        destination: "Chu TreichVille",
+        roadMap: stop,
+        isActive: false),
+    Bus(
+        number: 15,
+        source: "Abobo Sogefia",
+        destination: "Gare Sud",
+        roadMap: stop,
+        isActive: true),
+    Bus(
+        number: 85,
+        source: "Gare Campus",
+        destination: "Yopougon Kouté",
+        roadMap: stop,
+        isActive: false),
+    Bus(
+        number: 49,
+        source: "Abobo Sogefia",
+        destination: "Gare Campus",
+        roadMap: stop,
+        isActive: true),
+    Bus(
+        number: 49,
+        source: "Abobo Sogefia",
+        destination: "Gare Campus",
+        roadMap: stop,
+        isActive: false),
+    Bus(
+        number: 85,
+        source: "Yopougon Kouté",
+        destination: "Gare Campus",
+        roadMap: stop,
+        isActive: true),
+    Bus(
+        number: 85,
+        source: "Gare Campus",
+        destination: "Yopougon Kouté",
+        roadMap: stop,
+        isActive: false),
+    Bus(
+        number: 610,
+        source: "Adjamé",
+        destination: "BingerVille",
+        roadMap: stop,
+        isActive: true),
+    Bus(
+        number: 21,
+        source: "Ecole de Police",
+        destination: "Chu TreichVille",
+        roadMap: stop,
+        isActive: false),
+    Bus(
+        number: 15,
+        source: "Abobo Sogefia",
+        destination: "Gare Sud",
+        roadMap: stop,
+        isActive: true),
+    Bus(
+        number: 85,
+        source: "Gare Campus",
+        destination: "Yopougon Kouté",
+        roadMap: stop,
+        isActive: false),
+    Bus(
+        number: 49,
+        source: "Abobo Sogefia",
+        destination: "Gare Campus",
+        roadMap: stop,
+        isActive: true),
+    Bus(
+        number: 49,
+        source: "Abobo Sogefia",
+        destination: "Gare Campus",
+        roadMap: stop,
+        isActive: false),
+    Bus(
+        number: 85,
+        source: "Yopougon Kouté",
+        destination: "Gare Campus",
+        roadMap: stop,
+        isActive: true),
+    Bus(
+        number: 85,
+        source: "Gare Campus",
+        destination: "Yopougon Kouté",
+        roadMap: stop,
         isActive: false),
   ];
 }

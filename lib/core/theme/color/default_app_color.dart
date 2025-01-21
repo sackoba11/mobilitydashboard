@@ -30,4 +30,7 @@ class DefaultAppColor implements IAppColor {
 
   @override
   Color get textColor => const Color(0xFF9E9E9E);
+
+  @override
+  Color get transparent => Colors.transparent;
 }

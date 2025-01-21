@@ -10,5 +10,5 @@ abstract class IAppColor {
   Color get red;
   Color get background;
   Color get textColor;
-  static Color transparent = Colors.transparent;
+  Color get transparent;
 }

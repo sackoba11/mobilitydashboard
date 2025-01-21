@@ -2,24 +2,24 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
+import 'package:mobilitydashboard/models/bus/bus_from_firestore/bus.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
-import 'repo.dart';
+import '../../../data/mockData/mock_data.dart';
 
 class MainView extends StatefulWidget {
   const MainView({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _MainViewState();
+  State<MainView> createState() => _MainViewState();
 }
 
 class _MainViewState extends State<MainView> {
-  final tableController = PagedDataTableController<String, Post>();
-
+  final tableController = PagedDataTableController<String, Bus>();
   @override
   Widget build(BuildContext context) {
+    List<Bus> dataBus;
     return Scaffold(
       body: Container(
         color: context.colors.background,
@@ -38,67 +38,57 @@ class _MainViewState extends State<MainView> {
                   //     ? context.colors.lightPrimary
                   //     :
                 ),
-                child: PagedDataTable<String, Post>(
+                child: PagedDataTable<String, Bus>(
                   controller: tableController,
-                  initialPageSize: 20,
+                  initialPageSize: 5,
                   configuration: const PagedDataTableConfiguration(),
-                  pageSizes: const [10, 20, 50, 100],
+                  pageSizes: const [5, 10, 20],
                   fetcher: (pageSize, sortModel, filterModel, pageToken) async {
-                    final data = List.generate(40, (index) {
-                      return Post(
-                          id: index,
-                          author: 'author',
-                          content: 'content',
-                          createdAt: DateTime.now(),
-                          isEnabled: index % 2 == 0 ? true : false,
-                          number: 2,
-                          authorGender:
-                              index % 2 == 0 ? Gender.female : Gender.male);
-                    });
+                    print(pageSize);
+                    print(sortModel);
+                    print(filterModel);
+                    print(pageToken);
 
-                    return (data, '');
+                    dataBus = await Future.delayed(Duration(seconds: 2), () {
+                      return MockData.dataBus;
+                    });
+                    return (dataBus, '');
                   },
                   filters: [
                     TextTableFilter(
-                      id: "content",
-                      chipFormatter: (value) => 'Content has "$value"',
-                      name: "Content",
+                      id: "number",
+                      name: "number",
+                      chipFormatter: (value) => value,
                     ),
-                    DropdownTableFilter<Gender>(
-                      items: Gender.values
-                          .map((e) =>
-                              DropdownMenuItem(value: e, child: Text(e.name)))
-                          .toList(growable: false),
-                      chipFormatter: (value) =>
-                          'Author is ${value.name.toLowerCase()}',
-                      id: "authorGender",
-                      name: "Author's Gender",
-                    ),
-                    DateTimePickerTableFilter(
-                      id: "1",
-                      name: "Date picker",
-                      chipFormatter: (date) => "Date is $date",
-                      initialValue: DateTime.now(),
-                      firstDate:
-                          DateTime.now().subtract(const Duration(days: 30)),
-                      lastDate: DateTime.now(),
-                      dateFormat: DateFormat.yMd(),
-                    ),
-                    DateRangePickerTableFilter(
-                      id: "2",
-                      name: "DateRange picker",
-                      chipFormatter: (date) => "Date is $date",
-                      initialValue: null,
-                      firstDate:
-                          DateTime.now().subtract(const Duration(days: 30)),
-                      lastDate: DateTime.now(),
-                      formatter: (range) => "${range.start} - ${range.end}",
+                    DropdownTableFilter<bool>(
+                      id: "active",
+                      name: "active",
+                      items: const <DropdownMenuItem<bool>>[
+                        DropdownMenuItem(
+                            alignment: AlignmentDirectional.center,
+                            value: true,
+                            child: Text(
+                              "Oui",
+                              style: TextStyle(
+                                color: Colors.green,
+                              ),
+                            )),
+                        DropdownMenuItem(
+                            alignment: AlignmentDirectional.center,
+                            value: false,
+                            child: Text(
+                              "Non",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            )),
+                      ],
+                      chipFormatter: (value) => value.toString(),
                     ),
                   ],
                   filterBarChild: PopupMenuButton(
                     icon: const Icon(
                       Icons.more_vert_outlined,
-                      color: Colors.red,
                     ),
                     itemBuilder: (context) => <PopupMenuEntry>[
                       PopupMenuItem(
@@ -134,6 +124,7 @@ class _MainViewState extends State<MainView> {
                       PopupMenuItem(
                         child: const Text("Remove first row"),
                         onTap: () {
+                          // tableController.refresh();
                           tableController.removeRowAt(0);
                         },
                       ),
@@ -154,69 +145,98 @@ class _MainViewState extends State<MainView> {
                       ),
                     ],
                   ),
-                  fixedColumnCount: 2,
                   columns: [
                     RowSelectorColumn(),
                     TableColumn(
-                      title: const Text("Id"),
+                      title: const Text("Index"),
                       cellBuilder: (context, item, index) =>
-                          Text(item.id.toString()),
-                      size: const FixedColumnSize(100),
+                          Text(index.toString()),
                     ),
-                    TableColumn(
-                      title: const Text("Author"),
-                      cellBuilder: (context, item, index) => Text(item.author),
-                      sortable: true,
-                      id: "author",
-                      size: const FractionalColumnSize(.15),
-                    ),
-                    DropdownTableColumn(
-                      title: const Text("Enabled"),
-                      // cellBuilder: (context, item, index) => Text(item.isEnabled ? "Yes" : "No"),
-                      items: const <DropdownMenuItem<bool>>[
-                        DropdownMenuItem(value: true, child: Text("Yes")),
-                        DropdownMenuItem(value: false, child: Text("No")),
-                      ],
-                      size: const FixedColumnSize(100),
-                      getter: (item, index) => item.isEnabled,
+                    LargeTextTableColumn(
+                      showTooltip: false,
+                      title: const Text("Source"),
+                      getter: (item, index) => item.source,
+                      // sortable: true,
+                      id: "source",
+                      size: const FractionalColumnSize(.2),
+                      fieldLabel: "source",
                       setter: (item, newValue, index) async {
                         await Future.delayed(const Duration(seconds: 2));
-                        item.isEnabled = newValue;
-                        return true;
-                      },
-                    ),
-                    TableColumn(
-                      title: const Text("Author Gender"),
-                      cellBuilder: (context, item, index) =>
-                          Text(item.authorGender.name),
-                      sortable: true,
-                      id: "authorGender",
-                      size: const MaxColumnSize(
-                          FractionalColumnSize(.2), FixedColumnSize(100)),
-                    ),
-                    TextTableColumn(
-                      title: const Text("Number"),
-                      format: const NumericColumnFormat(),
-                      // cellBuilder: (context, item, index) => Text(item.number.toString()),
-                      size: const MaxColumnSize(
-                          FixedColumnSize(100), FractionalColumnSize(.18)),
-                      getter: (item, index) => item.number.toString(),
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      setter: (item, newValue, index) async {
-                        await Future.delayed(const Duration(seconds: 2));
-                        item.number = int.parse(newValue);
+                        print(newValue);
                         return true;
                       },
                     ),
                     LargeTextTableColumn(
-                      title: const Text("Content "),
-                      size: const RemainingColumnSize(),
-                      getter: (item, index) => item.content,
-                      fieldLabel: "Content",
+                      title: const Text("Destination"),
+                      showTooltip: false,
+                      getter: (item, index) => item.destination,
+                      sortable: true,
+                      id: "destination",
+                      size: const FractionalColumnSize(.2),
+                      fieldLabel: "destination",
                       setter: (item, newValue, index) async {
                         await Future.delayed(const Duration(seconds: 2));
-                        item.content = newValue;
+                        print(newValue);
                         return true;
+                      },
+                    ),
+                    TextTableColumn(
+                      id: 'number',
+                      title: const Text("Numéro"),
+                      format: const NumericColumnFormat(),
+                      size: const FractionalColumnSize(.12),
+                      getter: (item, index) => item.number.toString(),
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      setter: (item, newValue, index) async {
+                        // await Future.delayed(const Duration(seconds: 2));
+                        // item.number = int.parse(newValue);
+                        print(newValue);
+                        return true;
+                      },
+                    ),
+                    DropdownTableColumn(
+                      id: 'active',
+                      title: const Text("Actif"),
+                      items: const <DropdownMenuItem<bool>>[
+                        DropdownMenuItem(
+                            alignment: AlignmentDirectional.center,
+                            value: true,
+                            child: Text(
+                              "Oui",
+                              style: TextStyle(
+                                color: Colors.green,
+                              ),
+                            )),
+                        DropdownMenuItem(
+                            alignment: AlignmentDirectional.center,
+                            value: false,
+                            child: Text(
+                              "Non",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            )),
+                      ],
+                      size: const FractionalColumnSize(.12),
+                      getter: (item, index) => item.isActive,
+                      setter: (item, newValue, index) async {
+                        // await Future.delayed(const Duration(seconds: 2));
+                        print(newValue);
+                        return true;
+                      },
+                    ),
+                    LargeTextTableColumn(
+                      title: const Text("Itinéraire"),
+                      showTooltip: false,
+                      size: const RemainingColumnSize(),
+                      getter: (item, index) =>
+                          item.roadMap.map((stop) => stop).toString(),
+                      fieldLabel: "roadMap",
+                      setter: (item, newValue, index) async {
+                        await Future.delayed(const Duration(seconds: 2));
+                        // item.content = newValue;
+                        print(newValue);
+                        return false;
                       },
                     ),
                   ],
@@ -227,10 +247,5 @@ class _MainViewState extends State<MainView> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
