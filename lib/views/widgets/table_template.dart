@@ -49,6 +49,7 @@ class TableTemplate<K, T> extends StatelessWidget {
                     pageSizes: const [5, 10, 20, 40],
                     fetcher:
                         (pageSize, sortModel, filterModel, pageToken) async {
+                      await Future.delayed(const Duration(seconds: 2));
                       return (data, null);
                     },
                     columns: [

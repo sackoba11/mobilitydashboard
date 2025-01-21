@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:mobilitydashboard/cubits/side_menu_cubit/side_menu_state.dart';
 

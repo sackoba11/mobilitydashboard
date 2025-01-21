@@ -5,7 +5,48 @@ import 'package:mobilitydashboard/models/stop/stop.dart';
 import 'package:mobilitydashboard/models/gare/gare.dart';
 
 class MockData {
-  static List<Driver> drivers = [];
+  static List<Driver> drivers = [
+    Driver(
+        name: 'sacko Allou',
+        number: '0203040708',
+        email: 'badragmail.com',
+        password: 'password'),
+    Driver(
+        name: 'sacko Allou',
+        number: '0203040708',
+        email: 'badragmail.com',
+        password: 'password'),
+    Driver(
+        name: 'sacko Allou',
+        number: '0203040708',
+        email: 'badragmail.com',
+        password: 'password'),
+    Driver(
+        name: 'sacko Allou',
+        number: '0203040708',
+        email: 'badragmail.com',
+        password: 'password'),
+    Driver(
+        name: 'sacko Allou',
+        number: '0203040708',
+        email: 'badragmail.com',
+        password: 'password'),
+    Driver(
+        name: 'sacko Allou',
+        number: '0203040708',
+        email: 'badragmail.com',
+        password: 'password'),
+    Driver(
+        name: 'sacko Allou',
+        number: '0203040708',
+        email: 'badragmail.com',
+        password: 'password'),
+    Driver(
+        name: 'sacko Allou',
+        number: '0203040708',
+        email: 'badragmail.com',
+        password: 'password'),
+  ];
   static List<ItineraireGare> itineraireGbaka = [
     //Abobo
     ItineraireGare(commune: "Abobo", type: "Gbaka", source: {

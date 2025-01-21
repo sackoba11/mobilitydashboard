@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:mobilitydashboard/views/widgets/table_template.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
-import '../../../core/assets/assets.gen.dart';
 import '../../../data/mockData/mock_data.dart';
 import '../../../models/bus/bus_from_firestore/bus.dart';
 import '../../widgets/custom_large_text_table_column.dart';
@@ -19,7 +17,7 @@ class BusScreen extends StatelessWidget {
     List<Bus> dataBus = MockData.dataBus;
     return Scaffold(
       backgroundColor: context.colors.transparent,
-      body: TableTemplate(
+      body: TableTemplate<String, Bus>(
         title: 'Bus',
         data: dataBus,
         columns: [
@@ -126,8 +124,8 @@ class BusScreen extends StatelessWidget {
         ],
         filterBarChild: Row(
           children: [
-            IconButton(
-              tooltip: 'Ajouter',
+            FilterPopupMenuButtonAction(
+              tableController: tableController,
               onPressed: () {
                 tableController.insertAt(
                     0,
@@ -139,11 +137,7 @@ class BusScreen extends StatelessWidget {
                         roadMap: MockData.stop));
                 print('done');
               },
-              icon: Assets.svg.addRow.svg(
-                  color: context.colors.textColor, height: 35.sp, width: 35.sp),
             ),
-            filterPopupMenuButtom(
-                tableController: tableController, context: context),
           ],
         ),
       ),
