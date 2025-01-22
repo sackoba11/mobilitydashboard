@@ -72,7 +72,10 @@ class DriverScreen extends StatelessWidget {
               },
             ),
           ],
-          data: dataDrivers,
+         fetcher: (pageSize, sortModel, filterModel, pageToken) async {
+          await Future.delayed(const Duration(seconds: 2));
+          return (dataDrivers, null);
+        },
           filters: [
             TextTableFilter(
               id: "number",

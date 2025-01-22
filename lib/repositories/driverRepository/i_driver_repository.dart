@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../../error/app_error.dart';
-import '../../models/bus/bus_from_firestore/bus.dart';
+import '../../models/bus/bus.dart';
 
 abstract class IDriverRepository {
   Future<Either<AppError, List<Bus>>> getAllBus();

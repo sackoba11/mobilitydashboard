@@ -13,7 +13,7 @@ class StationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tableController = PagedDataTableController<String, Gare>();
-    List<Gare> dataDrivers = MockData.garesGbaka + MockData.garesTaxi;
+    List<Gare> dataGares = MockData.garesGbaka + MockData.garesTaxi;
     return Scaffold(
         backgroundColor: context.colors.transparent,
         body: TableTemplate<String, Gare>(
@@ -72,7 +72,10 @@ class StationScreen extends StatelessWidget {
               },
             ),
           ],
-          data: dataDrivers,
+          fetcher: (pageSize, sortModel, filterModel, pageToken) async {
+            await Future.delayed(const Duration(seconds: 2));
+            return (dataGares, null);
+          },
           filters: [
             TextTableFilter(
               id: "number",

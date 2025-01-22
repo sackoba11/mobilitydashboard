@@ -13,7 +13,7 @@ class UsersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tableController = PagedDataTableController<String, MyUser>();
-    List<MyUser> dataDrivers = MockData.users;
+    List<MyUser> dataUsers = MockData.users;
     return Scaffold(
         backgroundColor: context.colors.transparent,
         body: TableTemplate<String, MyUser>(
@@ -46,7 +46,10 @@ class UsersScreen extends StatelessWidget {
               },
             ),
           ],
-          data: dataDrivers,
+          fetcher: (pageSize, sortModel, filterModel, pageToken) async {
+            await Future.delayed(const Duration(seconds: 2));
+            return (dataUsers, null);
+          },
           filters: [
             TextTableFilter(
               id: "email",

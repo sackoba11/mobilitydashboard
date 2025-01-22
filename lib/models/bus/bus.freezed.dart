@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'bus_from_db.dart';
+part of 'bus.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-BusFromDb _$BusFromDbFromJson(Map<String, dynamic> json) {
-  return _BusFromDb.fromJson(json);
+Bus _$BusFromJson(Map<String, dynamic> json) {
+  return _Bus.fromJson(json);
 }
 
 /// @nodoc
-mixin _$BusFromDb {
+mixin _$Bus {
   int get number => throw _privateConstructorUsedError;
   String get source => throw _privateConstructorUsedError;
   String get destination => throw _privateConstructorUsedError;
@@ -28,20 +28,19 @@ mixin _$BusFromDb {
   Stop? get position => throw _privateConstructorUsedError;
   DateTime? get startDate => throw _privateConstructorUsedError;
 
-  /// Serializes this BusFromDb to a JSON map.
+  /// Serializes this Bus to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of BusFromDb
+  /// Create a copy of Bus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $BusFromDbCopyWith<BusFromDb> get copyWith =>
-      throw _privateConstructorUsedError;
+  $BusCopyWith<Bus> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BusFromDbCopyWith<$Res> {
-  factory $BusFromDbCopyWith(BusFromDb value, $Res Function(BusFromDb) then) =
-      _$BusFromDbCopyWithImpl<$Res, BusFromDb>;
+abstract class $BusCopyWith<$Res> {
+  factory $BusCopyWith(Bus value, $Res Function(Bus) then) =
+      _$BusCopyWithImpl<$Res, Bus>;
   @useResult
   $Res call(
       {int number,
@@ -56,16 +55,15 @@ abstract class $BusFromDbCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BusFromDbCopyWithImpl<$Res, $Val extends BusFromDb>
-    implements $BusFromDbCopyWith<$Res> {
-  _$BusFromDbCopyWithImpl(this._value, this._then);
+class _$BusCopyWithImpl<$Res, $Val extends Bus> implements $BusCopyWith<$Res> {
+  _$BusCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of BusFromDb
+  /// Create a copy of Bus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -110,7 +108,7 @@ class _$BusFromDbCopyWithImpl<$Res, $Val extends BusFromDb>
     ) as $Val);
   }
 
-  /// Create a copy of BusFromDb
+  /// Create a copy of Bus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -126,11 +124,9 @@ class _$BusFromDbCopyWithImpl<$Res, $Val extends BusFromDb>
 }
 
 /// @nodoc
-abstract class _$$BusFromDbImplCopyWith<$Res>
-    implements $BusFromDbCopyWith<$Res> {
-  factory _$$BusFromDbImplCopyWith(
-          _$BusFromDbImpl value, $Res Function(_$BusFromDbImpl) then) =
-      __$$BusFromDbImplCopyWithImpl<$Res>;
+abstract class _$$BusImplCopyWith<$Res> implements $BusCopyWith<$Res> {
+  factory _$$BusImplCopyWith(_$BusImpl value, $Res Function(_$BusImpl) then) =
+      __$$BusImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -147,14 +143,12 @@ abstract class _$$BusFromDbImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$BusFromDbImplCopyWithImpl<$Res>
-    extends _$BusFromDbCopyWithImpl<$Res, _$BusFromDbImpl>
-    implements _$$BusFromDbImplCopyWith<$Res> {
-  __$$BusFromDbImplCopyWithImpl(
-      _$BusFromDbImpl _value, $Res Function(_$BusFromDbImpl) _then)
+class __$$BusImplCopyWithImpl<$Res> extends _$BusCopyWithImpl<$Res, _$BusImpl>
+    implements _$$BusImplCopyWith<$Res> {
+  __$$BusImplCopyWithImpl(_$BusImpl _value, $Res Function(_$BusImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of BusFromDb
+  /// Create a copy of Bus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -167,7 +161,7 @@ class __$$BusFromDbImplCopyWithImpl<$Res>
     Object? position = freezed,
     Object? startDate = freezed,
   }) {
-    return _then(_$BusFromDbImpl(
+    return _then(_$BusImpl(
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -202,8 +196,8 @@ class __$$BusFromDbImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BusFromDbImpl implements _BusFromDb {
-  _$BusFromDbImpl(
+class _$BusImpl implements _Bus {
+  _$BusImpl(
       {required this.number,
       required this.source,
       required this.destination,
@@ -213,8 +207,8 @@ class _$BusFromDbImpl implements _BusFromDb {
       required this.startDate})
       : _roadMap = roadMap;
 
-  factory _$BusFromDbImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BusFromDbImplFromJson(json);
+  factory _$BusImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BusImplFromJson(json);
 
   @override
   final int number;
@@ -239,14 +233,14 @@ class _$BusFromDbImpl implements _BusFromDb {
 
   @override
   String toString() {
-    return 'BusFromDb(number: $number, source: $source, destination: $destination, isActive: $isActive, roadMap: $roadMap, position: $position, startDate: $startDate)';
+    return 'Bus(number: $number, source: $source, destination: $destination, isActive: $isActive, roadMap: $roadMap, position: $position, startDate: $startDate)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BusFromDbImpl &&
+            other is _$BusImpl &&
             (identical(other.number, number) || other.number == number) &&
             (identical(other.source, source) || other.source == source) &&
             (identical(other.destination, destination) ||
@@ -272,34 +266,33 @@ class _$BusFromDbImpl implements _BusFromDb {
       position,
       startDate);
 
-  /// Create a copy of BusFromDb
+  /// Create a copy of Bus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$BusFromDbImplCopyWith<_$BusFromDbImpl> get copyWith =>
-      __$$BusFromDbImplCopyWithImpl<_$BusFromDbImpl>(this, _$identity);
+  _$$BusImplCopyWith<_$BusImpl> get copyWith =>
+      __$$BusImplCopyWithImpl<_$BusImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BusFromDbImplToJson(
+    return _$$BusImplToJson(
       this,
     );
   }
 }
 
-abstract class _BusFromDb implements BusFromDb {
-  factory _BusFromDb(
+abstract class _Bus implements Bus {
+  factory _Bus(
       {required final int number,
       required final String source,
       required final String destination,
       required final bool isActive,
       required final List<Stop> roadMap,
       required final Stop? position,
-      required final DateTime? startDate}) = _$BusFromDbImpl;
+      required final DateTime? startDate}) = _$BusImpl;
 
-  factory _BusFromDb.fromJson(Map<String, dynamic> json) =
-      _$BusFromDbImpl.fromJson;
+  factory _Bus.fromJson(Map<String, dynamic> json) = _$BusImpl.fromJson;
 
   @override
   int get number;
@@ -316,10 +309,10 @@ abstract class _BusFromDb implements BusFromDb {
   @override
   DateTime? get startDate;
 
-  /// Create a copy of BusFromDb
+  /// Create a copy of Bus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BusFromDbImplCopyWith<_$BusFromDbImpl> get copyWith =>
+  _$$BusImplCopyWith<_$BusImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

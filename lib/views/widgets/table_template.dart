@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
@@ -10,14 +12,16 @@ class TableTemplate<K, T> extends StatelessWidget {
   final List<ReadOnlyTableColumn<String, T>> columns;
   final List<TableFilter<Object>> filters;
   final Widget filterBarChild;
-  final List<T> data;
+
+  final FutureOr<(List<T>, String?)> Function(
+      int, SortModel?, FilterModel, String?) fetcher;
   const TableTemplate(
       {super.key,
       required this.columns,
-      required this.data,
       required this.filters,
       required this.filterBarChild,
-      required this.title});
+      required this.title,
+      required this.fetcher});
 
   @override
   Widget build(BuildContext context) {
@@ -88,11 +92,7 @@ class TableTemplate<K, T> extends StatelessWidget {
                     initialPageSize: 40,
                     configuration: const PagedDataTableConfiguration(),
                     pageSizes: const [5, 10, 20, 40],
-                    fetcher:
-                        (pageSize, sortModel, filterModel, pageToken) async {
-                      await Future.delayed(const Duration(seconds: 2));
-                      return (data, null);
-                    },
+                    fetcher: fetcher,
                     columns: [
                       RowSelectorColumn(),
                       TableColumn(
