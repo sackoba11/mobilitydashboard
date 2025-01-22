@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
+import '../../responsive.dart';
+
 class TableTemplate<K, T> extends StatelessWidget {
   final String title;
   final List<ReadOnlyTableColumn<String, T>> columns;
@@ -26,9 +28,48 @@ class TableTemplate<K, T> extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
+              if (!Responsive.isMobile(context))
+                Expanded(
+                  flex: 2,
+                  child: SizedBox(
+                    height: 35,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: context.colors.secondary,
+                        enabledBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).primaryColor,
+                          ),
+                        ),
+                        prefixIcon: const Icon(Icons.search),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 7),
+                        hintText: 'Recherche',
+                      ),
+                    ),
+                  ),
+                ),
+              if (Responsive.isMobile(context))
+                IconButton(onPressed: () {}, icon: const Icon(Icons.search))
+            ],
           ),
           context.gaps.small,
           Expanded(
