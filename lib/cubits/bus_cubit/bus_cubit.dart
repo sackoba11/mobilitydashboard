@@ -23,7 +23,7 @@ class BusCubit extends Cubit<BusState> {
           (await busRepository.getAllBus()).fold((l) => [], (r) => r);
 
       var availableActiveBusList = listAllBus;
-      print(availableActiveBusList);
+      // print(availableActiveBusList);
       emit(BusLoaded(listBus: availableActiveBusList));
     } catch (e) {
       print(e);

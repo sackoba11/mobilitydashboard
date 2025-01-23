@@ -22,11 +22,10 @@ class BusScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.colors.transparent,
       body: BlocBuilder<BusCubit, BusState>(builder: (context, state) {
-        // if (state is BusLoading) {
-        //   return Center(
-        //       child: CircularProgressIndicator(color: context.colors.primary));
-        // } else
-        if (state is BusLoadingFailure) {
+        if (state is BusLoading) {
+          return Center(
+              child: CircularProgressIndicator(color: context.colors.primary));
+        } else if (state is BusLoadingFailure) {
           return const Center(
             child: Text('Echec de chargement'),
           );
