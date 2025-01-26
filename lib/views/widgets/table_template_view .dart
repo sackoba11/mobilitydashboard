@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobilitydashboard/core/constatnts/app_string.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
+import 'package:mobilitydashboard/data/mockData/mock_data.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 import '../../core/assets/assets.gen.dart';
@@ -11,132 +13,33 @@ class TableTemplateView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.sizeOf(context);
-    final List<PlutoColumn> columns = <PlutoColumn>[
-      PlutoColumn(
-        title: 'Id',
-        field: 'id',
-        width: size.width * .08,
-        enableRowChecked: true,
-        enableContextMenu: false,
-        enableDropToResize: false,
-        enableFilterMenuItem: false,
-        type: PlutoColumnType.text(),
-      ),
-      PlutoColumn(
-        title: 'Name',
-        field: 'name',
-        enableContextMenu: false,
-        enableDropToResize: false,
-        enableFilterMenuItem: false,
-        width: size.width * .08,
-        type: PlutoColumnType.text(),
-      ),
-      PlutoColumn(
-        title: 'Age',
-        field: 'age',
-        enableContextMenu: false,
-        enableDropToResize: false,
-        enableFilterMenuItem: false,
-        width: size.width * .08,
-        type: PlutoColumnType.number(),
-      ),
-      PlutoColumn(
-        title: 'Role',
-        field: 'role',
-        enableContextMenu: false,
-        enableDropToResize: false,
-        enableFilterMenuItem: false,
-        width: size.width * .12,
-        type: PlutoColumnType.select(<String>[
-          'Programmer',
-          'Designer',
-          'Owner',
-        ]),
-      ),
-      PlutoColumn(
-        title: 'Joined',
-        field: 'joined',
-        enableContextMenu: false,
-        enableDropToResize: false,
-        enableFilterMenuItem: false,
-        width: size.width * .12,
-        type: PlutoColumnType.date(),
-      ),
-      PlutoColumn(
-        title: 'Working time',
-        field: 'working_time',
-        enableContextMenu: false,
-        enableDropToResize: false,
-        enableFilterMenuItem: false,
-        width: size.width * .12,
-        type: PlutoColumnType.time(),
-      ),
-      PlutoColumn(
-        title: 'salary',
-        field: 'salary',
-        enableContextMenu: false,
-        enableDropToResize: false,
-        enableFilterMenuItem: false,
-        width: size.width * .12,
-        type: PlutoColumnType.currency(),
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            rendererContext: rendererContext,
-            formatAsCurrency: true,
-            type: PlutoAggregateColumnType.sum,
-            format: '#,###',
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'Sum',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
-      ),
-    ];
+    final List<PlutoColumn> column = AppString.titleTableHeaderBus
+        .map((title) => PlutoColumn(
+              title: title,
+              field: title,
+              // enableRowChecked: true,
+              enableContextMenu: false,
+              enableDropToResize: false,
+              enableFilterMenuItem: false,
+              type: PlutoColumnType.text(),
+            ))
+        .toList();
+    final List<PlutoRow> row = MockData.dataBus
+        .map((data) => PlutoRow(cells: {
+              AppString.titleTableHeaderBus[0].toString(): PlutoCell(value: 2),
+              AppString.titleTableHeaderBus[1].toString():
+                  PlutoCell(value: data.number),
+              AppString.titleTableHeaderBus[2].toString():
+                  PlutoCell(value: data.source),
+              AppString.titleTableHeaderBus[3].toString():
+                  PlutoCell(value: data.destination),
+              AppString.titleTableHeaderBus[4].toString():
+                  PlutoCell(value: data.isActive),
+              AppString.titleTableHeaderBus[5].toString():
+                  PlutoCell(value: data.roadMap),
+            }))
+        .toList();
 
-    final List<PlutoRow> rows = [
-      PlutoRow(
-        cells: {
-          'id': PlutoCell(value: 'user1'),
-          'name': PlutoCell(value: 'Mike'),
-          'age': PlutoCell(value: 20),
-          'role': PlutoCell(value: 'Programmer'),
-          'joined': PlutoCell(value: '2021-01-01'),
-          'working_time': PlutoCell(value: '09:00'),
-          'salary': PlutoCell(value: 300),
-        },
-      ),
-      PlutoRow(
-        cells: {
-          'id': PlutoCell(value: 'user2'),
-          'name': PlutoCell(value: 'Jack'),
-          'age': PlutoCell(value: 25),
-          'role': PlutoCell(value: 'Designer'),
-          'joined': PlutoCell(value: '2021-02-01'),
-          'working_time': PlutoCell(value: '10:00'),
-          'salary': PlutoCell(value: 400),
-        },
-      ),
-      PlutoRow(
-        cells: {
-          'id': PlutoCell(value: 'user3'),
-          'name': PlutoCell(value: 'Suzi'),
-          'age': PlutoCell(value: 40),
-          'role': PlutoCell(value: 'Owner'),
-          'joined': PlutoCell(value: '2021-03-01'),
-          'working_time': PlutoCell(value: '11:00'),
-          'salary': PlutoCell(value: 700),
-        },
-      ),
-    ];
     // late final PlutoGridStateManager stateManager;
 
     return Padding(
@@ -149,7 +52,7 @@ class TableTemplateView extends StatelessWidget {
             children: [
               const Expanded(
                 child: Text(
-                  'title',
+                  'Accueil',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -185,27 +88,40 @@ class TableTemplateView extends StatelessWidget {
                   ),
                 ),
               if (Responsive.isMobile(context))
-                IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-              PopupMenuButton(
-                tooltip: 'Menu',
-                icon: Assets.svg.menuVertical1.svg(
-                    color: context.colors.textColor,
-                    height: 30.sp,
-                    width: 30.sp),
-                itemBuilder: (context) => <PopupMenuEntry>[
-                  PopupMenuItem(
-                    child: const Text(
-                      "Print selected rows",
+                IconButton(
+                    tooltip: 'Recherche',
+                    onPressed: () {},
+                    icon: const Icon(Icons.search)),
+              context.gaps.normal,
+              if (!Responsive.isMobile(context))
+                IconButton(
+                  tooltip: 'Se deconnecter',
+                  onPressed: () {},
+                  icon: Container(
+                    // height: 34,
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Row(
+                      children: [
+                        Assets.svg.logout1.svg(
+                            color: context.colors.textColor,
+                            height: 20.sp,
+                            width: 20.sp),
+                        context.gaps.small,
+                        Text(
+                          'Se deconnecter',
+                          style: TextStyle(color: context.colors.textColor),
+                        )
+                      ],
                     ),
-                    onTap: () {},
                   ),
-                  const PopupMenuDivider(),
-                  PopupMenuItem(
-                    child: const Text("Remove first row"),
-                    onTap: () {},
-                  ),
-                ],
-              ),
+                ),
+              if (Responsive.isMobile(context))
+                IconButton(
+                  tooltip: 'Se deconnecter',
+                  onPressed: () {},
+                  icon: Assets.svg.logout1.svg(
+                      color: context.colors.textColor, height: 20, width: 20),
+                ),
             ],
           ),
           context.gaps.small,
@@ -266,8 +182,8 @@ class TableTemplateView extends StatelessWidget {
                   ],
                 );
               },
-              columns: columns,
-              rows: rows,
+              columns: column,
+              rows: row,
               onLoaded: (PlutoGridOnLoadedEvent event) {
                 // stateManager = event.stateManager;
               },
