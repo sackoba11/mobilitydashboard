@@ -13,7 +13,7 @@ class BusCubit extends Cubit<BusState> {
   List<Bus> busData = [];
   IBusRepository busRepository = BusRepositoryImpl();
 
-  void getAllBus() async {
+  Future<List<Bus>> getAllBus() async {
     try {
       emit(BusLoading());
       // List<Bus> activeBusList =
@@ -25,10 +25,12 @@ class BusCubit extends Cubit<BusState> {
       var availableActiveBusList = listAllBus;
       // print(availableActiveBusList);
       emit(BusLoaded(listBus: availableActiveBusList));
+      return listAllBus;
     } catch (e) {
       print(e);
       emit(BusLoadingFailure(
           error: GenericAppError('Echec de chargement des bus, Erreur: $e')));
+      return [];
     }
   }
 }

@@ -14,28 +14,30 @@ class TableTemplateView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<PlutoColumn> column = AppString.titleTableHeaderBus
-        .map((title) => PlutoColumn(
-              title: title,
-              field: title,
-              // enableRowChecked: true,
+        .map((column) => PlutoColumn(
+              title: column.title,
+              field: column.title,
+              enableRowChecked: column.enableRowChecked,
               enableContextMenu: false,
               enableDropToResize: false,
               enableFilterMenuItem: false,
-              type: PlutoColumnType.text(),
+              enableSetColumnsMenuItem: false,
+              type: column.type,
             ))
         .toList();
     final List<PlutoRow> row = MockData.dataBus
         .map((data) => PlutoRow(cells: {
-              AppString.titleTableHeaderBus[0].toString(): PlutoCell(value: 2),
-              AppString.titleTableHeaderBus[1].toString():
+              AppString.titleTableHeaderBus[0].title.toString():
+                  PlutoCell(value: 2),
+              AppString.titleTableHeaderBus[1].title.toString():
                   PlutoCell(value: data.number),
-              AppString.titleTableHeaderBus[2].toString():
+              AppString.titleTableHeaderBus[2].title.toString():
                   PlutoCell(value: data.source),
-              AppString.titleTableHeaderBus[3].toString():
+              AppString.titleTableHeaderBus[3].title.toString():
                   PlutoCell(value: data.destination),
-              AppString.titleTableHeaderBus[4].toString():
-                  PlutoCell(value: data.isActive),
-              AppString.titleTableHeaderBus[5].toString():
+              AppString.titleTableHeaderBus[4].title.toString():
+                  PlutoCell(value: data.isActive ? 'Oui' : 'Non'),
+              AppString.titleTableHeaderBus[5].title.toString():
                   PlutoCell(value: data.roadMap),
             }))
         .toList();
@@ -199,7 +201,8 @@ class TableTemplateView extends StatelessWidget {
                 enableColumnBorderVertical: false,
                 enableCellBorderVertical: false,
                 enableRowColorAnimation: true,
-                cellColorInEditState: context.colors.textColor,
+                iconColor: context.colors.textColor,
+                cellColorInEditState: context.colors.black,
                 checkedColor: context.colors.lightPrimary,
                 activatedColor: context.colors.lightPrimary,
                 rowColor: context.colors.secondary,
