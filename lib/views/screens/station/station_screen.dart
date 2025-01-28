@@ -30,6 +30,7 @@ class StationScreen extends StatelessWidget {
               context.gaps.small,
               Expanded(
                   child: TableTemplate<String, Gare>(
+                    tableController: tableController,
                 columns: [
                   LargeTextTableColumn(
                     showTooltip: false,

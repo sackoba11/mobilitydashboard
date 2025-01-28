@@ -9,6 +9,7 @@ class TableTemplate<K, T> extends StatelessWidget {
   final List<ReadOnlyTableColumn<String, T>> columns;
   final List<TableFilter<Object>> filters;
   final Widget filterBarChild;
+  final PagedDataTableController<String, T> tableController;
 
   final FutureOr<(List<T>, String?)> Function(
       int, SortModel?, FilterModel, String?) fetcher;
@@ -17,12 +18,11 @@ class TableTemplate<K, T> extends StatelessWidget {
       required this.columns,
       required this.filters,
       required this.filterBarChild,
-      required this.fetcher});
+      required this.fetcher,
+      required this.tableController});
 
   @override
   Widget build(BuildContext context) {
-    final tableController = PagedDataTableController<String, T>();
-    
     return PagedDataTableTheme(
         data: PagedDataTableThemeData(
           filterBarHeight: 60,

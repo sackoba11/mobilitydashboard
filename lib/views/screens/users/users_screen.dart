@@ -30,6 +30,7 @@ class UsersScreen extends StatelessWidget {
               context.gaps.small,
               Expanded(
                   child: TableTemplate<String, MyUser>(
+                    tableController: tableController,
                 columns: [
                   LargeTextTableColumn(
                     showTooltip: false,

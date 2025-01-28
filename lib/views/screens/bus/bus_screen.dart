@@ -30,6 +30,7 @@ class BusScreen extends StatelessWidget {
               context.gaps.small,
               Expanded(
                   child: TableTemplate<String, Bus>(
+                    tableController: tableController,
                 fetcher: (pageSize, sortModel, filterModel, pageToken) async {
                   var bus = await locator.get<BusCubit>().getAllBus();
                   return (bus, null);

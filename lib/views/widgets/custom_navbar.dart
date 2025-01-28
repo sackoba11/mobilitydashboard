@@ -49,10 +49,10 @@ class CustomNavBar extends StatelessWidget {
                     color: context.colors.primary,
                   ),
                 ),
-                prefixIcon: const Icon(Icons.search, size: 18),
+                prefixIcon: const Icon(Icons.search, size: 22),
                 contentPadding:
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 7),
-                hintText: 'Recherche',
+                hintText: 'recherche',
               ),
             ),
           ),
@@ -60,7 +60,7 @@ class CustomNavBar extends StatelessWidget {
         context.gaps.normal,
 
         IconButton(
-          tooltip: 'Se deconnecter',
+          tooltip: 'Se déconnecter',
           splashRadius: 2.sp,
           onPressed: () {},
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -71,7 +71,7 @@ class CustomNavBar extends StatelessWidget {
               context.gaps.small,
               if (!Responsive.isMobile(context))
                 Text(
-                  'Se deconnecter',
+                  'Se déconnecter',
                   style: TextStyle(color: context.colors.textColor),
                 )
             ],

@@ -30,6 +30,7 @@ class DriverScreen extends StatelessWidget {
               context.gaps.small,
               Expanded(
                   child: TableTemplate<String, Driver>(
+                tableController: tableController,
                 columns: [
                   LargeTextTableColumn(
                     showTooltip: false,

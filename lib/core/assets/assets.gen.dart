@@ -71,6 +71,16 @@ class $AssetsSvgGen {
   /// File path: assets/svg/dashboard2.svg
   SvgGenImage get dashboard2 => const SvgGenImage('assets/svg/dashboard2.svg');
 
+  /// File path: assets/svg/delete-button.svg
+  SvgGenImage get deleteButton =>
+      const SvgGenImage('assets/svg/delete-button.svg');
+
+  /// File path: assets/svg/delete.svg
+  SvgGenImage get delete => const SvgGenImage('assets/svg/delete.svg');
+
+  /// File path: assets/svg/delete1.svg
+  SvgGenImage get delete1 => const SvgGenImage('assets/svg/delete1.svg');
+
   /// File path: assets/svg/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/svg/filter.svg');
 
@@ -79,6 +89,9 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/filter2.svg
   SvgGenImage get filter2 => const SvgGenImage('assets/svg/filter2.svg');
+
+  /// File path: assets/svg/left-arrow.svg
+  SvgGenImage get leftArrow => const SvgGenImage('assets/svg/left-arrow.svg');
 
   /// File path: assets/svg/logout.svg
   SvgGenImage get logout => const SvgGenImage('assets/svg/logout.svg');
@@ -89,6 +102,28 @@ class $AssetsSvgGen {
   /// File path: assets/svg/menu-vertical1.svg
   SvgGenImage get menuVertical1 =>
       const SvgGenImage('assets/svg/menu-vertical1.svg');
+
+  /// File path: assets/svg/refresh-cw-alt.svg
+  SvgGenImage get refreshCwAlt =>
+      const SvgGenImage('assets/svg/refresh-cw-alt.svg');
+
+  /// File path: assets/svg/refresh-cw.svg
+  SvgGenImage get refreshCw => const SvgGenImage('assets/svg/refresh-cw.svg');
+
+  /// File path: assets/svg/refresh.svg
+  SvgGenImage get refresh => const SvgGenImage('assets/svg/refresh.svg');
+
+  /// File path: assets/svg/refresh1.svg
+  SvgGenImage get refresh1 => const SvgGenImage('assets/svg/refresh1.svg');
+
+  /// File path: assets/svg/right-arrow.svg
+  SvgGenImage get rightArrow => const SvgGenImage('assets/svg/right-arrow.svg');
+
+  /// File path: assets/svg/search-alt.svg
+  SvgGenImage get searchAlt => const SvgGenImage('assets/svg/search-alt.svg');
+
+  /// File path: assets/svg/search-alt2.svg
+  SvgGenImage get searchAlt2 => const SvgGenImage('assets/svg/search-alt2.svg');
 
   /// File path: assets/svg/table-add.svg
   SvgGenImage get tableAdd => const SvgGenImage('assets/svg/table-add.svg');
@@ -103,12 +138,23 @@ class $AssetsSvgGen {
         bus1,
         chauffer,
         dashboard2,
+        deleteButton,
+        delete,
+        delete1,
         filter,
         filter1,
         filter2,
+        leftArrow,
         logout,
         logout1,
         menuVertical1,
+        refreshCwAlt,
+        refreshCw,
+        refresh,
+        refresh1,
+        rightArrow,
+        searchAlt,
+        searchAlt2,
         tableAdd,
         usersUser
       ];

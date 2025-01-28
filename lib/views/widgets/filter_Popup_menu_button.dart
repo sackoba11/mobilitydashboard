@@ -15,15 +15,21 @@ class FilterPopupMenuButtonAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (tableController.selectedRows.isEmpty)
-          InkWell(
-            child: Text('supprimer'),
-            onTap: () {
-              tableController.selectRow(0);
-              print(tableController.selectedRows);
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(
+            tooltip: 'Supprimer',
+            onPressed: () {
+              final rows = tableController.selectedRows;
+              for (var index in rows) {
+                tableController.removeRowAt(index);
+              }
+              tableController.unselectAllRows();
             },
-            // icon: Icon(Icons.delete_outline, color: context.colors.red),
+            icon: Assets.svg.deleteButton
+                .svg(color: context.colors.red, height: 20, width: 20),
           ),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: IconButton(

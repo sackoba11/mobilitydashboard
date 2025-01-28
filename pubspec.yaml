@@ -58,7 +58,7 @@ dependencies:
   dartz: ^0.10.1
   google_sign_in: ^6.2.2
   geolocator: ^13.0.2
-  pluto_grid: ^8.0.0
+  wolt_modal_sheet: ^0.10.0
 
 dev_dependencies:
   flutter_test:
