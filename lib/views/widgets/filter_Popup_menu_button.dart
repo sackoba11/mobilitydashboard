@@ -43,3 +43,30 @@ class FilterPopupMenuButtonAction extends StatelessWidget {
     );
   }
 }
+
+final class CustomTextTableFilter extends TableFilter<String> {
+  final InputDecoration? decoration;
+
+  const CustomTextTableFilter({
+    this.decoration,
+    required super.chipFormatter,
+    required super.id,
+    required super.name,
+    super.initialValue,
+    super.enabled = true,
+  });
+
+  @override
+  Widget buildPicker(BuildContext context, FilterState<String> state) {
+    return TextFormField(
+      decoration: InputDecoration(
+          labelText: name, hintText: name, border: const OutlineInputBorder()),
+      initialValue: state.value,
+      onSaved: (newValue) {
+        if (newValue != null && newValue.isNotEmpty) {
+          state.value = newValue;
+        }
+      },
+    );
+  }
+}

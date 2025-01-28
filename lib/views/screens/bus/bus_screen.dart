@@ -5,8 +5,8 @@ import 'package:mobilitydashboard/cubits/bus_cubit/bus_cubit.dart';
 import 'package:mobilitydashboard/di.dart';
 import 'package:mobilitydashboard/views/widgets/table_template.dart';
 import 'package:paged_datatable/paged_datatable.dart';
+import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
-import '../../../data/mockData/mock_data.dart';
 import '../../../models/bus/bus.dart';
 import '../../widgets/custom_large_text_table_column.dart';
 import '../../widgets/custom_navbar.dart';
@@ -18,7 +18,14 @@ class BusScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tableController = PagedDataTableController<String, Bus>();
-    TextEditingController textEditingController = TextEditingController();
+    TextEditingController searchTextEditingController = TextEditingController();
+    TextEditingController numberTextEditingController = TextEditingController();
+    TextEditingController sourceTextEditingController = TextEditingController();
+    TextEditingController destinationTextEditingController =
+        TextEditingController();
+    TextEditingController roadMapTextEditingController =
+        TextEditingController();
+
     return Scaffold(
         backgroundColor: context.colors.transparent,
         body: Padding(
@@ -26,11 +33,12 @@ class BusScreen extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               CustomNavBar(
-                  title: 'Bus', textEditingController: textEditingController),
+                  title: 'Bus',
+                  textEditingController: searchTextEditingController),
               context.gaps.small,
               Expanded(
                   child: TableTemplate<String, Bus>(
-                    tableController: tableController,
+                tableController: tableController,
                 fetcher: (pageSize, sortModel, filterModel, pageToken) async {
                   var bus = await locator.get<BusCubit>().getAllBus();
                   return (bus, null);
@@ -106,14 +114,18 @@ class BusScreen extends StatelessWidget {
                   ),
                 ],
                 filters: [
-                  TextTableFilter(
-                    id: "number",
-                    name: "number",
+                  CustomTextTableFilter(
                     chipFormatter: (value) => value,
+                    id: 'number',
+                    name: 'Numero',
                   ),
                   DropdownTableFilter<bool>(
                     id: "active",
                     name: "active",
+                    decoration: const InputDecoration(
+                        labelText: "active",
+                        hintText: "active",
+                        border: OutlineInputBorder()),
                     items: const <DropdownMenuItem<bool>>[
                       DropdownMenuItem(
                           alignment: AlignmentDirectional.center,
@@ -140,19 +152,122 @@ class BusScreen extends StatelessWidget {
                 filterBarChild: FilterPopupMenuButtonAction(
                   tableController: tableController,
                   onPressed: () {
-                    tableController.insertAt(
-                        0,
-                        Bus(
-                            position: MockData.stop.first,
-                            startDate: null,
-                            number: 29,
-                            source: 'Riviera',
-                            destination: 'Gare Sud',
-                            isActive: true,
-                            roadMap: []));
+                    WoltModalSheet.show(
+                      barrierDismissible: false,
+                      context: context,
+                      pageListBuilder: (bottomSheetContext) => [
+                        WoltModalSheetPage(
+                            topBarTitle: Center(
+                                child: Text(
+                              'Ajout',
+                              style: TextStyle(color: context.colors.textColor),
+                            )),
+                            pageTitle: const Center(child: Text('Ajout')),
+                            // isTopBarLayerAlwaysVisible: true,
+                            backgroundColor: context.colors.secondary,
+                            trailingNavBarWidget: IconButton(
+                              padding: const EdgeInsets.all(8),
+                              icon: const Icon(Icons.close),
+                              onPressed: Navigator.of(bottomSheetContext).pop,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(28.0),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    CustomTextFormField(
+                                      labelText: 'Numero',
+                                      textEditingController:
+                                          numberTextEditingController,
+                                    ),
+                                    context.gaps.normal,
+                                    CustomTextFormField(
+                                      labelText: 'Source',
+                                      textEditingController:
+                                          sourceTextEditingController,
+                                    ),
+                                    context.gaps.normal,
+                                    CustomTextFormField(
+                                      labelText: 'Destination',
+                                      textEditingController:
+                                          destinationTextEditingController,
+                                    ),
+                                    context.gaps.normal,
+                                    CustomTextFormField(
+                                      labelText: 'Itineraires',
+                                      textEditingController:
+                                          roadMapTextEditingController,
+                                    ),
+                                    context.gaps.large,
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Container(
+                                          width: double.infinity,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: context.colors.primary),
+                                          child: Center(
+                                            child: Text(
+                                              'Valider',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: context.colors.black),
+                                            ),
+                                          )),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ))
+                      ],
+                    );
+                    // tableController.insertAt(
+                    //     0,
+                    //     Bus(
+                    //         position: MockData.stop.first,
+                    //         startDate: null,
+                    //         number: 29,
+                    //         source: 'Riviera',
+                    //         destination: 'Gare Sud',
+                    //         isActive: true,
+                    //         roadMap: []));
                   },
                 ),
               ))
             ])));
+  }
+}
+
+class CustomTextFormField extends StatelessWidget {
+  final String labelText;
+  final TextEditingController textEditingController;
+  const CustomTextFormField({
+    super.key,
+    required this.labelText,
+    required this.textEditingController,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: textEditingController,
+      decoration: InputDecoration(
+          labelText: labelText,
+          hintText: labelText,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide:
+                  BorderSide(width: 0.4, color: context.colors.textColor))),
+      onSaved: (newValue) {
+        if (newValue != null && newValue.isNotEmpty) {
+          textEditingController.text = newValue;
+        }
+      },
+    );
   }
 }
