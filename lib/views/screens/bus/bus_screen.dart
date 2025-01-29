@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:mobilitydashboard/cubits/bus_cubit/bus_cubit.dart';
 import 'package:mobilitydashboard/di.dart';
+import 'package:mobilitydashboard/models/stop/stop.dart';
 import 'package:mobilitydashboard/views/widgets/table_template.dart';
 import 'package:paged_datatable/paged_datatable.dart';
-import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
+import '../../../core/constatnts/app_string.dart';
 import '../../../models/bus/bus.dart';
+import '../../widgets/customWoltModalSheetPage.dart';
 import '../../widgets/custom_large_text_table_column.dart';
 import '../../widgets/custom_navbar.dart';
+import '../../widgets/custom_text_form_field.dart';
 import '../../widgets/filter_Popup_menu_button.dart';
 
 class BusScreen extends StatelessWidget {
@@ -115,159 +119,111 @@ class BusScreen extends StatelessWidget {
                 ],
                 filters: [
                   CustomTextTableFilter(
-                    chipFormatter: (value) => value,
+                    chipFormatter: (value) => 'Numero : $value',
                     id: 'number',
                     name: 'Numero',
                   ),
-                  DropdownTableFilter<bool>(
+                  DropdownTableFilter<Active>(
                     id: "active",
                     name: "active",
                     decoration: const InputDecoration(
-                        labelText: "active",
-                        hintText: "active",
+                        labelText: "actif",
+                        hintText: "actif",
                         border: OutlineInputBorder()),
-                    items: const <DropdownMenuItem<bool>>[
-                      DropdownMenuItem(
-                          alignment: AlignmentDirectional.center,
-                          value: true,
-                          child: Text(
-                            "Oui",
-                            style: TextStyle(
-                              color: Colors.green,
-                            ),
-                          )),
-                      DropdownMenuItem(
-                          alignment: AlignmentDirectional.center,
-                          value: false,
-                          child: Text(
-                            "Non",
-                            style: TextStyle(
-                              color: Colors.red,
-                            ),
-                          )),
-                    ],
-                    chipFormatter: (value) => value.toString(),
+                    items: Active.values
+                        .map((e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(
+                              e.name,
+                              style: e.index == 0
+                                  ? const TextStyle(color: Colors.green)
+                                  : TextStyle(color: context.colors.red),
+                            )))
+                        .toList(growable: false),
+                    chipFormatter: (value) =>
+                        'Actif : ${value.name.toLowerCase()}',
                   ),
                 ],
                 filterBarChild: FilterPopupMenuButtonAction(
                   tableController: tableController,
-                  onPressed: () {
-                    WoltModalSheet.show(
-                      barrierDismissible: false,
-                      context: context,
-                      pageListBuilder: (bottomSheetContext) => [
-                        WoltModalSheetPage(
-                            topBarTitle: Center(
-                                child: Text(
-                              'Ajout',
-                              style: TextStyle(color: context.colors.textColor),
-                            )),
-                            pageTitle: const Center(child: Text('Ajout')),
-                            // isTopBarLayerAlwaysVisible: true,
-                            backgroundColor: context.colors.secondary,
-                            trailingNavBarWidget: IconButton(
-                              padding: const EdgeInsets.all(8),
-                              icon: const Icon(Icons.close),
-                              onPressed: Navigator.of(bottomSheetContext).pop,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(28.0),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    CustomTextFormField(
-                                      labelText: 'Numero',
-                                      textEditingController:
-                                          numberTextEditingController,
-                                    ),
-                                    context.gaps.normal,
-                                    CustomTextFormField(
-                                      labelText: 'Source',
-                                      textEditingController:
-                                          sourceTextEditingController,
-                                    ),
-                                    context.gaps.normal,
-                                    CustomTextFormField(
-                                      labelText: 'Destination',
-                                      textEditingController:
-                                          destinationTextEditingController,
-                                    ),
-                                    context.gaps.normal,
-                                    CustomTextFormField(
-                                      labelText: 'Itineraires',
-                                      textEditingController:
-                                          roadMapTextEditingController,
-                                    ),
-                                    context.gaps.large,
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Container(
-                                          width: double.infinity,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              color: context.colors.primary),
-                                          child: Center(
-                                            child: Text(
-                                              'Valider',
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: context.colors.black),
-                                            ),
-                                          )),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ))
-                      ],
-                    );
-                    // tableController.insertAt(
-                    //     0,
-                    //     Bus(
-                    //         position: MockData.stop.first,
-                    //         startDate: null,
-                    //         number: 29,
-                    //         source: 'Riviera',
-                    //         destination: 'Gare Sud',
-                    //         isActive: true,
-                    //         roadMap: []));
+                  onPressed: () async {
+                    await customWoltModalSheetPage(
+                        title: 'Ajout de Bus',
+                        context: context,
+                        tableController: tableController,
+                        columns: [
+                          CustomTextFormField(
+                            id: 'number',
+                            labelText: 'Numero',
+                            textInputType: TextInputType.datetime,
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(),
+                              FormBuilderValidators.numeric(),
+                              FormBuilderValidators.max(4),
+                            ]),
+                            textEditingController: numberTextEditingController,
+                          ),
+                          context.gaps.normal,
+                          CustomTextFormField(
+                            id: 'source',
+                            labelText: 'Source',
+                            textInputType: TextInputType.text,
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(),
+                              // FormBuilderValidators.alphabetical(),
+                            ]),
+                            textEditingController: sourceTextEditingController,
+                          ),
+                          context.gaps.normal,
+                          CustomTextFormField(
+                            id: 'destination',
+                            labelText: 'Destination',
+                            textInputType: TextInputType.text,
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(),
+                              // FormBuilderValidators.alphabetical(),
+                            ]),
+                            textEditingController:
+                                destinationTextEditingController,
+                          ),
+                          context.gaps.normal,
+                          CustomTextFormField(
+                            id: 'roadMap',
+                            labelText: 'Itineraires',
+                            textInputType:
+                                const TextInputType.numberWithOptions(
+                                    decimal: true),
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(),
+                              // FormBuilderValidators.alphabetical(),
+                            ]),
+                            textEditingController: roadMapTextEditingController,
+                          ),
+                        ],
+                        onTap: () {
+                          tableController.insertAt(
+                              0,
+                              Bus(
+                                  position: null,
+                                  startDate: null,
+                                  number: int.parse(
+                                      numberTextEditingController.text),
+                                  source: sourceTextEditingController.text,
+                                  destination:
+                                      destinationTextEditingController.text,
+                                  isActive: false,
+                                  roadMap: [
+                                    Stop(
+                                        lat: double.parse(
+                                            roadMapTextEditingController.text),
+                                        long: double.parse(
+                                            roadMapTextEditingController.text))
+                                  ]));
+                          Navigator.of(context).pop();
+                        });
                   },
                 ),
               ))
             ])));
-  }
-}
-
-class CustomTextFormField extends StatelessWidget {
-  final String labelText;
-  final TextEditingController textEditingController;
-  const CustomTextFormField({
-    super.key,
-    required this.labelText,
-    required this.textEditingController,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: textEditingController,
-      decoration: InputDecoration(
-          labelText: labelText,
-          hintText: labelText,
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide:
-                  BorderSide(width: 0.4, color: context.colors.textColor))),
-      onSaved: (newValue) {
-        if (newValue != null && newValue.isNotEmpty) {
-          textEditingController.text = newValue;
-        }
-      },
-    );
   }
 }

@@ -27,7 +27,7 @@ class SideMenuItem extends StatelessWidget {
       builder: (context, state) {
         return Container(
           width: MediaQuery.of(context).size.width,
-          margin: EdgeInsets.symmetric(vertical: 5.sp),
+          margin: EdgeInsets.symmetric(vertical: 3.sp),
           decoration: BoxDecoration(
               color: locator.get<SideMenuCubit>().isActive(itemName)
                   ? context.colors.primary
@@ -39,8 +39,8 @@ class SideMenuItem extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 13, vertical: 12),
                     child: SvgGenImage(itemName.icon!).svg(
                       height: 20.sp,
                       width: 25.sp,

@@ -1,3 +1,12 @@
+enum Active {
+  oui("Oui"),
+  non("Non");
+
+  const Active(this.name);
+
+  final String name;
+}
+
 class AppString {
   static List<String> titleTableHeaderBus = [
     'Index',
