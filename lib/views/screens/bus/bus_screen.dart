@@ -13,6 +13,7 @@ import '../../../models/bus/bus.dart';
 import '../../widgets/customWoltModalSheetPage.dart';
 import '../../widgets/custom_large_text_table_column.dart';
 import '../../widgets/custom_navbar.dart';
+import '../../widgets/custom_text_field_lat_long.dart';
 import '../../widgets/custom_text_form_field.dart';
 import '../../widgets/filter_Popup_menu_button.dart';
 
@@ -155,50 +156,46 @@ class BusScreen extends StatelessWidget {
                           CustomTextFormField(
                             id: 'number',
                             labelText: 'Numero',
-                            textInputType: TextInputType.datetime,
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(),
-                              FormBuilderValidators.numeric(),
-                              FormBuilderValidators.max(4),
-                            ]),
                             textEditingController: numberTextEditingController,
+                            textInputType: TextInputType.number,
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(
+                                  errorText: 'valeur requise'),
+                              FormBuilderValidators.numeric(
+                                  errorText: 'valeur numerique uniquement'),
+                              FormBuilderValidators.maxLength(4,
+                                  errorText: '4 chiffres max'),
+                            ]),
                           ),
                           context.gaps.normal,
                           CustomTextFormField(
                             id: 'source',
                             labelText: 'Source',
+                            textEditingController: sourceTextEditingController,
                             textInputType: TextInputType.text,
                             validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(),
+                              FormBuilderValidators.required(
+                                  errorText: 'valeur requise'),
                               // FormBuilderValidators.alphabetical(),
                             ]),
-                            textEditingController: sourceTextEditingController,
                           ),
                           context.gaps.normal,
                           CustomTextFormField(
                             id: 'destination',
                             labelText: 'Destination',
-                            textInputType: TextInputType.text,
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(),
-                              // FormBuilderValidators.alphabetical(),
-                            ]),
                             textEditingController:
                                 destinationTextEditingController,
+                            textInputType: TextInputType.text,
+                            validator: FormBuilderValidators.compose([
+                              FormBuilderValidators.required(
+                                  errorText: 'valeur requise'),
+                            ]),
                           ),
                           context.gaps.normal,
-                          CustomTextFormField(
-                            id: 'roadMap',
-                            labelText: 'Itineraires',
-                            textInputType:
-                                const TextInputType.numberWithOptions(
-                                    decimal: true),
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(),
-                              // FormBuilderValidators.alphabetical(),
-                            ]),
-                            textEditingController: roadMapTextEditingController,
-                          ),
+                          const CustomTextFieldLatLong(
+                            name: 'Stop',
+                            index: 0,
+                          )
                         ],
                         onTap: () {
                           tableController.insertAt(

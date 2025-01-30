@@ -36,9 +36,65 @@ class CustomTextFormField extends StatelessWidget {
         }
       },
       validator: validator,
-      // initialValue: '12',
-
       textInputAction: TextInputAction.next,
+    );
+  }
+}
+
+class NewTextFieldLatLong extends StatelessWidget {
+  const NewTextFieldLatLong({
+    super.key,
+    required this.name,
+    this.onDelete,
+    this.validator,
+  });
+  final String name;
+  final VoidCallback? onDelete;
+  final String? Function(String?)? validator;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 8.0, bottom: 8),
+          child: Text('Arrêt:0'),
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: FormBuilderTextField(
+                name: 'lat$name',
+                validator: validator,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                    labelText: 'lat',
+                    hintText: 'latitude',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(
+                            width: 0.4, color: context.colors.textColor))),
+              ),
+            ),
+            context.gaps.small,
+            Expanded(
+              child: FormBuilderTextField(
+                name: 'long$name',
+                validator: validator,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                    labelText: 'long',
+                    hintText: 'longitude',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(
+                            width: 0.4, color: context.colors.textColor))),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
