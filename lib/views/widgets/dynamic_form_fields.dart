@@ -1,15 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
+import 'package:mobilitydashboard/views/screens/bus/repo.dart';
 
 import 'custom_button.dart';
 import 'custom_text_field_lat_long.dart';
 
 class DynamicFormFields extends StatefulWidget {
   final List<Widget> columns;
-
-  const DynamicFormFields({super.key, required this.columns});
+  final bool isBus;
+  final Function() onTap;
+  final TextEditingController? roadMapTextEditingController;
+  const DynamicFormFields(
+      {super.key,
+      required this.columns,
+      this.isBus = false,
+      required this.onTap,
+      this.roadMapTextEditingController});
 
   @override
   State<DynamicFormFields> createState() => _DynamicFormFieldsState();
@@ -18,6 +28,8 @@ class DynamicFormFields extends StatefulWidget {
 class _DynamicFormFieldsState extends State<DynamicFormFields> {
   final _formKey = GlobalKey<FormBuilderState>();
   final List<Widget> fields = [];
+  final List<String> latList = [];
+  final List<String> longList = [];
   var _newTextFieldId = 0;
   String savedValue = '';
 
@@ -52,32 +64,61 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
                         savedValue =
                             _formKey.currentState?.value.toString() ?? '';
                       });
-                      Navigator.of(context).pop();
-                      print('Saved value: $savedValue');
+                      if (_formKey.currentState!.isValid) {
+                        if (widget.isBus) {
+                          Map<String, dynamic> result = {};
+                          List<String> str = savedValue
+                              .replaceAll("{", "")
+                              .replaceAll("}", "")
+                              .split(",");
+                          print(str);
+                          for (int i = 3; i < str.length; i++) {
+                            List<String> s = str[i].split(":");
+                            s[0] = '"${s[0].trim()}"';
+                            s[1] = '"${s[1].trim()}"';
+                            if (i % 2 != 0) {
+                              latList.add(s[1]);
+                            } else {
+                              longList.add(s[1]);
+                            }
+                            result.putIfAbsent(s[0].trim(), () => s[1].trim());
+                          }
+                          print('latListg: $latList');
+                          print('longListg: $longList');
+                          var jsonValue = json.decode(result.toString());
+                          print(jsonValue);
+                        }
+                        widget.onTap();
+                        // Navigator.of(context).pop();
+                        // _formKey.currentState!.reset();
+                        print('Saved value: $savedValue');
+                      }
                     },
                   )),
                   context.gaps.normal,
-                  Expanded(
-                      child: CustomButton(
-                    title: "Ajouter arrêt",
-                    onPressed: () {
-                      final newTextFieldName = 'Stop${_newTextFieldId++}';
-                      final newTextFieldKey = ValueKey(_newTextFieldId);
-                      setState(() {
-                        fields.add(CustomTextFieldLatLong(
-                          key: newTextFieldKey,
-                          index: _newTextFieldId,
-                          name: newTextFieldName,
-                          onDelete: () {
+                  widget.isBus
+                      ? Expanded(
+                          child: CustomButton(
+                          title: "Ajouter arrêt",
+                          onPressed: () {
+                            final newTextFieldName = 'Stop${_newTextFieldId++}';
+                            final newTextFieldKey = ValueKey(_newTextFieldId);
                             setState(() {
-                              fields
-                                  .removeWhere((e) => e.key == newTextFieldKey);
+                              fields.add(CustomTextFieldLatLong(
+                                key: newTextFieldKey,
+                                index: _newTextFieldId,
+                                name: newTextFieldName,
+                                onDelete: () {
+                                  setState(() {
+                                    fields.removeWhere(
+                                        (e) => e.key == newTextFieldKey);
+                                  });
+                                },
+                              ));
                             });
                           },
-                        ));
-                      });
-                    },
-                  )),
+                        ))
+                      : const SizedBox(),
                 ],
               ),
             ],

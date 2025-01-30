@@ -12,7 +12,6 @@ class CustomTextFieldLatLong extends StatelessWidget {
   });
   final String name;
   final int index;
-
   final VoidCallback? onDelete;
 
   @override

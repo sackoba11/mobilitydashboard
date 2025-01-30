@@ -8,7 +8,9 @@ Future<dynamic> customWoltModalSheetPage(
     {required BuildContext context,
     required String title,
     required List<Widget> columns,
-    required Function()? onTap,
+    required Function() onTap,
+    bool isBus = false,
+    TextEditingController? roadMapTextEditingController,
     required PagedDataTableController<String, dynamic> tableController}) {
   return WoltModalSheet.show(
     barrierDismissible: false,
@@ -21,7 +23,6 @@ Future<dynamic> customWoltModalSheetPage(
             style: TextStyle(color: context.colors.textColor),
           )),
           pageTitle: Center(child: Text(title)),
-          // isTopBarLayerAlwaysVisible: true,
           backgroundColor: context.colors.secondary,
           trailingNavBarWidget: IconButton(
             tooltip: 'Fermer',
@@ -29,9 +30,11 @@ Future<dynamic> customWoltModalSheetPage(
             icon: const Icon(Icons.close),
             onPressed: Navigator.of(bottomSheetContext).pop,
           ),
-          child: DynamicFormFields(columns: columns)
-         
-          ),
+          child: DynamicFormFields(
+            columns: columns,
+            isBus: isBus,
+            onTap: onTap,
+          )),
     ],
   );
 }

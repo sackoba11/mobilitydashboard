@@ -149,7 +149,10 @@ class BusScreen extends StatelessWidget {
                   tableController: tableController,
                   onPressed: () async {
                     await customWoltModalSheetPage(
+                        roadMapTextEditingController:
+                            roadMapTextEditingController,
                         title: 'Ajout de Bus',
+                        isBus: true,
                         context: context,
                         tableController: tableController,
                         columns: [
@@ -210,13 +213,12 @@ class BusScreen extends StatelessWidget {
                                       destinationTextEditingController.text,
                                   isActive: false,
                                   roadMap: [
-                                    Stop(
-                                        lat: double.parse(
-                                            roadMapTextEditingController.text),
-                                        long: double.parse(
-                                            roadMapTextEditingController.text))
+                                    // Stop(
+                                    //     lat: double.parse(
+                                    //         roadMapTextEditingController.text),
+                                    //     long: double.parse(
+                                    //         roadMapTextEditingController.text))
                                   ]));
-                          Navigator.of(context).pop();
                         });
                   },
                 ),
