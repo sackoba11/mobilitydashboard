@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
-import 'package:mobilitydashboard/views/screens/bus/repo.dart';
 
+import '../../models/stop/stop.dart';
 import 'custom_button.dart';
 import 'custom_text_field_lat_long.dart';
 
@@ -13,8 +11,8 @@ class DynamicFormFields extends StatefulWidget {
   final List<Widget> columns;
   final bool isBus;
   final Function() onTap;
-  final TextEditingController? roadMapTextEditingController;
-  const DynamicFormFields(
+  List<Stop>? roadMapTextEditingController;
+  DynamicFormFields(
       {super.key,
       required this.columns,
       this.isBus = false,
@@ -30,6 +28,7 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
   final List<Widget> fields = [];
   final List<String> latList = [];
   final List<String> longList = [];
+  final List<Stop> roadMap = [];
   var _newTextFieldId = 0;
   String savedValue = '';
 
@@ -58,7 +57,7 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
                       child: CustomButton(
                     isBorder: true,
                     title: 'Valider',
-                    onPressed: () {
+                    onPressed: () async {
                       _formKey.currentState!.saveAndValidate();
                       setState(() {
                         savedValue =
@@ -71,11 +70,10 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
                               .replaceAll("{", "")
                               .replaceAll("}", "")
                               .split(",");
-                          print(str);
                           for (int i = 3; i < str.length; i++) {
                             List<String> s = str[i].split(":");
                             s[0] = '"${s[0].trim()}"';
-                            s[1] = '"${s[1].trim()}"';
+                            s[1] = s[1].trim();
                             if (i % 2 != 0) {
                               latList.add(s[1]);
                             } else {
@@ -83,15 +81,18 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
                             }
                             result.putIfAbsent(s[0].trim(), () => s[1].trim());
                           }
-                          print('latListg: $latList');
-                          print('longListg: $longList');
-                          var jsonValue = json.decode(result.toString());
-                          print(jsonValue);
+
+                          for (int i = 0; i < latList.length; i++) {
+                            widget.roadMapTextEditingController!.add(
+                              Stop(
+                                  lat: double.parse(latList[i]),
+                                  long: double.parse(longList[i])),
+                            );
+                          }
                         }
                         widget.onTap();
-                        // Navigator.of(context).pop();
-                        // _formKey.currentState!.reset();
-                        print('Saved value: $savedValue');
+                        Navigator.of(context).pop();
+                        _formKey.currentState!.reset();
                       }
                     },
                   )),

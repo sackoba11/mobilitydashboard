@@ -4,13 +4,15 @@ import 'package:mobilitydashboard/views/widgets/dynamic_form_fields.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
+import '../../models/stop/stop.dart';
+
 Future<dynamic> customWoltModalSheetPage(
     {required BuildContext context,
     required String title,
     required List<Widget> columns,
     required Function() onTap,
     bool isBus = false,
-    TextEditingController? roadMapTextEditingController,
+    List<Stop>? roadMapTextEditingController,
     required PagedDataTableController<String, dynamic> tableController}) {
   return WoltModalSheet.show(
     barrierDismissible: false,
@@ -34,6 +36,7 @@ Future<dynamic> customWoltModalSheetPage(
             columns: columns,
             isBus: isBus,
             onTap: onTap,
+            roadMapTextEditingController: roadMapTextEditingController,
           )),
     ],
   );

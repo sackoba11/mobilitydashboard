@@ -28,8 +28,7 @@ class BusScreen extends StatelessWidget {
     TextEditingController sourceTextEditingController = TextEditingController();
     TextEditingController destinationTextEditingController =
         TextEditingController();
-    TextEditingController roadMapTextEditingController =
-        TextEditingController();
+    List<Stop> roadMapTextEditingController = [];
 
     return Scaffold(
         backgroundColor: context.colors.transparent,
@@ -179,7 +178,6 @@ class BusScreen extends StatelessWidget {
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
                                   errorText: 'valeur requise'),
-                              // FormBuilderValidators.alphabetical(),
                             ]),
                           ),
                           context.gaps.normal,
@@ -212,13 +210,7 @@ class BusScreen extends StatelessWidget {
                                   destination:
                                       destinationTextEditingController.text,
                                   isActive: false,
-                                  roadMap: [
-                                    // Stop(
-                                    //     lat: double.parse(
-                                    //         roadMapTextEditingController.text),
-                                    //     long: double.parse(
-                                    //         roadMapTextEditingController.text))
-                                  ]));
+                                  roadMap: roadMapTextEditingController));
                         });
                   },
                 ),
