@@ -10,14 +10,19 @@ import 'custom_text_field_lat_long.dart';
 class DynamicFormFields extends StatefulWidget {
   final List<Widget> columns;
   final bool isBus;
+  final bool isStation;
   final Function() onTap;
   List<Stop>? roadMapTextEditingController;
-  DynamicFormFields(
-      {super.key,
-      required this.columns,
-      this.isBus = false,
-      required this.onTap,
-      this.roadMapTextEditingController});
+  Stop? locationStation;
+  DynamicFormFields({
+    super.key,
+    required this.columns,
+    this.isBus = false,
+    this.isStation = false,
+    required this.onTap,
+    this.roadMapTextEditingController,
+    this.locationStation,
+  });
 
   @override
   State<DynamicFormFields> createState() => _DynamicFormFieldsState();
@@ -28,7 +33,8 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
   final List<Widget> fields = [];
   final List<String> latList = [];
   final List<String> longList = [];
-  final List<Stop> roadMap = [];
+  final List<String> stop = [];
+
   var _newTextFieldId = 0;
   String savedValue = '';
 
@@ -89,7 +95,27 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
                                   long: double.parse(longList[i])),
                             );
                           }
+                        } else if (widget.isStation) {
+                          List<String> str = savedValue
+                              .replaceAll("{", "")
+                              .replaceAll("}", "")
+                              .split(",");
+                          for (int i = 3; i < str.length; i++) {
+                            List<String> s = str[i].split(":");
+                            s[0] = '"${s[0].trim()}"';
+                            s[1] = s[1].trim();
+                            stop.add(s[1]);
+                          }
+                          print(stop);
+
+                          setState(() {
+                            widget.locationStation = Stop(
+                                lat: double.parse(stop[0]),
+                                long: double.parse(stop[1]));
+                            print(widget.locationStation);
+                          });
                         }
+
                         widget.onTap();
                         Navigator.of(context).pop();
                         _formKey.currentState!.reset();

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
 import '../../../data/mockData/mock_data.dart';
 import '../../../models/user/my_user.dart';
+import '../../widgets/customWoltModalSheetPage.dart';
 import '../../widgets/custom_navbar.dart';
+import '../../widgets/custom_text_form_field.dart';
 import '../../widgets/filter_Popup_menu_button.dart';
 import '../../widgets/table_template.dart';
 
@@ -15,7 +18,9 @@ class UsersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tableController = PagedDataTableController<String, MyUser>();
-    TextEditingController textEditingController = TextEditingController();
+    TextEditingController nameTextEditingController = TextEditingController();
+    TextEditingController searchTextEditingController = TextEditingController();
+    TextEditingController emailTextEditingController = TextEditingController();
     List<MyUser> dataUsers = MockData.users;
     return Scaffold(
         backgroundColor: context.colors.transparent,
@@ -25,12 +30,12 @@ class UsersScreen extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               CustomNavBar(
                 title: 'Utilisateurs',
-                textEditingController: textEditingController,
+                textEditingController: searchTextEditingController,
               ),
               context.gaps.small,
               Expanded(
                   child: TableTemplate<String, MyUser>(
-                    tableController: tableController,
+                tableController: tableController,
                 columns: [
                   LargeTextTableColumn(
                     showTooltip: false,
@@ -74,16 +79,49 @@ class UsersScreen extends StatelessWidget {
                   children: [
                     FilterPopupMenuButtonAction(
                         tableController: tableController,
-                        onPressed: () {
-                          tableController.insertAt(
-                            0,
-                            MyUser(
-                              name: 'Kouassi Obed',
-                              email: 'obedgmail.com',
-                            ),
-                          );
-                          print('done');
-                        }),
+                        onPressed: () async {
+                          await customWoltModalSheetPage(
+                              title: "Ajout d'utilisateur",
+                              context: context,
+                              tableController: tableController,
+                              columns: [
+                                CustomTextFormField(
+                                  id: 'name',
+                                  labelText: 'Nom',
+                                  textEditingController:
+                                      nameTextEditingController,
+                                  textInputType: TextInputType.text,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: 'valeur requise'),
+                                  ]),
+                                ),
+                                context.gaps.normal,
+                                CustomTextFormField(
+                                  id: 'email',
+                                  labelText: 'Email',
+                                  textEditingController:
+                                      emailTextEditingController,
+                                  textInputType: TextInputType.text,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: 'valeur requise'),
+                                    FormBuilderValidators.email(
+                                        errorText: 'Donner un email valable')
+                                  ]),
+                                ),
+                                context.gaps.normal,
+                              ],
+                              onTap: () {
+                                tableController.insertAt(
+                                  0,
+                                  MyUser(
+                                    name: nameTextEditingController.text,
+                                    email: emailTextEditingController.text,
+                                  ),
+                                );
+                              });
+                        })
                   ],
                 ),
               ))

@@ -9,8 +9,10 @@ class CustomTextFieldLatLong extends StatelessWidget {
     required this.name,
     this.onDelete,
     required this.index,
+    this.label,
   });
   final String name;
+  final String? label;
   final int index;
   final VoidCallback? onDelete;
 
@@ -23,7 +25,7 @@ class CustomTextFieldLatLong extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 8.0, bottom: 8),
-            child: Text('Arrêt:$index'),
+            child: Text(label ?? 'Arrêt:$index'),
           ),
           Row(
             children: [

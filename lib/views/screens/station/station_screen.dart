@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
 import '../../../data/mockData/mock_data.dart';
 import '../../../models/gare/gare.dart';
+import '../../../models/stop/stop.dart';
+import '../../widgets/customWoltModalSheetPage.dart';
 import '../../widgets/custom_navbar.dart';
+import '../../widgets/custom_text_field_lat_long.dart';
+import '../../widgets/custom_text_form_field.dart';
 import '../../widgets/filter_Popup_menu_button.dart';
 import '../../widgets/table_template.dart';
 
@@ -15,7 +20,12 @@ class StationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tableController = PagedDataTableController<String, Gare>();
-    TextEditingController textEditingController = TextEditingController();
+    TextEditingController nameTextEditingController = TextEditingController();
+    TextEditingController searchTextEditingController = TextEditingController();
+    TextEditingController municipalityTextEditingController =
+        TextEditingController();
+    TextEditingController typeTextEditingController = TextEditingController();
+    Stop locationTextEditingController = Stop(lat: 0, long: 0);
     List<Gare> dataGares = MockData.garesGbaka + MockData.garesTaxi;
     return Scaffold(
         backgroundColor: context.colors.transparent,
@@ -25,12 +35,12 @@ class StationScreen extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               CustomNavBar(
                 title: 'Gares',
-                textEditingController: textEditingController,
+                textEditingController: searchTextEditingController,
               ),
               context.gaps.small,
               Expanded(
                   child: TableTemplate<String, Gare>(
-                    tableController: tableController,
+                tableController: tableController,
                 columns: [
                   LargeTextTableColumn(
                     showTooltip: false,
@@ -100,20 +110,70 @@ class StationScreen extends StatelessWidget {
                   children: [
                     FilterPopupMenuButtonAction(
                         tableController: tableController,
-                        onPressed: () {
-                          tableController.insertAt(
-                              0,
-                              Gare(
-                                  name: 'Coulibaly Yaya',
-                                  commune: 'Yopougon',
-                                  type: 'Tasi',
-                                  location: {
-                                    "label": "teste",
-                                    "lat": 5.3502292,
-                                    "long": -3.9881887,
-                                  }));
-                          print('done');
-                        }),
+                        onPressed: () async {
+                          await customWoltModalSheetPage(
+                              locationStation: locationTextEditingController,
+                              title: "Ajout d'une gare",
+                              isStation: true,
+                              context: context,
+                              tableController: tableController,
+                              columns: [
+                                CustomTextFormField(
+                                  id: 'name',
+                                  labelText: 'Nom',
+                                  textEditingController:
+                                      nameTextEditingController,
+                                  textInputType: TextInputType.number,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: 'valeur requise'),
+                                  ]),
+                                ),
+                                context.gaps.normal,
+                                CustomTextFormField(
+                                  id: 'municipality',
+                                  labelText: 'Commmune',
+                                  textEditingController:
+                                      municipalityTextEditingController,
+                                  textInputType: TextInputType.text,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: 'valeur requise'),
+                                  ]),
+                                ),
+                                context.gaps.normal,
+                                CustomTextFormField(
+                                  id: 'type',
+                                  labelText: 'Type',
+                                  textEditingController:
+                                      typeTextEditingController,
+                                  textInputType: TextInputType.text,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: 'valeur requise'),
+                                  ]),
+                                ),
+                                context.gaps.normal,
+                                const CustomTextFieldLatLong(
+                                  label: 'Localisation',
+                                  name: 'Stop',
+                                  index: 0,
+                                )
+                              ],
+                              onTap: () {
+                                print(locationTextEditingController);
+                                tableController.insertAt(
+                                    0,
+                                    Gare(
+                                        name: nameTextEditingController.text,
+                                        commune:
+                                            municipalityTextEditingController
+                                                .text,
+                                        type: typeTextEditingController.text,
+                                        location: locationTextEditingController
+                                            .toJson()));
+                              });
+                        })
                   ],
                 ),
               ))

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:mobilitydashboard/models/driver/driver.dart';
 import 'package:mobilitydashboard/views/widgets/table_template.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
 import '../../../data/mockData/mock_data.dart';
+import '../../widgets/customWoltModalSheetPage.dart';
 import '../../widgets/custom_navbar.dart';
+import '../../widgets/custom_text_form_field.dart';
 import '../../widgets/filter_Popup_menu_button.dart';
 
 class DriverScreen extends StatelessWidget {
@@ -15,7 +18,10 @@ class DriverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tableController = PagedDataTableController<String, Driver>();
-    TextEditingController textEditingController = TextEditingController();
+    TextEditingController nameTextEditingController = TextEditingController();
+    TextEditingController searchTextEditingController = TextEditingController();
+    TextEditingController numberTextEditingController = TextEditingController();
+    TextEditingController emailTextEditingController = TextEditingController();
     List<Driver> dataDrivers = MockData.drivers;
     return Scaffold(
         backgroundColor: context.colors.transparent,
@@ -25,7 +31,7 @@ class DriverScreen extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               CustomNavBar(
                 title: 'Conducteurs',
-                textEditingController: textEditingController,
+                textEditingController: searchTextEditingController,
               ),
               context.gaps.small,
               Expanded(
@@ -100,16 +106,69 @@ class DriverScreen extends StatelessWidget {
                   children: [
                     FilterPopupMenuButtonAction(
                         tableController: tableController,
-                        onPressed: () {
-                          tableController.insertAt(
-                              0,
-                              Driver(
-                                  name: 'Coulibaly Yaya',
-                                  email: 'Yayagmail.com',
-                                  number: '030420202',
-                                  password: 'sgngkgegzngzgz3'));
-                          print('done');
-                        }),
+                        onPressed: () async {
+                          await customWoltModalSheetPage(
+                              title: 'Ajout de conducteur',
+                              context: context,
+                              tableController: tableController,
+                              columns: [
+                                CustomTextFormField(
+                                  id: 'name',
+                                  labelText: 'Nom',
+                                  textEditingController:
+                                      nameTextEditingController,
+                                  textInputType: TextInputType.text,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: 'valeur requise'),
+                                  ]),
+                                ),
+                                context.gaps.normal,
+                                CustomTextFormField(
+                                  id: 'email',
+                                  labelText: 'Email',
+                                  textEditingController:
+                                      emailTextEditingController,
+                                  textInputType: TextInputType.text,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: 'valeur requise'),
+                                    FormBuilderValidators.email(
+                                        errorText: 'Donner un email valable')
+                                  ]),
+                                ),
+                                context.gaps.normal,
+                                CustomTextFormField(
+                                  id: 'number',
+                                  labelText: 'Numero',
+                                  textEditingController:
+                                      numberTextEditingController,
+                                  textInputType: TextInputType.number,
+                                  validator: FormBuilderValidators.compose([
+                                    FormBuilderValidators.required(
+                                        errorText: 'valeur requise'),
+                                    FormBuilderValidators.numeric(
+                                        errorText:
+                                            'valeur numerique uniquement'),
+                                    FormBuilderValidators.maxLength(10,
+                                        errorText: '10 chiffres requis'),
+                                        FormBuilderValidators.minLength(10,
+                                        errorText: '10 chiffres requis')
+                                  ]),
+                                ),
+                                context.gaps.normal,
+                              ],
+                              onTap: () {
+                                tableController.insertAt(
+                                    0,
+                                    Driver(
+                                        name: nameTextEditingController.text,
+                                        email: emailTextEditingController.text,
+                                        number:
+                                            numberTextEditingController.text,
+                                        password: 'null'));
+                              });
+                        })
                   ],
                 ),
               ))

@@ -12,7 +12,9 @@ Future<dynamic> customWoltModalSheetPage(
     required List<Widget> columns,
     required Function() onTap,
     bool isBus = false,
+    bool isStation = false,
     List<Stop>? roadMapTextEditingController,
+    Stop? locationStation,
     required PagedDataTableController<String, dynamic> tableController}) {
   return WoltModalSheet.show(
     barrierDismissible: false,
@@ -36,6 +38,8 @@ Future<dynamic> customWoltModalSheetPage(
             columns: columns,
             isBus: isBus,
             onTap: onTap,
+            isStation: isStation,
+            locationStation: locationStation,
             roadMapTextEditingController: roadMapTextEditingController,
           )),
     ],
