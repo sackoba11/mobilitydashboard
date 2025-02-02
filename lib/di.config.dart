@@ -15,15 +15,15 @@ import 'core/theme/color/default_app_color.dart' as _i763;
 import 'core/theme/color/i_app_color.dart' as _i260;
 import 'cubits/bus_cubit/bus_cubit.dart' as _i423;
 import 'cubits/side_menu_cubit/side_menu_cubit.dart' as _i180;
-import 'repositories/authRepositiry/auth_repository_impl.dart' as _i25;
-import 'repositories/authRepositiry/i_auth_repository.dart' as _i1037;
-import 'repositories/BusRepository/bus_repository_impl.dart' as _i920;
-import 'repositories/BusRepository/i_bus_repository.dart' as _i455;
-import 'repositories/driverRepository/driver_repository_impl.dart' as _i950;
-import 'repositories/driverRepository/i_driver_repository.dart' as _i726;
-import 'repositories/OtherCarRepository/i_other_car_repository.dart' as _i559;
-import 'repositories/OtherCarRepository/other_car_repository_impl.dart'
-    as _i545;
+import 'cubits/station_cubit/station_cubit.dart' as _i1046;
+import 'repositories/auth_repositiry/auth_repository_impl.dart' as _i505;
+import 'repositories/auth_repositiry/i_auth_repository.dart' as _i872;
+import 'repositories/bus_repository/bus_repository_impl.dart' as _i25;
+import 'repositories/bus_repository/i_bus_repository.dart' as _i569;
+import 'repositories/driver_repository/driver_repository_impl.dart' as _i961;
+import 'repositories/driver_repository/i_driver_repository.dart' as _i376;
+import 'repositories/station_repository/i_station_repository.dart' as _i342;
+import 'repositories/station_repository/station_repository_impl.dart' as _i760;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -38,13 +38,14 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i423.BusCubit>(() => _i423.BusCubit());
     gh.singleton<_i180.SideMenuCubit>(() => _i180.SideMenuCubit());
+    gh.singleton<_i1046.StationCubit>(() => _i1046.StationCubit());
+    gh.lazySingleton<_i569.IBusRepository>(() => _i25.BusRepositoryImpl());
+    gh.lazySingleton<_i376.IDriverRepository>(
+        () => _i961.DriverRepositoryImpl());
     gh.singleton<_i260.IAppColor>(() => _i763.DefaultAppColor());
-    gh.lazySingleton<_i726.IDriverRepository>(
-        () => _i950.DriverRepositoryImpl());
-    gh.lazySingleton<_i1037.IAuthRepository>(() => _i25.AuthRepositoryImpl());
-    gh.lazySingleton<_i455.IBusRepository>(() => _i920.BusRepositoryImpl());
-    gh.lazySingleton<_i559.IOtherCarRepository>(
-        () => _i545.OtherCarRepositoryImpl());
+    gh.lazySingleton<_i872.IAuthRepository>(() => _i505.AuthRepositoryImpl());
+    gh.lazySingleton<_i342.IStationRepository>(
+        () => _i760.StationRepositoryImpl());
     return this;
   }
 }

@@ -6,25 +6,22 @@ import '../../data/mockData/mock_data.dart';
 import '../../error/app_error.dart';
 import '../../models/gare/gare.dart';
 import '../../models/itineraire_gare/itineraire_gare.dart';
-import 'i_other_car_repository.dart';
+import 'i_station_repository.dart';
 
-@LazySingleton(as: IOtherCarRepository)
-class OtherCarRepositoryImpl implements IOtherCarRepository {
+@LazySingleton(as: IStationRepository)
+class StationRepositoryImpl implements IStationRepository {
   @override
   Future<Either<AppError, List<Gare>>> getAllGares() async {
     try {
-      final snapShotListGaresGbaka =
-          await FirebaseFirestore.instance.collection('GaresGbaka').get();
-      final docsListGaresGbaka = snapShotListGaresGbaka.docs;
-      final buslistFirebaseGbaka =
-          docsListGaresGbaka.map((e) => Gare.fromJson(e.data())).toList();
-      final snapShotListGaresTaxi =
-          await FirebaseFirestore.instance.collection('GaresTaxi').get();
-      final docsListGaresTaxi = snapShotListGaresTaxi.docs;
-      final buslistFirebaseTaxi =
-          docsListGaresTaxi.map((e) => Gare.fromJson(e.data())).toList();
-      final buslistFirebase = buslistFirebaseGbaka + buslistFirebaseTaxi;
-      return right(buslistFirebase);
+      //get all stations on snapshot
+      final snapShotListStation =
+          await FirebaseFirestore.instance.collection('Gares').get();
+      final docsListStation = snapShotListStation.docs;
+      //transform snapshot list to list of Station modele
+      final listFirebaseStation =
+          docsListStation.map((e) => Gare.fromJson(e.data())).toList();
+
+      return right(listFirebaseStation);
     } catch (e) {
       return left(GenericAppError("erreur: ${e.toString()}"));
     }

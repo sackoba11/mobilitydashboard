@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../error/app_error.dart';
 import '../../models/bus/bus.dart';
+import '../../models/driver/driver.dart';
 import 'i_driver_repository.dart';
 
 @LazySingleton(as: IDriverRepository)
@@ -13,13 +14,15 @@ class DriverRepositoryImpl implements IDriverRepository {
   DatabaseReference ref = FirebaseDatabase.instance.ref().child("activeBus");
 
   @override
-  Future<Either<AppError, List<Bus>>> getAllBus() async {
-    final snapShotListBus =
-        await FirebaseFirestore.instance.collection('listBus').get();
-    final docsListBus = snapShotListBus.docs;
-    final buslistFirebse =
-        docsListBus.map((e) => Bus.fromJson(e.data())).toList();
-    return right(buslistFirebse);
+  Future<Either<AppError, List<Driver>>> getAllDrivers() async {
+    final snapShotListDriver = await FirebaseFirestore.instance
+        .collection('users')
+        .where('isDriver', isEqualTo: true)
+        .get();
+    final docsListDriver = snapShotListDriver.docs;
+    final driverlistFirebse =
+        docsListDriver.map((e) => Driver.fromJson(e.data())).toList();
+    return right(driverlistFirebse);
   }
 
   @override

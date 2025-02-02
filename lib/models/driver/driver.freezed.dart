@@ -23,7 +23,6 @@ mixin _$Driver {
   String get name => throw _privateConstructorUsedError;
   String get number => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
 
   /// Serializes this Driver to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +38,7 @@ abstract class $DriverCopyWith<$Res> {
   factory $DriverCopyWith(Driver value, $Res Function(Driver) then) =
       _$DriverCopyWithImpl<$Res, Driver>;
   @useResult
-  $Res call({String name, String number, String email, String password});
+  $Res call({String name, String number, String email});
 }
 
 /// @nodoc
@@ -60,7 +59,6 @@ class _$DriverCopyWithImpl<$Res, $Val extends Driver>
     Object? name = null,
     Object? number = null,
     Object? email = null,
-    Object? password = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -75,10 +73,6 @@ class _$DriverCopyWithImpl<$Res, $Val extends Driver>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -90,7 +84,7 @@ abstract class _$$DriverImplCopyWith<$Res> implements $DriverCopyWith<$Res> {
       __$$DriverImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String number, String email, String password});
+  $Res call({String name, String number, String email});
 }
 
 /// @nodoc
@@ -109,7 +103,6 @@ class __$$DriverImplCopyWithImpl<$Res>
     Object? name = null,
     Object? number = null,
     Object? email = null,
-    Object? password = null,
   }) {
     return _then(_$DriverImpl(
       name: null == name
@@ -124,10 +117,6 @@ class __$$DriverImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -135,11 +124,7 @@ class __$$DriverImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$DriverImpl implements _Driver {
-  _$DriverImpl(
-      {required this.name,
-      required this.number,
-      required this.email,
-      required this.password});
+  _$DriverImpl({required this.name, required this.number, required this.email});
 
   factory _$DriverImpl.fromJson(Map<String, dynamic> json) =>
       _$$DriverImplFromJson(json);
@@ -150,12 +135,10 @@ class _$DriverImpl implements _Driver {
   final String number;
   @override
   final String email;
-  @override
-  final String password;
 
   @override
   String toString() {
-    return 'Driver(name: $name, number: $number, email: $email, password: $password)';
+    return 'Driver(name: $name, number: $number, email: $email)';
   }
 
   @override
@@ -165,14 +148,12 @@ class _$DriverImpl implements _Driver {
             other is _$DriverImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.number, number) || other.number == number) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password));
+            (identical(other.email, email) || other.email == email));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, number, email, password);
+  int get hashCode => Object.hash(runtimeType, name, number, email);
 
   /// Create a copy of Driver
   /// with the given fields replaced by the non-null parameter values.
@@ -194,8 +175,7 @@ abstract class _Driver implements Driver {
   factory _Driver(
       {required final String name,
       required final String number,
-      required final String email,
-      required final String password}) = _$DriverImpl;
+      required final String email}) = _$DriverImpl;
 
   factory _Driver.fromJson(Map<String, dynamic> json) = _$DriverImpl.fromJson;
 
@@ -205,8 +185,6 @@ abstract class _Driver implements Driver {
   String get number;
   @override
   String get email;
-  @override
-  String get password;
 
   /// Create a copy of Driver
   /// with the given fields replaced by the non-null parameter values.

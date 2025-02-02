@@ -9,6 +9,6 @@ class Driver with _$Driver {
       {required String name,
       required String number,
       required String email,
-      required String password}) = _Driver;
+      }) = _Driver;
   factory Driver.fromJson(Map<String, dynamic> json) => _$DriverFromJson(json);
 }

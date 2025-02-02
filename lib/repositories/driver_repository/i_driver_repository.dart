@@ -3,9 +3,10 @@ import 'package:geolocator/geolocator.dart';
 
 import '../../error/app_error.dart';
 import '../../models/bus/bus.dart';
+import '../../models/driver/driver.dart';
 
 abstract class IDriverRepository {
-  Future<Either<AppError, List<Bus>>> getAllBus();
+  Future<Either<AppError, List<Driver>>> getAllDrivers();
   Future<Either<AppError, String>> activateBusService(
       {required Bus bus, required Position position});
   Future<Either<AppError, void>> updatePosition(

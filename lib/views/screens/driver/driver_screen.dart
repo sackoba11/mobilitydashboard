@@ -77,19 +77,6 @@ class DriverScreen extends StatelessWidget {
                       return true;
                     },
                   ),
-                  LargeTextTableColumn(
-                    showTooltip: false,
-                    title: const Text("Mot de passe"),
-                    getter: (item, index) => item.password,
-                    id: "password",
-                    size: const RemainingColumnSize(),
-                    fieldLabel: "password",
-                    setter: (item, newValue, index) async {
-                      await Future.delayed(const Duration(seconds: 2));
-                      print(newValue);
-                      return true;
-                    },
-                  ),
                 ],
                 fetcher: (pageSize, sortModel, filterModel, pageToken) async {
                   await Future.delayed(const Duration(seconds: 2));
@@ -152,7 +139,7 @@ class DriverScreen extends StatelessWidget {
                                             'valeur numerique uniquement'),
                                     FormBuilderValidators.maxLength(10,
                                         errorText: '10 chiffres requis'),
-                                        FormBuilderValidators.minLength(10,
+                                    FormBuilderValidators.minLength(10,
                                         errorText: '10 chiffres requis')
                                   ]),
                                 ),
@@ -162,11 +149,10 @@ class DriverScreen extends StatelessWidget {
                                 tableController.insertAt(
                                     0,
                                     Driver(
-                                        name: nameTextEditingController.text,
-                                        email: emailTextEditingController.text,
-                                        number:
-                                            numberTextEditingController.text,
-                                        password: 'null'));
+                                      name: nameTextEditingController.text,
+                                      email: emailTextEditingController.text,
+                                      number: numberTextEditingController.text,
+                                    ));
                               });
                         })
                   ],

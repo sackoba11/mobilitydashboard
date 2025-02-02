@@ -75,12 +75,6 @@ class $AssetsSvgGen {
   SvgGenImage get deleteButton =>
       const SvgGenImage('assets/svg/delete-button.svg');
 
-  /// File path: assets/svg/delete.svg
-  SvgGenImage get delete => const SvgGenImage('assets/svg/delete.svg');
-
-  /// File path: assets/svg/delete1.svg
-  SvgGenImage get delete1 => const SvgGenImage('assets/svg/delete1.svg');
-
   /// File path: assets/svg/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/svg/filter.svg');
 
@@ -119,12 +113,6 @@ class $AssetsSvgGen {
   /// File path: assets/svg/right-arrow.svg
   SvgGenImage get rightArrow => const SvgGenImage('assets/svg/right-arrow.svg');
 
-  /// File path: assets/svg/search-alt.svg
-  SvgGenImage get searchAlt => const SvgGenImage('assets/svg/search-alt.svg');
-
-  /// File path: assets/svg/search-alt2.svg
-  SvgGenImage get searchAlt2 => const SvgGenImage('assets/svg/search-alt2.svg');
-
   /// File path: assets/svg/table-add.svg
   SvgGenImage get tableAdd => const SvgGenImage('assets/svg/table-add.svg');
 
@@ -139,8 +127,6 @@ class $AssetsSvgGen {
         chauffer,
         dashboard2,
         deleteButton,
-        delete,
-        delete1,
         filter,
         filter1,
         filter2,
@@ -153,8 +139,6 @@ class $AssetsSvgGen {
         refresh,
         refresh1,
         rightArrow,
-        searchAlt,
-        searchAlt2,
         tableAdd,
         usersUser
       ];

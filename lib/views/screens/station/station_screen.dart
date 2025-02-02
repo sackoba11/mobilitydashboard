@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
+import 'package:mobilitydashboard/cubits/station_cubit/station_cubit.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
-import '../../../data/mockData/mock_data.dart';
+import '../../../di.dart';
 import '../../../models/gare/gare.dart';
 import '../../../models/stop/stop.dart';
 import '../../widgets/customWoltModalSheetPage.dart';
@@ -26,7 +27,6 @@ class StationScreen extends StatelessWidget {
         TextEditingController();
     TextEditingController typeTextEditingController = TextEditingController();
     Stop locationTextEditingController = Stop(lat: 0, long: 0);
-    List<Gare> dataGares = MockData.garesGbaka + MockData.garesTaxi;
     return Scaffold(
         backgroundColor: context.colors.transparent,
         body: Padding(
@@ -96,7 +96,7 @@ class StationScreen extends StatelessWidget {
                   ),
                 ],
                 fetcher: (pageSize, sortModel, filterModel, pageToken) async {
-                  await Future.delayed(const Duration(seconds: 2));
+                  var dataGares = await locator.get<StationCubit>().getAllBus();
                   return (dataGares, null);
                 },
                 filters: [
@@ -123,7 +123,7 @@ class StationScreen extends StatelessWidget {
                                   labelText: 'Nom',
                                   textEditingController:
                                       nameTextEditingController,
-                                  textInputType: TextInputType.number,
+                                  textInputType: TextInputType.text,
                                   validator: FormBuilderValidators.compose([
                                     FormBuilderValidators.required(
                                         errorText: 'valeur requise'),

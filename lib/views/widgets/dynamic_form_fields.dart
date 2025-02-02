@@ -100,6 +100,7 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
                               .replaceAll("{", "")
                               .replaceAll("}", "")
                               .split(",");
+                          print(str);
                           for (int i = 3; i < str.length; i++) {
                             List<String> s = str[i].split(":");
                             s[0] = '"${s[0].trim()}"';

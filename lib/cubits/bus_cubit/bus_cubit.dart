@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:mobilitydashboard/error/app_error.dart';
 
 import '../../models/bus/bus.dart';
-import '../../repositories/BusRepository/bus_repository_impl.dart';
-import '../../repositories/BusRepository/i_bus_repository.dart';
+import '../../repositories/bus_repository/bus_repository_impl.dart';
+import '../../repositories/bus_repository/i_bus_repository.dart';
 import 'bus_state.dart';
 
 @Singleton()
