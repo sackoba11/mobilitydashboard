@@ -11,14 +11,14 @@ import 'station_state.dart';
 class StationCubit extends Cubit<StationState> {
   StationCubit() : super(StationInitialState());
   List<Gare> stationData = [];
-  IStationRepository stationRepository = StationRepositoryImpl();
+  IStationRepository driverRepository = StationRepositoryImpl();
 
   Future<List<Gare>> getAllBus() async {
     try {
       emit(StationLoading());
 
       stationData =
-          (await stationRepository.getAllGares()).fold((l) => [], (r) => r);
+          (await driverRepository.getAllGares()).fold((l) => [], (r) => r);
 
       emit(StationLoaded(listStation: stationData));
       return stationData;

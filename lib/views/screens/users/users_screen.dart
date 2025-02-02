@@ -4,7 +4,8 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
-import '../../../data/mockData/mock_data.dart';
+import '../../../cubits/users_cubit/user_cubit.dart';
+import '../../../di.dart';
 import '../../../models/user/my_user.dart';
 import '../../widgets/customWoltModalSheetPage.dart';
 import '../../widgets/custom_navbar.dart';
@@ -21,7 +22,6 @@ class UsersScreen extends StatelessWidget {
     TextEditingController nameTextEditingController = TextEditingController();
     TextEditingController searchTextEditingController = TextEditingController();
     TextEditingController emailTextEditingController = TextEditingController();
-    List<MyUser> dataUsers = MockData.users;
     return Scaffold(
         backgroundColor: context.colors.transparent,
         body: Padding(
@@ -65,7 +65,7 @@ class UsersScreen extends StatelessWidget {
                   ),
                 ],
                 fetcher: (pageSize, sortModel, filterModel, pageToken) async {
-                  await Future.delayed(const Duration(seconds: 2));
+                  var dataUsers = await locator.get<UserCubit>().getAllUsers();
                   return (dataUsers, null);
                 },
                 filters: [

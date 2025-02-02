@@ -17,6 +17,7 @@ import 'cubits/bus_cubit/bus_cubit.dart' as _i423;
 import 'cubits/driver_cubit/driver_cubit.dart' as _i358;
 import 'cubits/side_menu_cubit/side_menu_cubit.dart' as _i180;
 import 'cubits/station_cubit/station_cubit.dart' as _i1046;
+import 'cubits/users_cubit/user_cubit.dart' as _i265;
 import 'repositories/auth_repositiry/auth_repository_impl.dart' as _i505;
 import 'repositories/auth_repositiry/i_auth_repository.dart' as _i872;
 import 'repositories/bus_repository/bus_repository_impl.dart' as _i25;
@@ -41,6 +42,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i180.SideMenuCubit>(() => _i180.SideMenuCubit());
     gh.singleton<_i1046.StationCubit>(() => _i1046.StationCubit());
     gh.singleton<_i358.DriverCubit>(() => _i358.DriverCubit());
+    gh.singleton<_i265.UserCubit>(() => _i265.UserCubit());
     gh.lazySingleton<_i569.IBusRepository>(() => _i25.BusRepositoryImpl());
     gh.lazySingleton<_i376.IDriverRepository>(
         () => _i961.DriverRepositoryImpl());
