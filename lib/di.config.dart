@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'core/theme/color/default_app_color.dart' as _i763;
 import 'core/theme/color/i_app_color.dart' as _i260;
 import 'cubits/bus_cubit/bus_cubit.dart' as _i423;
+import 'cubits/driver_cubit/driver_cubit.dart' as _i358;
 import 'cubits/side_menu_cubit/side_menu_cubit.dart' as _i180;
 import 'cubits/station_cubit/station_cubit.dart' as _i1046;
 import 'repositories/auth_repositiry/auth_repository_impl.dart' as _i505;
@@ -39,6 +40,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i423.BusCubit>(() => _i423.BusCubit());
     gh.singleton<_i180.SideMenuCubit>(() => _i180.SideMenuCubit());
     gh.singleton<_i1046.StationCubit>(() => _i1046.StationCubit());
+    gh.singleton<_i358.DriverCubit>(() => _i358.DriverCubit());
     gh.lazySingleton<_i569.IBusRepository>(() => _i25.BusRepositoryImpl());
     gh.lazySingleton<_i376.IDriverRepository>(
         () => _i961.DriverRepositoryImpl());

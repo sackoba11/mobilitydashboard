@@ -21,7 +21,7 @@ Driver _$DriverFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Driver {
   String get name => throw _privateConstructorUsedError;
-  String get number => throw _privateConstructorUsedError;
+  String? get number => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
 
   /// Serializes this Driver to a JSON map.
@@ -38,7 +38,7 @@ abstract class $DriverCopyWith<$Res> {
   factory $DriverCopyWith(Driver value, $Res Function(Driver) then) =
       _$DriverCopyWithImpl<$Res, Driver>;
   @useResult
-  $Res call({String name, String number, String email});
+  $Res call({String name, String? number, String email});
 }
 
 /// @nodoc
@@ -57,7 +57,7 @@ class _$DriverCopyWithImpl<$Res, $Val extends Driver>
   @override
   $Res call({
     Object? name = null,
-    Object? number = null,
+    Object? number = freezed,
     Object? email = null,
   }) {
     return _then(_value.copyWith(
@@ -65,10 +65,10 @@ class _$DriverCopyWithImpl<$Res, $Val extends Driver>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      number: null == number
+      number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -84,7 +84,7 @@ abstract class _$$DriverImplCopyWith<$Res> implements $DriverCopyWith<$Res> {
       __$$DriverImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String number, String email});
+  $Res call({String name, String? number, String email});
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class __$$DriverImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
-    Object? number = null,
+    Object? number = freezed,
     Object? email = null,
   }) {
     return _then(_$DriverImpl(
@@ -109,10 +109,10 @@ class __$$DriverImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      number: null == number
+      number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -132,7 +132,7 @@ class _$DriverImpl implements _Driver {
   @override
   final String name;
   @override
-  final String number;
+  final String? number;
   @override
   final String email;
 
@@ -174,7 +174,7 @@ class _$DriverImpl implements _Driver {
 abstract class _Driver implements Driver {
   factory _Driver(
       {required final String name,
-      required final String number,
+      required final String? number,
       required final String email}) = _$DriverImpl;
 
   factory _Driver.fromJson(Map<String, dynamic> json) = _$DriverImpl.fromJson;
@@ -182,7 +182,7 @@ abstract class _Driver implements Driver {
   @override
   String get name;
   @override
-  String get number;
+  String? get number;
   @override
   String get email;
 

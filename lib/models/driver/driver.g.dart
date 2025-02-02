@@ -8,7 +8,7 @@ part of 'driver.dart';
 
 _$DriverImpl _$$DriverImplFromJson(Map<String, dynamic> json) => _$DriverImpl(
       name: json['name'] as String,
-      number: json['number'] as String,
+      number: json['number'] as String?,
       email: json['email'] as String,
     );
 

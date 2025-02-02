@@ -6,7 +6,8 @@ import 'package:mobilitydashboard/models/driver/driver.dart';
 import 'package:mobilitydashboard/views/widgets/table_template.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
-import '../../../data/mockData/mock_data.dart';
+import '../../../cubits/driver_cubit/driver_cubit.dart';
+import '../../../di.dart';
 import '../../widgets/customWoltModalSheetPage.dart';
 import '../../widgets/custom_navbar.dart';
 import '../../widgets/custom_text_form_field.dart';
@@ -22,7 +23,6 @@ class DriverScreen extends StatelessWidget {
     TextEditingController searchTextEditingController = TextEditingController();
     TextEditingController numberTextEditingController = TextEditingController();
     TextEditingController emailTextEditingController = TextEditingController();
-    List<Driver> dataDrivers = MockData.drivers;
     return Scaffold(
         backgroundColor: context.colors.transparent,
         body: Padding(
@@ -67,7 +67,7 @@ class DriverScreen extends StatelessWidget {
                   LargeTextTableColumn(
                     showTooltip: false,
                     title: const Text("Numero"),
-                    getter: (item, index) => item.number,
+                    getter: (item, index) => item.number ?? 'null',
                     id: "number",
                     size: const RemainingColumnSize(),
                     fieldLabel: "number",
@@ -79,7 +79,8 @@ class DriverScreen extends StatelessWidget {
                   ),
                 ],
                 fetcher: (pageSize, sortModel, filterModel, pageToken) async {
-                  await Future.delayed(const Duration(seconds: 2));
+                  var dataDrivers =
+                      await locator.get<DriverCubit>().getAllDrivers();
                   return (dataDrivers, null);
                 },
                 filters: [
