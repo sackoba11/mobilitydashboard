@@ -84,7 +84,17 @@ class DriverScreen extends StatelessWidget {
                   return (dataDrivers, null);
                 },
                 filters: [
-                  TextTableFilter(
+                  CustomTextTableFilter(
+                    chipFormatter: (value) => 'recherche : $value',
+                    id: 'search',
+                    name: 'Recherche',
+                  ),
+                  CustomTextTableFilter(
+                    id: "email",
+                    name: "email",
+                    chipFormatter: (value) => value,
+                  ),
+                  CustomTextTableFilter(
                     id: "number",
                     name: "number",
                     chipFormatter: (value) => value,

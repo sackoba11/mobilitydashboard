@@ -143,6 +143,11 @@ class BusScreen extends StatelessWidget {
                     chipFormatter: (value) =>
                         'Actif : ${value.name.toLowerCase()}',
                   ),
+                  CustomTextTableFilter(
+                    chipFormatter: (value) => 'recherche : $value',
+                    id: 'search',
+                    name: 'Recherche',
+                  ),
                 ],
                 filterBarChild: FilterPopupMenuButtonAction(
                   tableController: tableController,

@@ -7,6 +7,15 @@ enum Active {
   final String name;
 }
 
+enum TypeCar {
+  taxi("Taxi"),
+  gbaka("Gbaka");
+
+  const TypeCar(this.type);
+
+  final String type;
+}
+
 class AppString {
   static List<String> titleTableHeaderBus = [
     'Index',

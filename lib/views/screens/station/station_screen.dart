@@ -5,6 +5,7 @@ import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:mobilitydashboard/cubits/station_cubit/station_cubit.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
+import '../../../core/constatnts/app_string.dart';
 import '../../../di.dart';
 import '../../../models/gare/gare.dart';
 import '../../../models/stop/stop.dart';
@@ -100,10 +101,31 @@ class StationScreen extends StatelessWidget {
                   return (dataGares, null);
                 },
                 filters: [
-                  TextTableFilter(
-                    id: "number",
-                    name: "number",
-                    chipFormatter: (value) => value,
+                  CustomTextTableFilter(
+                    chipFormatter: (value) => 'recherche : $value',
+                    id: 'search',
+                    name: 'Recherche',
+                  ),
+                  CustomTextTableFilter(
+                    chipFormatter: (value) => 'Commune : $value',
+                    id: 'Commune',
+                    name: 'Commune',
+                  ),
+                  DropdownTableFilter<TypeCar>(
+                    id: "type",
+                    name: "Type",
+                    decoration: const InputDecoration(
+                        labelText: "Type",
+                        hintText: "Type",
+                        border: OutlineInputBorder()),
+                    items: TypeCar.values
+                        .map((e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(
+                              e.type,
+                            )))
+                        .toList(growable: false),
+                    chipFormatter: (value) => 'Type : ${value.type}',
                   ),
                 ],
                 filterBarChild: Row(

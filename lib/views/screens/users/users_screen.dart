@@ -69,7 +69,12 @@ class UsersScreen extends StatelessWidget {
                   return (dataUsers, null);
                 },
                 filters: [
-                  TextTableFilter(
+                  CustomTextTableFilter(
+                    chipFormatter: (value) => 'recherche : $value',
+                    id: 'search',
+                    name: 'Recherche',
+                  ),
+                  CustomTextTableFilter(
                     id: "email",
                     name: "email",
                     chipFormatter: (value) => value,
