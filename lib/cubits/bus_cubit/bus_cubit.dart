@@ -20,7 +20,7 @@ class BusCubit extends Cubit<BusState> {
 
       List<Bus> listAllBus =
           (await busRepository.getAllBus()).fold((l) => [], (r) => r);
-
+      busData = listAllBus;
       return listAllBus;
     } catch (e) {
       print(e);

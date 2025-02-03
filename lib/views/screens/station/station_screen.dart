@@ -97,8 +97,15 @@ class StationScreen extends StatelessWidget {
                   ),
                 ],
                 fetcher: (pageSize, sortModel, filterModel, pageToken) async {
-                  var dataGares = await locator.get<StationCubit>().getAllBus();
-                  return (dataGares, null);
+                  var dataGares = await locator
+                      .get<StationCubit>()
+                      .getAllStationPaginated(
+                          pageSize: pageSize,
+                          searchQuery: filterModel["search"],
+                          commune: filterModel["commune"],
+                          type: filterModel["type"],
+                          pageToken: pageToken);
+                  return (dataGares.items, null);
                 },
                 filters: [
                   CustomTextTableFilter(
@@ -108,11 +115,10 @@ class StationScreen extends StatelessWidget {
                   ),
                   CustomTextTableFilter(
                     chipFormatter: (value) => 'Commune : $value',
-                    id: 'Commune',
+                    id: 'commune',
                     name: 'Commune',
-                    
                   ),
-                  DropdownTableFilter<TypeCar>(
+                  DropdownTableFilter<String>(
                     id: "type",
                     name: "Type",
                     decoration: const InputDecoration(
@@ -121,12 +127,12 @@ class StationScreen extends StatelessWidget {
                         border: OutlineInputBorder()),
                     items: TypeCar.values
                         .map((e) => DropdownMenuItem(
-                            value: e,
+                            value: e.type,
                             child: Text(
                               e.type,
                             )))
                         .toList(growable: false),
-                    chipFormatter: (value) => 'Type : ${value.type}',
+                    chipFormatter: (value) => 'Type : $value',
                   ),
                 ],
                 filterBarChild: Row(

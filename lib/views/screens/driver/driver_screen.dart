@@ -79,9 +79,15 @@ class DriverScreen extends StatelessWidget {
                   ),
                 ],
                 fetcher: (pageSize, sortModel, filterModel, pageToken) async {
-                  var dataDrivers =
-                      await locator.get<DriverCubit>().getAllDrivers();
-                  return (dataDrivers, null);
+                  var dataDrivers = await locator
+                      .get<DriverCubit>()
+                      .getAllDriverPaginated(
+                          pageSize: pageSize,
+                          searchQuery: filterModel["search"],
+                          driverNumber: filterModel["number"],
+                          email: filterModel["email"],
+                          pageToken: pageToken);
+                  return (dataDrivers.items, null);
                 },
                 filters: [
                   CustomTextTableFilter(

@@ -225,7 +225,6 @@ class BusRepositoryImpl implements IBusRepository {
     final snapShotListBus =
         await FirebaseFirestore.instance.collection('listBus').get();
     final docsListBus = snapShotListBus.docs;
-    print(docsListBus.map((e) => print(e.toString())));
     final buslistFirebse =
         docsListBus.map((e) => Bus.fromJson(e.data())).toList();
     return right(buslistFirebse);

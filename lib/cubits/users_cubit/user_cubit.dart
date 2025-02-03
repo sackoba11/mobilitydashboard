@@ -5,7 +5,8 @@ import 'package:mobilitydashboard/error/app_error.dart';
 import '../../models/user/my_user.dart';
 import '../../repositories/driver_repository/driver_repository_impl.dart';
 import '../../repositories/driver_repository/i_driver_repository.dart';
-import 'driver_state.dart';
+import '../../views/widgets/paginated_list.dart';
+import 'user_state.dart';
 
 @Singleton()
 class UserCubit extends Cubit<UserState> {
@@ -13,7 +14,7 @@ class UserCubit extends Cubit<UserState> {
   List<MyUser> usersData = [];
   IDriverRepository driverRepository = DriverRepositoryImpl();
 
-  Future<List<MyUser>> getAllUsers() async {
+  Future<List<MyUser>> getAllRemoteUsers() async {
     try {
       emit(UserLoading());
 
@@ -27,5 +28,34 @@ class UserCubit extends Cubit<UserState> {
           error: GenericAppError('Echec de chargement des gares, Erreur: $e')));
       return [];
     }
+  }
+
+  Future<PaginatedList<MyUser>> getAllUsersPaginated({
+    required int pageSize,
+    required String? pageToken,
+    String? email,
+    String? searchQuery,
+  }) async {
+    // int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
+    Iterable<MyUser> query = await getAllRemoteUsers();
+
+    if (email != null) {
+      query = query.where(
+          (element) => element.email.toLowerCase() == email.toLowerCase());
+    }
+    if (searchQuery != null) {
+      searchQuery = searchQuery.toLowerCase();
+      query = query.where((element) =>
+          element.name.toLowerCase().contains(searchQuery!) ||
+          element.email.toLowerCase().contains(searchQuery));
+    }
+
+    var resultSet = query.take(pageSize + 1).toList();
+    String? nextPageToken;
+    if (resultSet.length == pageSize + 1) {
+      MyUser lastUser = resultSet.removeLast();
+      nextPageToken = lastUser.toString();
+    }
+    return PaginatedList(items: resultSet, nextPageToken: nextPageToken);
   }
 }
