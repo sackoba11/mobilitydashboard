@@ -110,6 +110,7 @@ class StationScreen extends StatelessWidget {
                     chipFormatter: (value) => 'Commune : $value',
                     id: 'Commune',
                     name: 'Commune',
+                    
                   ),
                   DropdownTableFilter<TypeCar>(
                     id: "type",

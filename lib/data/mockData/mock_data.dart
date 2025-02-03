@@ -51,26 +51,32 @@ class MockData {
   ];
   static List<MyUser> users = [
     MyUser(
+      uid: '2dzhzuzzbz',
       name: 'sacko Moussa',
       email: 'mousagmail.com',
     ),
     MyUser(
+      uid: '3dzhzuzzbz',
       name: 'sacko Moussa',
       email: 'mousagmail.com',
     ),
     MyUser(
+      uid: '4dzhzuzzbz',
       name: 'sacko Moussa',
       email: 'mousagmail.com',
     ),
     MyUser(
+      uid: '7dzhzuzzbz',
       name: 'sacko Moussa',
       email: 'mousagmail.com',
     ),
     MyUser(
+      uid: '8dzhzuzzbz',
       name: 'sacko Moussa',
       email: 'mousagmail.com',
     ),
     MyUser(
+      uid: '9dzhzuzzbz',
       name: 'sacko Moussa',
       email: 'mousagmail.com',
     ),

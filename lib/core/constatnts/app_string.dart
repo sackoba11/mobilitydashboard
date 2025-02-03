@@ -1,10 +1,10 @@
 enum Active {
-  oui("Oui"),
-  non("Non");
+  oui(true),
+  non(false);
 
-  const Active(this.name);
+  const Active(this.status);
 
-  final String name;
+  final bool status;
 }
 
 enum TypeCar {

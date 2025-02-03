@@ -44,8 +44,13 @@ class BusScreen extends StatelessWidget {
                   child: TableTemplate<String, Bus>(
                 tableController: tableController,
                 fetcher: (pageSize, sortModel, filterModel, pageToken) async {
-                  var bus = await locator.get<BusCubit>().getAllBus();
-                  return (bus, null);
+                  var bus = await locator.get<BusCubit>().getAllBusPaginated(
+                      pageSize: pageSize,
+                      searchQuery: filterModel["search"],
+                      busNumber: filterModel["number"],
+                      active: filterModel["active"],
+                      pageToken: pageToken);
+                  return (bus.items, null);
                 },
                 columns: [
                   customLargeTextTableColumn(
@@ -123,7 +128,7 @@ class BusScreen extends StatelessWidget {
                     id: 'number',
                     name: 'Numero',
                   ),
-                  DropdownTableFilter<Active>(
+                  DropdownTableFilter<bool>(
                     id: "active",
                     name: "active",
                     decoration: const InputDecoration(
@@ -132,7 +137,7 @@ class BusScreen extends StatelessWidget {
                         border: OutlineInputBorder()),
                     items: Active.values
                         .map((e) => DropdownMenuItem(
-                            value: e,
+                            value: e.status,
                             child: Text(
                               e.name,
                               style: e.index == 0
@@ -141,7 +146,7 @@ class BusScreen extends StatelessWidget {
                             )))
                         .toList(growable: false),
                     chipFormatter: (value) =>
-                        'Actif : ${value.name.toLowerCase()}',
+                        'Actif : ${value ? 'Oui' : 'Non'}',
                   ),
                   CustomTextTableFilter(
                     chipFormatter: (value) => 'recherche : $value',

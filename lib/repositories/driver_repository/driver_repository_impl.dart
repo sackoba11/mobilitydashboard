@@ -11,6 +11,13 @@ import 'i_driver_repository.dart';
 @LazySingleton(as: IDriverRepository)
 class DriverRepositoryImpl implements IDriverRepository {
   DatabaseReference ref = FirebaseDatabase.instance.ref().child("activeBus");
+  static final List<Post> _backend = [];
+
+  static void generate(int count, MyUser user) {
+    _backend.clear();
+    _backend.addAll(
+        List.generate(count, (index) => Post.random(id: index, user: user)));
+  }
 
   @override
   Future<Either<AppError, List<Driver>>> getAllDrivers() async {
@@ -31,8 +38,38 @@ class DriverRepositoryImpl implements IDriverRepository {
         .where('isDriver', isEqualTo: false)
         .get();
     final docsListUsers = snapShotListUsers.docs;
+
     final userslistFirebse =
         docsListUsers.map((e) => MyUser.fromJson(e.data())).toList();
+    var len = userslistFirebse.length;
+    print(len);
+    userslistFirebse.map((e) => generate(len, e));
+    print(_backend);
     return right(userslistFirebse);
   }
+}
+
+class Post {
+  final int id;
+  String name;
+  String email;
+
+  Post({required this.id, required this.name, required this.email});
+
+  factory Post.random({required int id, required MyUser user}) {
+    return Post(
+      id: id,
+      name: user.name,
+      email: user.email,
+    );
+  }
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(Object other) => other is Post ? other.id == id : false;
+
+  @override
+  String toString() => "Post(id: $id, name: $name, email: $email)";
 }

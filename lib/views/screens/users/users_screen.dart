@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -121,6 +123,7 @@ class UsersScreen extends StatelessWidget {
                                 tableController.insertAt(
                                   0,
                                   MyUser(
+                                    uid: '98dzhzuzzbz',
                                     name: nameTextEditingController.text,
                                     email: emailTextEditingController.text,
                                   ),
@@ -132,4 +135,37 @@ class UsersScreen extends StatelessWidget {
               ))
             ])));
   }
+
+  static final List<MyUser> _backend = [];
+  Future<PaginatedList<MyUser>> getPosts({
+    required int pageSize,
+    required String? pageToken,
+    bool? status,
+    String? searchQuery,
+    String? sortBy,
+  }) async {
+    await Future.delayed(const Duration(seconds: 1));
+    int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
+    Iterable<MyUser> query = _backend;
+    // query = query.where((element) => element.uid >= nextId);
+    var resultSet = query.take(pageSize + 1).toList();
+    String? nextPageToken;
+    if (resultSet.length == pageSize + 1) {
+      MyUser lastBus = resultSet.removeLast();
+      nextPageToken = lastBus.uid;
+    }
+    return PaginatedList(items: resultSet, nextPageToken: nextId.toString());
+  }
+}
+
+class PaginatedList<T> {
+  final Iterable<T> _items;
+  final String? _nextPageToken;
+
+  List<T> get items => UnmodifiableListView(_items);
+  String? get nextPageToken => _nextPageToken;
+
+  PaginatedList({required Iterable<T> items, String? nextPageToken})
+      : _items = items,
+        _nextPageToken = nextPageToken;
 }
