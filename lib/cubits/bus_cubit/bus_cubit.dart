@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobilitydashboard/error/app_error.dart';
 
+import '../../models/add_bus/bus.dart';
 import '../../models/bus/bus.dart';
 import '../../repositories/bus_repository/bus_repository_impl.dart';
 import '../../repositories/bus_repository/i_bus_repository.dart';
@@ -14,6 +15,16 @@ class BusCubit extends Cubit<BusState> {
   BusCubit() : super(BusInitialState());
   List<Bus> busData = [];
   IBusRepository busRepository = BusRepositoryImpl();
+
+  Future<void> addBus({required Bus data}) async {
+    try {
+      var result =
+          (await busRepository.addBus(data: data)).fold((l) => l, (r) => r);
+      print(result);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   Future<List<Bus>> getAllRemoteBus() async {
     try {
@@ -30,8 +41,6 @@ class BusCubit extends Cubit<BusState> {
                 destination: busDatas[index].destination,
                 isActive: busDatas[index].isActive,
                 roadMap: busDatas[index].roadMap,
-                position: busDatas[index].position,
-                startDate: busDatas[index].startDate,
               ));
       return busData;
     } catch (e) {

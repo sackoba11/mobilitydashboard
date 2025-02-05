@@ -6,5 +6,5 @@ import '../../models/bus/bus.dart';
 abstract class IBusRepository {
   Future<Either<AppError, List<Bus>>> getAllBus();
   Future<Either<AppError, List<Bus>>> getActiveBus();
-  Future<Either<AppError, bool>> addRoadMap();
+  Future<Either<AppError, bool>> addBus({required Bus data});
 }

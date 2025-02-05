@@ -4743,8 +4743,6 @@ class MockData {
 
   static List<Bus> dataBus = [
     Bus(
-        position: stop.first,
-        startDate: null,
         number: 610,
         source: "Adjamé",
         destination: "BingerVille",
@@ -4755,56 +4753,42 @@ class MockData {
         source: "Ecole de Police",
         destination: "Chu TreichVille",
         roadMap: stop,
-        position: stop.first,
-        startDate: null,
         isActive: false),
     Bus(
         number: 15,
         source: "Abobo Sogefia",
         destination: "Gare Sud",
         roadMap: stop,
-        position: stop.first,
-        startDate: null,
         isActive: true),
     Bus(
         number: 85,
         source: "Gare Campus",
         destination: "Yopougon Kouté",
         roadMap: stop,
-        position: stop.first,
-        startDate: null,
         isActive: false),
     Bus(
         number: 49,
         source: "Abobo Sogefia",
         destination: "Gare Campus",
         roadMap: stop,
-        position: stop.first,
-        startDate: null,
         isActive: true),
     Bus(
         number: 49,
         source: "Abobo Sogefia",
         destination: "Gare Campus",
         roadMap: stop,
-        position: stop.first,
-        startDate: null,
         isActive: false),
     Bus(
         number: 85,
         source: "Yopougon Kouté",
         destination: "Gare Campus",
         roadMap: stop,
-        position: stop.first,
-        startDate: null,
         isActive: true),
     Bus(
         number: 85,
         source: "Gare Campus",
         destination: "Yopougon Kouté",
         roadMap: stop,
-        position: stop.first,
-        startDate: null,
         isActive: false),
   ];
 }

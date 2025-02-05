@@ -13,7 +13,7 @@ Future<dynamic> customWoltModalSheetPage(
     required Function() onTap,
     bool isBus = false,
     bool isStation = false,
-    List<Stop>? roadMapTextEditingController,
+    List? roadMapTextEditingController,
     Stop? locationStation,
     required PagedDataTableController<String, dynamic> tableController}) {
   return WoltModalSheet.show(

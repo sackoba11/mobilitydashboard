@@ -11,9 +11,8 @@ import 'i_bus_repository.dart';
 
 @LazySingleton(as: IBusRepository)
 class BusRepositoryImpl implements IBusRepository {
-  // var buslistFirebse = <Bus>[].obs;
-
-  List<Map<String, dynamic>> dataBus = [
+  List<Bus> dataBus = [];
+  List<Map<String, dynamic>> mockDataBus = [
     {
       "number": 610,
       "source": "Adjamé",
@@ -197,10 +196,11 @@ class BusRepositoryImpl implements IBusRepository {
   ];
 
   @override
-  Future<Either<AppError, bool>> addRoadMap() async {
-    for (var element in dataBus) {
-      await FirebaseFirestore.instance.collection("listBus").add(element);
-    }
+  Future<Either<AppError, bool>> addBus({required Bus data}) async {
+    final bus = await FirebaseFirestore.instance
+        .collection("listBus")
+        .add(data.toJson());
+    print(bus);
     return right(true);
   }
 
@@ -208,7 +208,6 @@ class BusRepositoryImpl implements IBusRepository {
   Future<Either<AppError, List<Bus>>> getActiveBus() async {
     DatabaseReference ref = FirebaseDatabase.instance.ref().child("activeBus");
 
-    List<Bus> dataBus = [];
     final activeListBus = await ref.get();
     activeListBus.children
         .map((e) => (e.children
@@ -225,8 +224,10 @@ class BusRepositoryImpl implements IBusRepository {
     final snapShotListBus =
         await FirebaseFirestore.instance.collection('listBus').get();
     final docsListBus = snapShotListBus.docs;
+    print(docsListBus.map((e) => e.data()).toList());
     final buslistFirebse =
         docsListBus.map((e) => Bus.fromJson(e.data())).toList();
+
     return right(buslistFirebse);
   }
 }

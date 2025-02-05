@@ -12,7 +12,7 @@ class DynamicFormFields extends StatefulWidget {
   final bool isBus;
   final bool isStation;
   final Function() onTap;
-  List<Stop>? roadMapTextEditingController;
+  List? roadMapTextEditingController;
   Stop? locationStation;
   DynamicFormFields({
     super.key,
@@ -91,8 +91,10 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
                           for (int i = 0; i < latList.length; i++) {
                             widget.roadMapTextEditingController!.add(
                               Stop(
-                                  lat: double.parse(latList[i]),
-                                  long: double.parse(longList[i])),
+                                      lat: double.parse(latList[i]),
+                                      long: double.parse(longList[i]))
+                                  .toJson()
+                                  .entries,
                             );
                           }
                         } else if (widget.isStation) {

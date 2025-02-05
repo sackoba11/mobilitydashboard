@@ -4,11 +4,11 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:mobilitydashboard/core/extensions/context_extensions.dart';
 import 'package:mobilitydashboard/cubits/bus_cubit/bus_cubit.dart';
 import 'package:mobilitydashboard/di.dart';
-import 'package:mobilitydashboard/models/stop/stop.dart';
 import 'package:mobilitydashboard/views/widgets/table_template.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
 import '../../../core/constatnts/app_string.dart';
+import '../../../models/add_bus/bus.dart';
 import '../../../models/bus/bus.dart';
 import '../../widgets/customWoltModalSheetPage.dart';
 import '../../widgets/custom_large_text_table_column.dart';
@@ -28,7 +28,7 @@ class BusScreen extends StatelessWidget {
     TextEditingController sourceTextEditingController = TextEditingController();
     TextEditingController destinationTextEditingController =
         TextEditingController();
-    List<Stop> roadMapTextEditingController = [];
+    List roadMapTextEditingController = [];
 
     return Scaffold(
         backgroundColor: context.colors.transparent,
@@ -113,8 +113,7 @@ class BusScreen extends StatelessWidget {
                   customLargeTextTableColumn(
                     title: "Itinéraire",
                     id: "itinéraire",
-                    getter: (item, index) =>
-                        item.roadMap.map((stop) => stop).toString(),
+                    getter: (item, index) => item.roadMap.toString(),
                     setter: (item, newValue, index) async {
                       await Future.delayed(const Duration(seconds: 2));
                       print(newValue);
@@ -208,19 +207,18 @@ class BusScreen extends StatelessWidget {
                             index: 0,
                           )
                         ],
-                        onTap: () {
-                          tableController.insertAt(
-                              0,
-                              Bus(
-                                  position: null,
-                                  startDate: null,
-                                  number: int.parse(
-                                      numberTextEditingController.text),
-                                  source: sourceTextEditingController.text,
-                                  destination:
-                                      destinationTextEditingController.text,
-                                  isActive: false,
-                                  roadMap: roadMapTextEditingController));
+                        onTap: () async {
+                          Bus data = Bus(
+                              number:
+                                  int.parse(numberTextEditingController.text),
+                              source: sourceTextEditingController.text,
+                              destination:
+                                  destinationTextEditingController.text,
+                              isActive: false,
+                              roadMap: [roadMapTextEditingController]);
+                          tableController.insertAt(0, data);
+                          await locator.get<BusCubit>().addBus(data: data);
+                          tableController.refresh();
                         });
                   },
                 ),
