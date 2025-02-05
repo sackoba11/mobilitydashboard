@@ -1,3 +1,4 @@
+import 'package:darq/darq.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobilitydashboard/error/app_error.dart';
@@ -11,7 +12,7 @@ import 'user_state.dart';
 @Singleton()
 class UserCubit extends Cubit<UserState> {
   UserCubit() : super(UserInitialState());
-  List<MyUser> usersData = [];
+  static List<MyUser> usersData = [];
   IDriverRepository driverRepository = DriverRepositoryImpl();
 
   Future<List<MyUser>> getAllRemoteUsers() async {
@@ -36,9 +37,16 @@ class UserCubit extends Cubit<UserState> {
     String? email,
     String? searchQuery,
   }) async {
-    // int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
-    Iterable<MyUser> query = await getAllRemoteUsers();
+    int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
+    Iterable<MyUser> query;
 
+    if (usersData.isEmpty) {
+      query = await getAllRemoteUsers();
+    } else {
+      query = usersData;
+    }
+    query = query.orderBy((element) => element.uid);
+    print(query.first.hashCode);
     if (email != null) {
       query = query.where(
           (element) => element.email.toLowerCase() == email.toLowerCase());
@@ -49,13 +57,18 @@ class UserCubit extends Cubit<UserState> {
           element.name.toLowerCase().contains(searchQuery!) ||
           element.email.toLowerCase().contains(searchQuery));
     }
+    // query = query.where((element) => element.uid >= nextId.toString());
 
     var resultSet = query.take(pageSize + 1).toList();
     String? nextPageToken;
     if (resultSet.length == pageSize + 1) {
       MyUser lastUser = resultSet.removeLast();
-      nextPageToken = lastUser.toString();
+      nextPageToken = lastUser.hashCode.toString();
     }
     return PaginatedList(items: resultSet, nextPageToken: nextPageToken);
+  }
+
+  MyUser addIndex({required int id, required MyUser user}) {
+    return MyUser(uid: id.toString(), name: user.name, email: user.email);
   }
 }

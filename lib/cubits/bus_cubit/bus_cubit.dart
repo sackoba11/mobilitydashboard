@@ -1,3 +1,4 @@
+import 'package:darq/darq.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobilitydashboard/error/app_error.dart';
@@ -18,10 +19,8 @@ class BusCubit extends Cubit<BusState> {
     try {
       emit(BusLoading());
 
-      List<Bus> listAllBus =
-          (await busRepository.getAllBus()).fold((l) => [], (r) => r);
-      busData = listAllBus;
-      return listAllBus;
+      busData = (await busRepository.getAllBus()).fold((l) => [], (r) => r);
+      return busData;
     } catch (e) {
       print(e);
       emit(BusLoadingFailure(
@@ -37,9 +36,15 @@ class BusCubit extends Cubit<BusState> {
     String? busNumber,
     String? searchQuery,
   }) async {
-    // int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
-    Iterable<Bus> query = await getAllRemoteBus();
+    int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
+    Iterable<Bus> query;
+    if (busData.isEmpty) {
+      query = await getAllRemoteBus();
+    } else {
+      query = busData;
+    }
 
+    query = query.orderBy((element) => element.number);
     if (active != null) {
       query = query.where((element) => element.isActive == active);
     }
@@ -52,12 +57,13 @@ class BusCubit extends Cubit<BusState> {
           element.source.toLowerCase().contains(searchQuery!) ||
           element.destination.toLowerCase().contains(searchQuery));
     }
+    query = query.where((element) => element.number >= nextId);
 
     var resultSet = query.take(pageSize + 1).toList();
     String? nextPageToken;
     if (resultSet.length == pageSize + 1) {
       Bus lastBus = resultSet.removeLast();
-      nextPageToken = lastBus.toString();
+      nextPageToken = lastBus.number.toString();
     }
     return PaginatedList(items: resultSet, nextPageToken: nextPageToken);
   }

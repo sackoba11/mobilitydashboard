@@ -13,8 +13,23 @@ import '../../widgets/custom_text_form_field.dart';
 import '../../widgets/filter_Popup_menu_button.dart';
 import '../../widgets/table_template.dart';
 
-class UsersScreen extends StatelessWidget {
+class UsersScreen extends StatefulWidget {
   const UsersScreen({super.key});
+
+  @override
+  State<UsersScreen> createState() => _UsersScreenState();
+}
+
+class _UsersScreenState extends State<UsersScreen> {
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    await locator.get<UserCubit>().getAllRemoteUsers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +37,7 @@ class UsersScreen extends StatelessWidget {
     TextEditingController nameTextEditingController = TextEditingController();
     TextEditingController searchTextEditingController = TextEditingController();
     TextEditingController emailTextEditingController = TextEditingController();
+
     return Scaffold(
         backgroundColor: context.colors.transparent,
         body: Padding(

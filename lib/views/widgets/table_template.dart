@@ -38,14 +38,14 @@ class TableTemplate<K, T> extends StatelessWidget {
         ),
         child: PagedDataTable<String, T>(
             controller: tableController,
-            initialPageSize: 40,
-            pageSizes: const [5, 10, 20, 40],
+            initialPageSize: 5,
+            pageSizes: const [5, 10, 20, 50, 70, 100, 150],
             fetcher: fetcher,
             columns: [
               RowSelectorColumn(),
               TableColumn(
                 title: const Text("Index"),
-                cellBuilder: (context, item, index) => Text(index.toString()),
+                cellBuilder: (context, item, index) => Text('${index + 1}'),
               ),
               for (var column in columns) column,
             ],

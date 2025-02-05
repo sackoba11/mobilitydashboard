@@ -39,7 +39,12 @@ class StationCubit extends Cubit<StationState> {
     String? searchQuery,
   }) async {
     // int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
-    Iterable<Gare> query = await getAllRemoteStations();
+    Iterable<Gare> query;
+    if (stationData.isEmpty) {
+      query = await getAllRemoteStations();
+    } else {
+      query = stationData;
+    }
 
     if (type != null) {
       query = query.where((element) => element.type == type);

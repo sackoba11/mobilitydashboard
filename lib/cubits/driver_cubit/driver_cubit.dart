@@ -38,9 +38,15 @@ class DriverCubit extends Cubit<DriverState> {
   }) async {
     // int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
     Iterable<Driver> query = await getAllRemoteDrivers();
+    if (driversData.isEmpty) {
+      query = await getAllRemoteDrivers();
+    } else {
+      query = driversData;
+    }
 
     if (email != null) {
-      query = query.where((element) => element.email.toLowerCase() == email.toLowerCase());
+      query = query.where(
+          (element) => element.email.toLowerCase() == email.toLowerCase());
     }
     if (driverNumber != null) {
       query = query.where((element) => element.number == driverNumber);
