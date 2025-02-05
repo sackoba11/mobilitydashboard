@@ -8,7 +8,8 @@ part 'bus.g.dart';
 @freezed
 class Bus with _$Bus {
   factory Bus(
-      {required int number,
+      {int? id,
+      required int number,
       required String source,
       required String destination,
       required bool isActive,

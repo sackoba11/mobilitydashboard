@@ -50,8 +50,6 @@ class BusScreen extends StatelessWidget {
                       busNumber: filterModel["number"],
                       active: filterModel["active"],
                       pageToken: pageToken);
-                  print(tableController.totalItems);
-                  print(bus.nextPageToken);
                   return (bus.items, bus.nextPageToken);
                 },
                 columns: [

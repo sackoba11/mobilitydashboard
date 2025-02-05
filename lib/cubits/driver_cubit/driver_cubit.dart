@@ -1,3 +1,4 @@
+import 'package:darq/darq.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobilitydashboard/error/app_error.dart';
@@ -17,8 +18,15 @@ class DriverCubit extends Cubit<DriverState> {
   Future<List<Driver>> getAllRemoteDrivers() async {
     try {
       emit(DriverLoading());
-      driversData =
+      List<Driver> driversDatas =
           (await stationRepository.getAllDrivers()).fold((l) => [], (r) => r);
+      driversData = List.generate(
+          driversDatas.length,
+          (index) => Driver(
+              id: index,
+              name: driversDatas[index].name,
+              number: driversDatas[index].number,
+              email: driversDatas[index].email));
       emit(DriverLoaded(listStation: driversData));
       return driversData;
     } catch (e) {
@@ -36,13 +44,15 @@ class DriverCubit extends Cubit<DriverState> {
     String? driverNumber,
     String? searchQuery,
   }) async {
-    // int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
+    int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
     Iterable<Driver> query = await getAllRemoteDrivers();
     if (driversData.isEmpty) {
       query = await getAllRemoteDrivers();
     } else {
       query = driversData;
     }
+
+    query = query.orderBy((element) => element.id);
 
     if (email != null) {
       query = query.where(
@@ -57,12 +67,12 @@ class DriverCubit extends Cubit<DriverState> {
           element.name.toLowerCase().contains(searchQuery!) ||
           element.email.toLowerCase().contains(searchQuery));
     }
-
+    query = query.where((element) => element.id! >= nextId);
     var resultSet = query.take(pageSize + 1).toList();
     String? nextPageToken;
     if (resultSet.length == pageSize + 1) {
       Driver lastDriver = resultSet.removeLast();
-      nextPageToken = lastDriver.toString();
+      nextPageToken = lastDriver.id.toString();
     }
     return PaginatedList(items: resultSet, nextPageToken: nextPageToken);
   }

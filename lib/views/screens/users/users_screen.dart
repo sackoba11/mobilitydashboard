@@ -88,7 +88,7 @@ class _UsersScreenState extends State<UsersScreen> {
                           searchQuery: filterModel["search"],
                           email: filterModel["email"],
                           pageToken: pageToken);
-                  return (dataUsers.items, null);
+                  return (dataUsers.items, dataUsers.nextPageToken);
                 },
                 filters: [
                   CustomTextTableFilter(

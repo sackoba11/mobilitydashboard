@@ -38,7 +38,7 @@ class TableTemplate<K, T> extends StatelessWidget {
         ),
         child: PagedDataTable<String, T>(
             controller: tableController,
-            initialPageSize: 5,
+            initialPageSize: 10,
             pageSizes: const [5, 10, 20, 50, 70, 100, 150],
             fetcher: fetcher,
             columns: [

@@ -20,6 +20,7 @@ Bus _$BusFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Bus {
+  int? get id => throw _privateConstructorUsedError;
   int get number => throw _privateConstructorUsedError;
   String get source => throw _privateConstructorUsedError;
   String get destination => throw _privateConstructorUsedError;
@@ -43,7 +44,8 @@ abstract class $BusCopyWith<$Res> {
       _$BusCopyWithImpl<$Res, Bus>;
   @useResult
   $Res call(
-      {int number,
+      {int? id,
+      int number,
       String source,
       String destination,
       bool isActive,
@@ -68,6 +70,7 @@ class _$BusCopyWithImpl<$Res, $Val extends Bus> implements $BusCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? number = null,
     Object? source = null,
     Object? destination = null,
@@ -77,6 +80,10 @@ class _$BusCopyWithImpl<$Res, $Val extends Bus> implements $BusCopyWith<$Res> {
     Object? startDate = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -130,7 +137,8 @@ abstract class _$$BusImplCopyWith<$Res> implements $BusCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int number,
+      {int? id,
+      int number,
       String source,
       String destination,
       bool isActive,
@@ -153,6 +161,7 @@ class __$$BusImplCopyWithImpl<$Res> extends _$BusCopyWithImpl<$Res, _$BusImpl>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? number = null,
     Object? source = null,
     Object? destination = null,
@@ -162,6 +171,10 @@ class __$$BusImplCopyWithImpl<$Res> extends _$BusCopyWithImpl<$Res, _$BusImpl>
     Object? startDate = freezed,
   }) {
     return _then(_$BusImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       number: null == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
@@ -198,7 +211,8 @@ class __$$BusImplCopyWithImpl<$Res> extends _$BusCopyWithImpl<$Res, _$BusImpl>
 @JsonSerializable()
 class _$BusImpl implements _Bus {
   _$BusImpl(
-      {required this.number,
+      {this.id,
+      required this.number,
       required this.source,
       required this.destination,
       required this.isActive,
@@ -210,6 +224,8 @@ class _$BusImpl implements _Bus {
   factory _$BusImpl.fromJson(Map<String, dynamic> json) =>
       _$$BusImplFromJson(json);
 
+  @override
+  final int? id;
   @override
   final int number;
   @override
@@ -233,7 +249,7 @@ class _$BusImpl implements _Bus {
 
   @override
   String toString() {
-    return 'Bus(number: $number, source: $source, destination: $destination, isActive: $isActive, roadMap: $roadMap, position: $position, startDate: $startDate)';
+    return 'Bus(id: $id, number: $number, source: $source, destination: $destination, isActive: $isActive, roadMap: $roadMap, position: $position, startDate: $startDate)';
   }
 
   @override
@@ -241,6 +257,7 @@ class _$BusImpl implements _Bus {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BusImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.number, number) || other.number == number) &&
             (identical(other.source, source) || other.source == source) &&
             (identical(other.destination, destination) ||
@@ -258,6 +275,7 @@ class _$BusImpl implements _Bus {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       number,
       source,
       destination,
@@ -284,7 +302,8 @@ class _$BusImpl implements _Bus {
 
 abstract class _Bus implements Bus {
   factory _Bus(
-      {required final int number,
+      {final int? id,
+      required final int number,
       required final String source,
       required final String destination,
       required final bool isActive,
@@ -294,6 +313,8 @@ abstract class _Bus implements Bus {
 
   factory _Bus.fromJson(Map<String, dynamic> json) = _$BusImpl.fromJson;
 
+  @override
+  int? get id;
   @override
   int get number;
   @override

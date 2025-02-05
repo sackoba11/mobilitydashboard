@@ -6,6 +6,7 @@ part 'driver.g.dart';
 @freezed
 class Driver with _$Driver {
   factory Driver({
+    int? id,
     required String name,
     required String? number,
     required String email,

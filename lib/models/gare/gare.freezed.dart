@@ -20,6 +20,7 @@ Gare _$GareFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Gare {
+  int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get commune => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
@@ -40,7 +41,8 @@ abstract class $GareCopyWith<$Res> {
       _$GareCopyWithImpl<$Res, Gare>;
   @useResult
   $Res call(
-      {String name,
+      {int? id,
+      String name,
       String commune,
       String type,
       Map<String, dynamic> location});
@@ -61,12 +63,17 @@ class _$GareCopyWithImpl<$Res, $Val extends Gare>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? commune = null,
     Object? type = null,
     Object? location = null,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -95,7 +102,8 @@ abstract class _$$GareImplCopyWith<$Res> implements $GareCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String name,
+      {int? id,
+      String name,
       String commune,
       String type,
       Map<String, dynamic> location});
@@ -113,12 +121,17 @@ class __$$GareImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? commune = null,
     Object? type = null,
     Object? location = null,
   }) {
     return _then(_$GareImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -143,7 +156,8 @@ class __$$GareImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$GareImpl implements _Gare {
   _$GareImpl(
-      {required this.name,
+      {this.id,
+      required this.name,
       required this.commune,
       required this.type,
       required final Map<String, dynamic> location})
@@ -152,6 +166,8 @@ class _$GareImpl implements _Gare {
   factory _$GareImpl.fromJson(Map<String, dynamic> json) =>
       _$$GareImplFromJson(json);
 
+  @override
+  final int? id;
   @override
   final String name;
   @override
@@ -168,7 +184,7 @@ class _$GareImpl implements _Gare {
 
   @override
   String toString() {
-    return 'Gare(name: $name, commune: $commune, type: $type, location: $location)';
+    return 'Gare(id: $id, name: $name, commune: $commune, type: $type, location: $location)';
   }
 
   @override
@@ -176,6 +192,7 @@ class _$GareImpl implements _Gare {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GareImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.commune, commune) || other.commune == commune) &&
             (identical(other.type, type) || other.type == type) &&
@@ -184,7 +201,7 @@ class _$GareImpl implements _Gare {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, commune, type,
+  int get hashCode => Object.hash(runtimeType, id, name, commune, type,
       const DeepCollectionEquality().hash(_location));
 
   /// Create a copy of Gare
@@ -205,13 +222,16 @@ class _$GareImpl implements _Gare {
 
 abstract class _Gare implements Gare {
   factory _Gare(
-      {required final String name,
+      {final int? id,
+      required final String name,
       required final String commune,
       required final String type,
       required final Map<String, dynamic> location}) = _$GareImpl;
 
   factory _Gare.fromJson(Map<String, dynamic> json) = _$GareImpl.fromJson;
 
+  @override
+  int? get id;
   @override
   String get name;
   @override

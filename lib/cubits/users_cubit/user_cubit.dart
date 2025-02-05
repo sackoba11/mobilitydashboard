@@ -19,8 +19,15 @@ class UserCubit extends Cubit<UserState> {
     try {
       emit(UserLoading());
 
-      usersData =
+      List<MyUser> usersDatas =
           (await driverRepository.getAllUsers()).fold((l) => [], (r) => r);
+      usersData = List.generate(
+          usersDatas.length,
+          (index) => MyUser(
+              id: index,
+              uid: usersDatas[index].uid,
+              name: usersDatas[index].name,
+              email: usersDatas[index].email));
       emit(UserLoaded(listUsers: usersData));
       return usersData;
     } catch (e) {
@@ -45,8 +52,7 @@ class UserCubit extends Cubit<UserState> {
     } else {
       query = usersData;
     }
-    query = query.orderBy((element) => element.uid);
-    print(query.first.hashCode);
+    query = query.orderBy((element) => element.id);
     if (email != null) {
       query = query.where(
           (element) => element.email.toLowerCase() == email.toLowerCase());
@@ -57,18 +63,14 @@ class UserCubit extends Cubit<UserState> {
           element.name.toLowerCase().contains(searchQuery!) ||
           element.email.toLowerCase().contains(searchQuery));
     }
-    // query = query.where((element) => element.uid >= nextId.toString());
+    query = query.where((element) => element.id! >= nextId);
 
     var resultSet = query.take(pageSize + 1).toList();
     String? nextPageToken;
     if (resultSet.length == pageSize + 1) {
       MyUser lastUser = resultSet.removeLast();
-      nextPageToken = lastUser.hashCode.toString();
+      nextPageToken = lastUser.id.toString();
     }
     return PaginatedList(items: resultSet, nextPageToken: nextPageToken);
-  }
-
-  MyUser addIndex({required int id, required MyUser user}) {
-    return MyUser(uid: id.toString(), name: user.name, email: user.email);
   }
 }

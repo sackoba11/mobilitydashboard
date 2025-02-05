@@ -87,7 +87,7 @@ class DriverScreen extends StatelessWidget {
                           driverNumber: filterModel["number"],
                           email: filterModel["email"],
                           pageToken: pageToken);
-                  return (dataDrivers.items, null);
+                  return (dataDrivers.items, dataDrivers.nextPageToken);
                 },
                 filters: [
                   CustomTextTableFilter(

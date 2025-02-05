@@ -20,6 +20,7 @@ MyUser _$MyUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MyUser {
+  int? get id => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
@@ -38,7 +39,7 @@ abstract class $MyUserCopyWith<$Res> {
   factory $MyUserCopyWith(MyUser value, $Res Function(MyUser) then) =
       _$MyUserCopyWithImpl<$Res, MyUser>;
   @useResult
-  $Res call({String uid, String name, String email});
+  $Res call({int? id, String uid, String name, String email});
 }
 
 /// @nodoc
@@ -56,11 +57,16 @@ class _$MyUserCopyWithImpl<$Res, $Val extends MyUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? uid = null,
     Object? name = null,
     Object? email = null,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -84,7 +90,7 @@ abstract class _$$MyUserImplCopyWith<$Res> implements $MyUserCopyWith<$Res> {
       __$$MyUserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String uid, String name, String email});
+  $Res call({int? id, String uid, String name, String email});
 }
 
 /// @nodoc
@@ -100,11 +106,16 @@ class __$$MyUserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? uid = null,
     Object? name = null,
     Object? email = null,
   }) {
     return _then(_$MyUserImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -124,11 +135,14 @@ class __$$MyUserImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$MyUserImpl implements _MyUser {
-  _$MyUserImpl({required this.uid, required this.name, required this.email});
+  _$MyUserImpl(
+      {this.id, required this.uid, required this.name, required this.email});
 
   factory _$MyUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$MyUserImplFromJson(json);
 
+  @override
+  final int? id;
   @override
   final String uid;
   @override
@@ -138,7 +152,7 @@ class _$MyUserImpl implements _MyUser {
 
   @override
   String toString() {
-    return 'MyUser(uid: $uid, name: $name, email: $email)';
+    return 'MyUser(id: $id, uid: $uid, name: $name, email: $email)';
   }
 
   @override
@@ -146,6 +160,7 @@ class _$MyUserImpl implements _MyUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MyUserImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email));
@@ -153,7 +168,7 @@ class _$MyUserImpl implements _MyUser {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, uid, name, email);
+  int get hashCode => Object.hash(runtimeType, id, uid, name, email);
 
   /// Create a copy of MyUser
   /// with the given fields replaced by the non-null parameter values.
@@ -173,12 +188,15 @@ class _$MyUserImpl implements _MyUser {
 
 abstract class _MyUser implements MyUser {
   factory _MyUser(
-      {required final String uid,
+      {final int? id,
+      required final String uid,
       required final String name,
       required final String email}) = _$MyUserImpl;
 
   factory _MyUser.fromJson(Map<String, dynamic> json) = _$MyUserImpl.fromJson;
 
+  @override
+  int? get id;
   @override
   String get uid;
   @override

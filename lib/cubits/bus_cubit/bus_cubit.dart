@@ -19,7 +19,20 @@ class BusCubit extends Cubit<BusState> {
     try {
       emit(BusLoading());
 
-      busData = (await busRepository.getAllBus()).fold((l) => [], (r) => r);
+      List<Bus> busDatas =
+          (await busRepository.getAllBus()).fold((l) => [], (r) => r);
+      busData = List.generate(
+          busDatas.length,
+          (index) => Bus(
+                id: index,
+                number: busDatas[index].number,
+                source: busDatas[index].source,
+                destination: busDatas[index].destination,
+                isActive: busDatas[index].isActive,
+                roadMap: busDatas[index].roadMap,
+                position: busDatas[index].position,
+                startDate: busDatas[index].startDate,
+              ));
       return busData;
     } catch (e) {
       print(e);
@@ -40,11 +53,13 @@ class BusCubit extends Cubit<BusState> {
     Iterable<Bus> query;
     if (busData.isEmpty) {
       query = await getAllRemoteBus();
+
+      query.indexed.orderBy((element) => print('teste id: ${element.$1}'));
     } else {
       query = busData;
     }
 
-    query = query.orderBy((element) => element.number);
+    query = query.orderBy((element) => element.id);
     if (active != null) {
       query = query.where((element) => element.isActive == active);
     }
@@ -57,13 +72,13 @@ class BusCubit extends Cubit<BusState> {
           element.source.toLowerCase().contains(searchQuery!) ||
           element.destination.toLowerCase().contains(searchQuery));
     }
-    query = query.where((element) => element.number >= nextId);
+    query = query.where((element) => element.id! >= nextId);
 
     var resultSet = query.take(pageSize + 1).toList();
     String? nextPageToken;
     if (resultSet.length == pageSize + 1) {
       Bus lastBus = resultSet.removeLast();
-      nextPageToken = lastBus.number.toString();
+      nextPageToken = lastBus.id.toString();
     }
     return PaginatedList(items: resultSet, nextPageToken: nextPageToken);
   }

@@ -6,7 +6,8 @@ part 'gare.g.dart';
 @freezed
 abstract class Gare with _$Gare {
   factory Gare(
-      {required String name,
+      {int? id,
+      required String name,
       required String commune,
       required String type,
       required Map<String, dynamic> location}) = _Gare;

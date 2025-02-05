@@ -105,7 +105,7 @@ class StationScreen extends StatelessWidget {
                           commune: filterModel["commune"],
                           type: filterModel["type"],
                           pageToken: pageToken);
-                  return (dataGares.items, null);
+                  return (dataGares.items, dataGares.nextPageToken);
                 },
                 filters: [
                   CustomTextTableFilter(

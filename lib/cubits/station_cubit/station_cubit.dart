@@ -1,3 +1,4 @@
+import 'package:darq/darq.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobilitydashboard/error/app_error.dart';
@@ -18,8 +19,17 @@ class StationCubit extends Cubit<StationState> {
     try {
       emit(StationLoading());
 
-      stationData =
+      List<Gare> stationDatas =
           (await driverRepository.getAllGares()).fold((l) => [], (r) => r);
+
+      stationData = List.generate(
+          stationDatas.length,
+          (index) => Gare(
+              id: index,
+              name: stationDatas[index].name,
+              commune: stationDatas[index].commune,
+              type: stationDatas[index].type,
+              location: stationDatas[index].location));
 
       emit(StationLoaded(listStation: stationData));
       return stationData;
@@ -38,13 +48,14 @@ class StationCubit extends Cubit<StationState> {
     String? commune,
     String? searchQuery,
   }) async {
-    // int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
+    int nextId = pageToken == null ? 0 : int.tryParse(pageToken) ?? 1;
     Iterable<Gare> query;
     if (stationData.isEmpty) {
       query = await getAllRemoteStations();
     } else {
       query = stationData;
     }
+    query = query.orderBy((element) => element.id);
 
     if (type != null) {
       query = query.where((element) => element.type == type);
@@ -60,11 +71,13 @@ class StationCubit extends Cubit<StationState> {
           element.commune.toLowerCase().contains(searchQuery));
     }
 
+    query = query.where((element) => element.id! >= nextId);
+
     var resultSet = query.take(pageSize + 1).toList();
     String? nextPageToken;
     if (resultSet.length == pageSize + 1) {
       Gare lastStation = resultSet.removeLast();
-      nextPageToken = lastStation.toString();
+      nextPageToken = lastStation.id.toString();
     }
     return PaginatedList(items: resultSet, nextPageToken: nextPageToken);
   }

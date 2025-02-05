@@ -20,6 +20,7 @@ Driver _$DriverFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Driver {
+  int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String? get number => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
@@ -38,7 +39,7 @@ abstract class $DriverCopyWith<$Res> {
   factory $DriverCopyWith(Driver value, $Res Function(Driver) then) =
       _$DriverCopyWithImpl<$Res, Driver>;
   @useResult
-  $Res call({String name, String? number, String email});
+  $Res call({int? id, String name, String? number, String email});
 }
 
 /// @nodoc
@@ -56,11 +57,16 @@ class _$DriverCopyWithImpl<$Res, $Val extends Driver>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? number = freezed,
     Object? email = null,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -84,7 +90,7 @@ abstract class _$$DriverImplCopyWith<$Res> implements $DriverCopyWith<$Res> {
       __$$DriverImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String? number, String email});
+  $Res call({int? id, String name, String? number, String email});
 }
 
 /// @nodoc
@@ -100,11 +106,16 @@ class __$$DriverImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? number = freezed,
     Object? email = null,
   }) {
     return _then(_$DriverImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -124,11 +135,14 @@ class __$$DriverImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$DriverImpl implements _Driver {
-  _$DriverImpl({required this.name, required this.number, required this.email});
+  _$DriverImpl(
+      {this.id, required this.name, required this.number, required this.email});
 
   factory _$DriverImpl.fromJson(Map<String, dynamic> json) =>
       _$$DriverImplFromJson(json);
 
+  @override
+  final int? id;
   @override
   final String name;
   @override
@@ -138,7 +152,7 @@ class _$DriverImpl implements _Driver {
 
   @override
   String toString() {
-    return 'Driver(name: $name, number: $number, email: $email)';
+    return 'Driver(id: $id, name: $name, number: $number, email: $email)';
   }
 
   @override
@@ -146,6 +160,7 @@ class _$DriverImpl implements _Driver {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DriverImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.number, number) || other.number == number) &&
             (identical(other.email, email) || other.email == email));
@@ -153,7 +168,7 @@ class _$DriverImpl implements _Driver {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, number, email);
+  int get hashCode => Object.hash(runtimeType, id, name, number, email);
 
   /// Create a copy of Driver
   /// with the given fields replaced by the non-null parameter values.
@@ -173,12 +188,15 @@ class _$DriverImpl implements _Driver {
 
 abstract class _Driver implements Driver {
   factory _Driver(
-      {required final String name,
+      {final int? id,
+      required final String name,
       required final String? number,
       required final String email}) = _$DriverImpl;
 
   factory _Driver.fromJson(Map<String, dynamic> json) = _$DriverImpl.fromJson;
 
+  @override
+  int? get id;
   @override
   String get name;
   @override
