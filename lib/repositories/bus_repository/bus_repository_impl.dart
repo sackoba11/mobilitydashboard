@@ -197,6 +197,7 @@ class BusRepositoryImpl implements IBusRepository {
 
   @override
   Future<Either<AppError, bool>> addBus({required Bus data}) async {
+    print(data.toJson());
     final bus = await FirebaseFirestore.instance
         .collection("listBus")
         .add(data.toJson());
@@ -224,7 +225,6 @@ class BusRepositoryImpl implements IBusRepository {
     final snapShotListBus =
         await FirebaseFirestore.instance.collection('listBus').get();
     final docsListBus = snapShotListBus.docs;
-    print(docsListBus.map((e) => e.data()).toList());
     final buslistFirebse =
         docsListBus.map((e) => Bus.fromJson(e.data())).toList();
 

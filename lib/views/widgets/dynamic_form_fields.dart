@@ -71,7 +71,6 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
                       });
                       if (_formKey.currentState!.isValid) {
                         if (widget.isBus) {
-                          Map<String, dynamic> result = {};
                           List<String> str = savedValue
                               .replaceAll("{", "")
                               .replaceAll("}", "")
@@ -85,7 +84,6 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
                             } else {
                               longList.add(s[1]);
                             }
-                            result.putIfAbsent(s[0].trim(), () => s[1].trim());
                           }
 
                           for (int i = 0; i < latList.length; i++) {
@@ -93,8 +91,7 @@ class _DynamicFormFieldsState extends State<DynamicFormFields> {
                               Stop(
                                       lat: double.parse(latList[i]),
                                       long: double.parse(longList[i]))
-                                  .toJson()
-                                  .entries,
+                                  .toJson(),
                             );
                           }
                         } else if (widget.isStation) {

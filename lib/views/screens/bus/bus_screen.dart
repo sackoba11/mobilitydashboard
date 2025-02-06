@@ -8,7 +8,6 @@ import 'package:mobilitydashboard/views/widgets/table_template.dart';
 import 'package:paged_datatable/paged_datatable.dart';
 
 import '../../../core/constatnts/app_string.dart';
-import '../../../models/add_bus/bus.dart';
 import '../../../models/bus/bus.dart';
 import '../../widgets/customWoltModalSheetPage.dart';
 import '../../widgets/custom_large_text_table_column.dart';
@@ -215,10 +214,14 @@ class BusScreen extends StatelessWidget {
                               destination:
                                   destinationTextEditingController.text,
                               isActive: false,
-                              roadMap: [roadMapTextEditingController]);
-                          tableController.insertAt(0, data);
-                          await locator.get<BusCubit>().addBus(data: data);
-                          tableController.refresh();
+                              roadMap: roadMapTextEditingController);
+
+                          var result =
+                              await locator.get<BusCubit>().addBus(data: data);
+                          if (result) {
+                            tableController.insertAt(0, data);
+                            locator.get<BusCubit>().busData.add(data);
+                          }
                         });
                   },
                 ),

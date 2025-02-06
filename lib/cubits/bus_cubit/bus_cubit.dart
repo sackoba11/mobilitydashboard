@@ -1,4 +1,5 @@
 import 'package:darq/darq.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mobilitydashboard/error/app_error.dart';
@@ -16,13 +17,14 @@ class BusCubit extends Cubit<BusState> {
   List<Bus> busData = [];
   IBusRepository busRepository = BusRepositoryImpl();
 
-  Future<void> addBus({required Bus data}) async {
+  Future<bool> addBus({required Bus data}) async {
     try {
       var result =
-          (await busRepository.addBus(data: data)).fold((l) => l, (r) => r);
-      print(result);
+          (await busRepository.addBus(data: data)).fold((l) => false, (r) => r);
+      return result;
     } catch (e) {
       print(e);
+      return false;
     }
   }
 
@@ -30,18 +32,7 @@ class BusCubit extends Cubit<BusState> {
     try {
       emit(BusLoading());
 
-      List<Bus> busDatas =
-          (await busRepository.getAllBus()).fold((l) => [], (r) => r);
-      busData = List.generate(
-          busDatas.length,
-          (index) => Bus(
-                id: index,
-                number: busDatas[index].number,
-                source: busDatas[index].source,
-                destination: busDatas[index].destination,
-                isActive: busDatas[index].isActive,
-                roadMap: busDatas[index].roadMap,
-              ));
+      busData = (await busRepository.getAllBus()).fold((l) => [], (r) => r);
       return busData;
     } catch (e) {
       print(e);
@@ -62,11 +53,19 @@ class BusCubit extends Cubit<BusState> {
     Iterable<Bus> query;
     if (busData.isEmpty) {
       query = await getAllRemoteBus();
-
-      query.indexed.orderBy((element) => print('teste id: ${element.$1}'));
     } else {
       query = busData;
     }
+    query = List.generate(
+        busData.length,
+        (index) => Bus(
+              id: index,
+              number: busData[index].number,
+              source: busData[index].source,
+              destination: busData[index].destination,
+              isActive: busData[index].isActive,
+              roadMap: busData[index].roadMap,
+            ));
 
     query = query.orderBy((element) => element.id);
     if (active != null) {
